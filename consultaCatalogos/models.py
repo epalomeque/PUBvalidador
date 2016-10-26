@@ -8,6 +8,20 @@ class Cat_Sexo(models.Model):
     def __unicode__(self):  # __str__ en Python 3
         return self.nombreSexo
 
+class Cat_TipoApoyo(models.Model):
+    identTipoApoyo = models.CharField(max_length=2)
+    nombreTipoApoyo = models.CharField(max_length=10)
+
+    def __unicode__(self):
+        return self.nombreTipoApoyo
+
+class Cat_Fuentes():
+    identFuentes = models.CharField(max_length=3)
+    descripcionFuentes = models.CharField(max_length=35)
+
+    def __unicode__(self):
+        return self.descripcionFuentes
+
 class Cat_Edocivil(models.Model):
     identEdoCivil = models.CharField(max_length=2)
     nombreEdoCivil = models.CharField(max_length=14)
@@ -126,30 +140,34 @@ class Formato_PUB_Actor(models.Model):
     Municipio_donde_se_paga_el_beneficio_12 = models.ForeignKey(Cat_Municipio)
     #Clave_Localidad_donde_se_paga_el_beneficio_13 = models.ForeignKey(Cat_Localidad)
     Localidad_donde_se_paga_el_beneficio_14 = models.ForeignKey(Cat_Localidad)
+
     Localidad_de_residencia_actor_social_15 = models.ForeignKey(Cat_Localidad)
     Nombre_de_vialidad_actor_social_16 = models.CharField(max_length=20)
     Numero_Exterior_actor_social_17 = models.CharField(max_length=5)
     Numero_Interior_actor_social_18 = models.CharField(max_length=5)
-    Codigo_Postal_actor_social_19 = models.CharField(max_length=20)
-    Referencia_del_domicilio_actor_social_20 = models.CharField(max_length=20)
-    Localidad_de_residencia_del_integrante_el_actor_social_21 = models.CharField(max_length=20)
+    Codigo_Postal_actor_social_19 = models.CharField(max_length=5)
+    Referencia_del_domicilio_actor_social_20 = models.CharField(max_length=60)
+    Localidad_de_residencia_del_integrante_el_actor_social_21 = models.ForeignKey(Cat_Localidad)
+
     Nombre_de_vialidad_integrante_22 = models.CharField(max_length=20)
-    Numero_Exterior_integrante_23 = models.CharField(max_length=20)
-    Numero_Interior_integrante_24 = models.CharField(max_length=20)
-    Codigo_Postal_integrante_25 = models.CharField(max_length=20)
-    Referencia_del_domicilio_integrante_26 = models.CharField(max_length=20)
-    Dependencia_que_opera_el_programa_27 = models.CharField(max_length=20)
-    Clave_del_programa_28 = models.CharField(max_length=20)
-    Clave_del_subprograma_29 = models.CharField(max_length=20)
-    Nombre_del_programa_30 = models.CharField(max_length=20)
-    Tipo_de_apoyo_31 = models.CharField(max_length=20)
-    Beneficio_32 = models.CharField(max_length=20)
-    Cantidad_de_beneficios_33 = models.CharField(max_length=20)
-    Total_en_pesos_de_los_beneficios_34 = models.CharField(max_length=20)
-    Inversion_federal_35 = models.CharField(max_length=20)
-    Inversion_estatal_36 = models.CharField(max_length=20)
-    Inversion_municipal_37 = models.CharField(max_length=20)
-    Inversion_de_otras_fuentes_38 = models.CharField(max_length=20)
+    Numero_Exterior_integrante_23 = models.CharField(max_length=5)
+    Numero_Interior_integrante_24 = models.CharField(max_length=5)
+    Codigo_Postal_integrante_25 = models.CharField(max_length=5)
+    Referencia_del_domicilio_integrante_26 = models.CharField(max_length=60)
+
+    Dependencia_que_opera_el_programa_27 = models.ForeignKey(Cat_Dependencias)
+    Clave_del_programa_28 = models.ForeignKey(Cat_Programas)
+    Clave_del_subprograma_29 = models.ForeignKey(Cat_Subprogramas)
+    #Nombre_del_programa_30 = models.CharField(max_length=20)
+    Tipo_de_apoyo_31 = models.ForeignKey(Cat_TipoApoyo)
+    Beneficio_32 = models.CharField(max_length=35)
+    Cantidad_de_beneficios_33 = models.IntegerField
+    Total_en_pesos_de_los_beneficios_34 = models.IntegerField
+    Inversion_federal_35 = models.IntegerField
+    Inversion_estatal_36 = models.IntegerField
+    Inversion_municipal_37 = models.IntegerField
+    Inversion_de_otras_fuentes_38 = models.IntegerField
+
     Fuentes_que_fondean_el_recurso_39 = models.CharField(max_length=20)
     Trimestre_40 = models.CharField(max_length=20)
     Mes_de_periodo_de_pago_41 = models.CharField(max_length=20)
