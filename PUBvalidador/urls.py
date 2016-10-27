@@ -17,12 +17,13 @@ https://amatellanes.wordpress.com/2013/07/12/django-usando-el-sistema-de-autenti
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from django.contrib.auth.views import login, login_required
+from django.contrib.auth.views import login, logout
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 #    url(r'^$', 'consultaCatalogos.views.main', name='main'),
 #    url(r'^signup$', 'consultaCatalogos.views.signup', name='signup'),
     url(r'^$', login, {'template_name': 'login.html', }, name="login"),
-#    url(r'^home$', 'consultaCatalogos.views.home', name='home'),
+    url(r'^home$', 'consultaCatalogos.views.home', name='home'),
+    url(r'^logout$', logout, {'next_page': '/'}, name="logout"),
 ]

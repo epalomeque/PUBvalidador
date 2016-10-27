@@ -75,7 +75,7 @@
                           <label class="block clearfix">
                             <span class="block input-icon input-icon-right">
                               <!--input type="text" class="form-control" placeholder="Nombre de Usuario" /-->
-                              {# form.username.label_tag }#}
+                              {# { form.username.label_tag } #}
                               <i class="ace-icon fa fa-user"></i>
                               {{ form.username }}
                             </span>
@@ -83,7 +83,9 @@
 
                           <label class="block clearfix">
                             <span class="block input-icon input-icon-right">
-                              <input type="password" class="form-control" placeholder="Contraseña" />
+                              <!--input type="password" class="form-control" placeholder="Contraseña" /-->
+                              {#  { form.password.label_tag }#}
+                              {{ form.password }}
                               <i class="ace-icon fa fa-lock"></i>
                             </span>
                           </label>
@@ -96,9 +98,10 @@
                               <span class="lbl"> Recordarme</span>
                             </label>
 
-                            <button type="button" class="width-55 pull-right btn btn-sm btn-primary">
+                            <button type="submit" class="width-55 pull-right btn btn-sm btn-primary">
                               <!--i class="ace-icon fa fa-key"></i-->
                               <span class="bigger-110">Iniciar sesión</span>
+                              <input type="hidden" name="next" value="{{ next }}"/>
                             </button>
                           </div>
 
