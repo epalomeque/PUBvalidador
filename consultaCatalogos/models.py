@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class Cat_Sexo(models.Model):
     identSexo = models.CharField(max_length=1)
@@ -8,6 +9,7 @@ class Cat_Sexo(models.Model):
     def __unicode__(self):  # __str__ en Python 3
         return self.nombreSexo
 
+
 class Cat_TipoApoyo(models.Model):
     identTipoApoyo = models.CharField(max_length=2)
     nombreTipoApoyo = models.CharField(max_length=10)
@@ -15,12 +17,14 @@ class Cat_TipoApoyo(models.Model):
     def __unicode__(self):
         return self.nombreTipoApoyo
 
-class Cat_Fuentes():
+
+class Cat_Fuentes(models.Model):
     identFuentes = models.CharField(max_length=3)
     descripcionFuentes = models.CharField(max_length=35)
 
     def __unicode__(self):
         return self.descripcionFuentes
+
 
 class Cat_Edocivil(models.Model):
     identEdoCivil = models.CharField(max_length=2)
@@ -29,12 +33,14 @@ class Cat_Edocivil(models.Model):
     def __unicode__(self):
         return self.nombreEdoCivil
 
+
 class Cat_Parentesco(models.Model):
     identParentesco = models.CharField(max_length=2)
     nombreParentesco = models.CharField(max_length=20)
 
     def __unicode__(self):
         return self.nombreParentesco
+
 
 class Cat_Identificacion(models.Model):
     identIdentificacion = models.CharField(max_length=2)
@@ -43,12 +49,14 @@ class Cat_Identificacion(models.Model):
     def __unicode__(self):
         return '%s %s' % (self.identIdentificacion, self.nombreIdentificacion)
 
+
 class Cat_Estados(models.Model):
     identEstado = models.IntegerField()
     nombreEstado = models.CharField(max_length=25)
 
     def __unicode__(self):
         return self.nombreEstado
+
 
 class Cat_Municipio(models.Model):
     identMunicipio = models.IntegerField()
@@ -58,13 +66,15 @@ class Cat_Municipio(models.Model):
     def __unicode__(self):
         return self.nombreMunicipio
 
+
 class Cat_Localidad(models.Model):
     identLocalidad = models.IntegerField()
     nombreLocalidad = models.CharField(max_length=50)
-    idLocalidad = models.ForeignKey(Cat_Municipio)
+    idMunicipio = models.ForeignKey(Cat_Municipio)
 
     def __unicode__(self):
         return self.nombreLocalidad
+
 
 class Cat_CodigoPostal(models.Model):
     claveCP = models.IntegerField()
@@ -73,12 +83,14 @@ class Cat_CodigoPostal(models.Model):
     def __unicode__(self):
         return self.claveCP
 
+
 class Cat_Asentamiento(models.Model):
     identAsentamiento = models.IntegerField()
     nombreAsentamiento = models.CharField(max_length=50)
 
     def __unicode__(self):
         return self.nombreAsentamiento
+
 
 class Cat_Dependencias(models.Model):
      identDependencia = models.CharField(max_length=2)
@@ -87,6 +99,7 @@ class Cat_Dependencias(models.Model):
      def __unicode__(self):
          return self.nombreDependencia
 
+
 class Cat_Programas(models.Model):
     identPrograma = models.CharField(max_length=10)
     nombrePrograma = models.CharField(max_length=80)
@@ -94,6 +107,7 @@ class Cat_Programas(models.Model):
 
     def __unicode__(self):
         return self.nombrePrograma
+
 
 class Cat_Subprogramas(models.Model):
     identSubprograma = models.CharField(max_length=10)
@@ -104,6 +118,7 @@ class Cat_Subprogramas(models.Model):
     def __unicode__(self):
         return self.nombreSubprograma
 
+
 class Cat_Periodos(models.Model):
     identPeriodo = models.CharField(max_length=2)
     nombrePeriodo = models.CharField(max_length=20)
@@ -111,66 +126,107 @@ class Cat_Periodos(models.Model):
     def __unicode__(self):
         return self.nombrePeriodo
 
+
 class Cat_Mes(models.Model):
     nombreMes = models.CharField(max_length=12)
 
     def __unicode__(self):
         return self.nombreMes
 
+
 class Cat_Frecuencia(models.Model):
     identFrecuencia = models.CharField(max_length=2)
     nombreFrecuencia = models.CharField(max_length=15)
-    descripFrecuencia = models.CharField (max_length=45)
+    descripFrecuencia = models.CharField (max_length=45, blank=True)
 
     def __unicode__(self):
         return self.nombreMes
 
-class Formato_PUB_Actor(models.Model):
-    Razon_Social_1 = models.CharField(max_length=20)
-    Registro_Federal_de_Contribuyentes_2  = models.CharField(max_length=13)
-    Primer_Apellido_3 = models.CharField(max_length=20)
-    Segundo_Apellido_4 = models.CharField(max_length=20)
-    Nombre_s_5 = models.CharField(max_length=20)
-    CURP_6 = models.CharField(max_length=18)
-    Sexo_7 = models.ForeignKey(Cat_Sexo)
-    Estado_de_Nacimiento_8 = models.ForeignKey(Cat_Estados)
-    Titular_9 = models.CharField(max_length=1, )
-    Otro_documento_de_identificacion_10 = models.ForeignKey(Cat_Identificacion)
-    #Clave_Municipio_donde_se_paga_el_beneficio_11 = models.ForeignKey(Cat_Municipio)
-    Municipio_donde_se_paga_el_beneficio_12 = models.ForeignKey(Cat_Municipio)
-    #Clave_Localidad_donde_se_paga_el_beneficio_13 = models.ForeignKey(Cat_Localidad)
-    Localidad_donde_se_paga_el_beneficio_14 = models.ForeignKey(Cat_Localidad)
 
-    Localidad_de_residencia_actor_social_15 = models.ForeignKey(Cat_Localidad)
-    Nombre_de_vialidad_actor_social_16 = models.CharField(max_length=20)
-    Numero_Exterior_actor_social_17 = models.CharField(max_length=5)
-    Numero_Interior_actor_social_18 = models.CharField(max_length=5)
-    Codigo_Postal_actor_social_19 = models.CharField(max_length=5)
-    Referencia_del_domicilio_actor_social_20 = models.CharField(max_length=60)
-    Localidad_de_residencia_del_integrante_el_actor_social_21 = models.ForeignKey(Cat_Localidad)
+class FormatoPubActor(models.Model):
+    # Razon Social_1
+    RazonSocial = models.CharField(max_length=20)
+    # Registro Federal de Contribuyentes_2
+    RFC = models.CharField(max_length=13)
+    # Primer Apellido_3
+    PrimerApellido = models.CharField(max_length=20)
+    # Segundo Apellido_4
+    SegundoApellido = models.CharField(max_length=20, blank=True)
+    # Nombre(s)_5
+    Nombre = models.CharField(max_length=20)
+    # CURP_6
+    CURP = models.CharField(max_length=18)
+    # Sexo_7
+    Sexo = models.ForeignKey(Cat_Sexo)
+    # Estado de Nacimiento_8
+    EdoNacimiento = models.ForeignKey(Cat_Estados, blank=True)
+    # Titular_9
+    Titular = models.CharField(max_length=1)
+    # Otro documento de identificacion_10
+    OtroDocId = models.ForeignKey(Cat_Identificacion, blank=True)
+    # Clave Municipio donde se paga el beneficio_11
+    # Municipio donde se paga el beneficio_12
+    MunDondeSePagaBeneficio = models.ForeignKey(Cat_Municipio)
+    # Clave Localidad donde se paga el beneficio_13
+    # Localidad donde se paga el beneficio_14
+    LocDondeSePagaBeneficio = models.ForeignKey(Cat_Localidad, related_name='Localidad_Pago_Beneficio', default='')
+    # Localidad de residencia actor social_15
+    LocResidActorSocial = models.ForeignKey(Cat_Localidad, related_name='Localidad_Actor', default='')
+    # Nombre de vialidad actor social_16
+    NombreVialidadActor = models.CharField(max_length=20)
+    # Numero Exterior actor social_17
+    NumeroExtActor = models.CharField(max_length=5, blank=True)
+    # Numero Interior actor social_18
+    NumeroIntActor = models.CharField(max_length=5, blank=True)
+    # Codigo Postal actor social_19
+    CodigoPostalActor = models.CharField(max_length=5)
+    # Referencia del domicilio actor social_20
+    RefDomActor = models.CharField(max_length=60, blank=True)
+    # Localidad de residencia del integrante el actor social_21
+    LocResidDelIntegrante = models.ForeignKey(Cat_Localidad, related_name='Localidad_Integrante', default='')
+    # Nombre de vialidad integrante_22
+    NombreVialidadIntegrante = models.CharField(max_length=20)
+    # Numero Exterior integrante_23
+    NumeroExtIntegrante = models.CharField(max_length=5, blank=True)
+    # Numero Interior integrante_24
+    NumeroIntIntegrante = models.CharField(max_length=5, blank=True)
+    # Codigo Postal integrante_25
+    CodigoPostalIntegrante = models.CharField(max_length=5)
+    # Referencia del domicilio integrante_26
+    RefDomicilioIntegrante = models.CharField(max_length=60, blank=True)
+    # Dependencia que opera el programa_27
+    Dependencia = models.ForeignKey(Cat_Dependencias)
+    # Clave del programa_28
+    # Nombre del programa_30
+    ClavePrograma = models.ForeignKey(Cat_Programas)
+    # Clave del subprograma_29
+    ClaveSubprograma = models.ForeignKey(Cat_Subprogramas, blank=True)
+    # Tipo de apoyo_31
+    TipoApoyo = models.ForeignKey(Cat_TipoApoyo)
+    # Beneficio_32
+    Beneficio = models.CharField(max_length=35)
+    # Cantidad de beneficios_33
+    CantBeneficios = models.IntegerField
+    # Total en pesos de los beneficios_34
+    TotalPesosBeneficios = models.IntegerField
+    # Inversion federal_35
+    InversionFederal = models.IntegerField
+    # Inversion estatal_36
+    InversionEstatal = models.IntegerField
+    # Inversion municipal_37
+    InversionMunicipal = models.IntegerField
+    # Inversion de otras fuentes_38
+    InversionOtras = models.IntegerField
+    # Fuentes que fondean el recurso_39
+    FuentesRecurso = models.ForeignKey(Cat_Fuentes)
+    # Trimestre_40
+    Trimestre = models.ForeignKey(Cat_Periodos)
+    # Mes de periodo de pago_41
+    MesPeriodoPago = models.ForeignKey(Cat_Mes)
+    # Anio de ejercicio_42
+    AnioEjercicio = models.IntegerField
+    # Periodicidad de entrega del beneficio_43
+    PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
+    # Numero de la entrega del beneficio_44
+    NumeroEntregaBeneficio = models.IntegerField
 
-    Nombre_de_vialidad_integrante_22 = models.CharField(max_length=20)
-    Numero_Exterior_integrante_23 = models.CharField(max_length=5)
-    Numero_Interior_integrante_24 = models.CharField(max_length=5)
-    Codigo_Postal_integrante_25 = models.CharField(max_length=5)
-    Referencia_del_domicilio_integrante_26 = models.CharField(max_length=60)
-
-    Dependencia_que_opera_el_programa_27 = models.ForeignKey(Cat_Dependencias)
-    Clave_del_programa_28 = models.ForeignKey(Cat_Programas)
-    Clave_del_subprograma_29 = models.ForeignKey(Cat_Subprogramas)
-    #Nombre_del_programa_30 = models.CharField(max_length=20)
-    Tipo_de_apoyo_31 = models.ForeignKey(Cat_TipoApoyo)
-    Beneficio_32 = models.CharField(max_length=35)
-    Cantidad_de_beneficios_33 = models.IntegerField
-    Total_en_pesos_de_los_beneficios_34 = models.IntegerField
-    Inversion_federal_35 = models.IntegerField
-    Inversion_estatal_36 = models.IntegerField
-    Inversion_municipal_37 = models.IntegerField
-    Inversion_de_otras_fuentes_38 = models.IntegerField
-
-    Fuentes_que_fondean_el_recurso_39 = models.CharField(max_length=20)
-    Trimestre_40 = models.CharField(max_length=20)
-    Mes_de_periodo_de_pago_41 = models.CharField(max_length=20)
-    Anio_de_ejercicio_42 = models.CharField(max_length=20)
-    Periodicidad_de_entrega_del_beneficio_43 = models.CharField(max_length=20)
-    Numero_de_la_entrega_del_beneficio_44 = models.CharField(max_length=20)

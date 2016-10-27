@@ -17,4 +17,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'consultaCatalogos.views.main', name='main'),
+#    url(r'^signup$', 'consultaCatalogos.views.signup', name='signup'),
+#    url(r'^login$', login, {'template_name': 'login.html', }, name="login"),
 ]
