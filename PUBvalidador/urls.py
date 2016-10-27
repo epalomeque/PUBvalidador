@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^$', login, {'template_name': 'login.html', }, name="login"),
     url(r'^home$', 'consultaCatalogos.views.home', name='home'),
     url(r'^logout$', logout, {'next_page': '/'}, name="logout"),
+    url(r'^signup$', 'consultaCatalogos.views.signup', name='signup'),
 ]
