@@ -109,8 +109,12 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    #'C:/Users/DTIC-SYS/Desktop/validador/static/',
     'C:/Users/DTIC-SYS/PycharmProjects/PUBvalidador/static/'
 )
 
 MEDIA_ROOT = 'C:/Users/DTIC-SYS/PycharmProjects/PUBvalidador/media/'
+
+# Redirect when login is correct.
+LOGIN_REDIRECT_URL = "/home"
+# Redirect when login is not correct.
+LOGIN_URL = '/'
