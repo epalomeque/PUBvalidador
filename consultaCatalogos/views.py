@@ -36,7 +36,7 @@ def signup(request):
         formRegistro = SignUpForm()
 
     data = {
-        'form': formRegistro,
+        'formRegistro': formRegistro,
     }
     return render_to_response('login.html', data, context_instance=RequestContext(request))
 
