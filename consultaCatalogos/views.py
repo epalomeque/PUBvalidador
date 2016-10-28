@@ -11,15 +11,15 @@ from forms import SignUpForm
 # Create your views here.
 def signup(request):
     if request.method == 'POST':  # If the form has been submitted...
-        formRegistro = SignUpForm(request.POST)  # A form bound to the POST data
-        if formRegistro.is_valid():  # All validation rules pass
+        form = SignUpForm(request.POST)  # A form bound to the POST data
+        if form.is_valid():  # All validation rules pass
 
             # Process the data in form.cleaned_data
-            username = formRegistro.cleaned_data["username"]
-            password = formRegistro.cleaned_data["password"]
-            email = formRegistro.cleaned_data["email"]
-            first_name = formRegistro.cleaned_data["first_name"]
-            last_name = formRegistro.cleaned_data["last_name"]
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            email = form.cleaned_data["email"]
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
 
             # At this point, user is a User object that has already been saved
             # to the database. You can continue to change its attributes
@@ -33,12 +33,12 @@ def signup(request):
 
             return HttpResponseRedirect(reverse('home'))  # Redirect after POST
     else:
-        formRegistro = SignUpForm()
+        form = SignUpForm()
 
     data = {
-        'formRegistro': formRegistro,
+        'form': form,
     }
-    return render_to_response('login.html', data, context_instance=RequestContext(request))
+    return render_to_response('signup.html', data, context_instance=RequestContext(request))
 
 
 #def main(request):

@@ -1,0 +1,103 @@
+{% extends 'log_.html' %}
+
+                {% block contenido %}
+
+                <!-- Aqui empieza el registro -->
+                <!-- Aqui empieza el registro -->
+                <!-- Aqui empieza el registro -->
+                <!-- Aqui empieza el registro -->
+
+                <div id="signup-box" class="signup-box widget-box no-border">
+                  <div class="widget-body">
+                    <div class="widget-main">
+                      <h4 class="header green lighter bigger">
+                        <!-- i class="ace-icon fa fa-users blue"></i -->
+                        Nuevo Registro de Usuario
+                      </h4>
+
+                      <div class="space-6"></div>
+
+                        {% if form.errors %}
+                            <p>{{ form.errors }}</p>
+                        {% endif %}
+
+                      <p> Ingresa tus datos: </p>
+
+                      <form method="post" action="{% url 'signup' %}">
+                      {% csrf_token %}
+
+                        <fieldset>
+                          <label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                              <!--input type="email" class="form-control" placeholder="Email" /-->
+                              {{ form.email.label_tag }}
+                              {{ form.email }}
+                              <i class="ace-icon fa fa-envelope"></i>
+                            </span>
+                          </label>
+
+                          <label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                              <!--input type="text" class="form-control" placeholder="Nombre de usuario" /-->
+                                {{ form.username.label_tag }}
+                                {{ form.username }}
+                              <i class="ace-icon fa fa-user"></i>
+                            </span>
+                          </label>
+
+                          <label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                              <!--input type="password" class="form-control" placeholder="Contraseña" /-->
+                              {{ form.password.label_tag }}
+                              {{ form.password }}
+                              <i class="ace-icon fa fa-lock"></i>
+                            </span>
+                          </label>
+
+                          <!--label class="block clearfix">
+                            <span class="block input-icon input-icon-right">
+                              <input type="password" class="form-control" placeholder="Repetir contraseña" />
+                              <i class="ace-icon fa fa-retweet"></i>
+                            </span>
+                          </label-->
+
+                          <label class="block">
+                            <input type="checkbox" class="ace" />
+                            <span class="lbl">
+                              Acepto el
+                              <a href="#">Acuerdo de Usuario</a>
+                            </span>
+                          </label>
+
+                          <div class="space-24"></div>
+
+                          <div class="clearfix">
+                            <button type="reset" class="width-30 pull-left btn btn-sm">
+                              <i class="ace-icon fa fa-refresh"></i>
+                              <span class="bigger-110">Reset</span>
+                            </button>
+
+                            <button type="submit"  class="width-65 pull-right btn btn-sm btn-success">
+                              <span class="bigger-110">Registrar</span>
+
+                              <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                            </button>
+                          </div>
+                        </fieldset>
+                      </form>
+                    </div>
+
+                    <div class="toolbar center">
+                      <a href="#" data-target="#login-box" class="back-to-login-link">
+                        <i class="ace-icon fa fa-arrow-left"></i>
+                        Regresar al inicio
+                      </a>
+                    </div>
+                  </div><!-- /.widget-body -->
+                </div><!-- /.signup-box -->
+                <!-- Aqui termina el registro -->
+                <!-- Aqui termina el registro -->
+                <!-- Aqui termina el registro -->
+                <!-- Aqui termina el registro -->
+
+                {% endblock %}
