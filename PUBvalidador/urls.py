@@ -14,6 +14,11 @@ Including another URLconf
 
 ** Consultas
 https://amatellanes.wordpress.com/2013/07/12/django-usando-el-sistema-de-autentificacion-de-django/
+
+https://tutorial.djangogirls.org/es/django_forms/
+
+http://whoisnicoleharris.com/2015/01/06/implementing-django-formsets.html
+
 """
 from django.conf.urls import include, url
 from django.contrib import admin
