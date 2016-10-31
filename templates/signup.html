@@ -7,7 +7,7 @@
                 <!-- Aqui empieza el registro -->
                 <!-- Aqui empieza el registro -->
 
-                <div id="signup-box" class="signup-box widget-box no-border">
+                <div id="signup-box" class="signup-box visible widget-box no-border">
                   <div class="widget-body">
                     <div class="widget-main">
                       <h4 class="header green lighter bigger">
@@ -88,7 +88,8 @@
                     </div>
 
                     <div class="toolbar center">
-                      <a href="#" data-target="#login-box" class="back-to-login-link">
+                      <!a href="#" data-target="#login-box" class="back-to-login-link"-->
+                      <a href="{% url 'login' %}" class="back-to-login-link">
                         <i class="ace-icon fa fa-arrow-left"></i>
                         Regresar al inicio
                       </a>

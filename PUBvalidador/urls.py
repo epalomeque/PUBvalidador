@@ -23,13 +23,18 @@ http://whoisnicoleharris.com/2015/01/06/implementing-django-formsets.html
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
+from consultaCatalogos import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
 #    url(r'^$', 'consultaCatalogos.views.main', name='main'),
-#    url(r'^signup$', 'consultaCatalogos.views.signup', name='signup'),
     url(r'^$', login, {'template_name': 'login.html', }, name="login"),
     url(r'^home$', 'consultaCatalogos.views.home', name='home'),
     url(r'^logout$', logout, {'next_page': '/'}, name="logout"),
     url(r'^signup$', 'consultaCatalogos.views.signup', name='signup'),
+    #url(r'^home/validar/()$', views.validar, name="validar"),
+    url(r'^home/validar$', 'consultaCatalogos.views.validar', name="validar"),
+    ##### Ejemplos del sitio
+    #url(r'^community/', include('django_website.aggregator.urls')),
+    #url(r'^contact/', include('django_website.contact.urls')),
 ]

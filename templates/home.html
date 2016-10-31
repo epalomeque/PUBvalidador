@@ -1,38 +1,797 @@
 {% extends 'base.html' %}
 
+{% block navbar-container %}
+    			<div class="navbar-container" id="navbar-container">
+				<!-- #section:basics/sidebar.mobile.toggle -->
+				<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+					<span class="sr-only">Toggle sidebar</span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+
+					<span class="icon-bar"></span>
+				</button>
+
+				<!-- /section:basics/sidebar.mobile.toggle -->
+				<div class="navbar-header pull-left">
+					<!-- #section:basics/navbar.layout.brand -->
+					<a href="#" class="navbar-brand">
+						<small>
+							<!--i class="fa fa-leaf"></i-->
+							Validador | Padrón Único de Beneficiarios
+						</small>
+					</a>
+
+					<!-- /section:basics/navbar.layout.brand -->
+
+					<!-- #section:basics/navbar.toggle -->
+
+					<!-- /section:basics/navbar.toggle -->
+				</div>
+
+				<!-- #section:basics/navbar.dropdown -->
+				<div class="navbar-buttons navbar-header pull-right" role="navigation">
+					<ul class="nav ace-nav">
+						<!-- li class="grey">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="ace-icon fa fa-tasks"></i>
+								<span class="badge badge-grey">4</span>
+							</a>
+
+							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="ace-icon fa fa-check"></i>
+									4 Tasks to complete
+								</li>
+
+								<li class="dropdown-content">
+									<ul class="dropdown-menu dropdown-navbar">
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">Software Update</span>
+													<span class="pull-right">65%</span>
+												</div>
+
+												<div class="progress progress-mini">
+													<div style="width:65%" class="progress-bar"></div>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">Hardware Upgrade</span>
+													<span class="pull-right">35%</span>
+												</div>
+
+												<div class="progress progress-mini">
+													<div style="width:35%" class="progress-bar progress-bar-danger"></div>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">Unit Testing</span>
+													<span class="pull-right">15%</span>
+												</div>
+
+												<div class="progress progress-mini">
+													<div style="width:15%" class="progress-bar progress-bar-warning"></div>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">Bug Fixes</span>
+													<span class="pull-right">90%</span>
+												</div>
+
+												<div class="progress progress-mini progress-striped active">
+													<div style="width:90%" class="progress-bar progress-bar-success"></div>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="dropdown-footer">
+									<a href="#">
+										See tasks with details
+										<i class="ace-icon fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li -->
+
+						<!--li class="purple">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="ace-icon fa fa-bell icon-animated-bell"></i>
+								<span class="badge badge-important">8</span>
+							</a>
+
+							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="ace-icon fa fa-exclamation-triangle"></i>
+									8 Notifications
+								</li>
+
+								<li class="dropdown-content">
+									<ul class="dropdown-menu dropdown-navbar navbar-pink">
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
+														New Comments
+													</span>
+													<span class="pull-right badge badge-info">+12</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<i class="btn btn-xs btn-primary fa fa-user"></i>
+												Bob just signed up as an editor ...
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
+														New Orders
+													</span>
+													<span class="pull-right badge badge-success">+8</span>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="clearfix">
+													<span class="pull-left">
+														<i class="btn btn-xs no-hover btn-info fa fa-twitter"></i>
+														Followers
+													</span>
+													<span class="pull-right badge badge-info">+11</span>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="dropdown-footer">
+									<a href="#">
+										See all notifications
+										<i class="ace-icon fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li -->
+
+						<!--li class="green">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
+								<span class="badge badge-success">5</span>
+							</a>
+
+							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+								<li class="dropdown-header">
+									<i class="ace-icon fa fa-envelope-o"></i>
+									5 Messages
+								</li>
+
+								<li class="dropdown-content">
+									<ul class="dropdown-menu dropdown-navbar">
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/avatars/avatar.png" class="msg-photo" alt="Alex's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Alex:</span>
+														Ciao sociis natoque penatibus et auctor ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>a moment ago</span>
+													</span>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/avatars/avatar3.png" class="msg-photo" alt="Susan's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Susan:</span>
+														Vestibulum id ligula porta felis euismod ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>20 minutes ago</span>
+													</span>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/avatars/avatar4.png" class="msg-photo" alt="Bob's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Bob:</span>
+														Nullam quis risus eget urna mollis ornare ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>3:15 pm</span>
+													</span>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/avatars/avatar2.png" class="msg-photo" alt="Kate's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Kate:</span>
+														Ciao sociis natoque eget urna mollis ornare ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>1:33 pm</span>
+													</span>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="clearfix">
+												<img src="assets/avatars/avatar5.png" class="msg-photo" alt="Fred's Avatar" />
+												<span class="msg-body">
+													<span class="msg-title">
+														<span class="blue">Fred:</span>
+														Vestibulum id penatibus et auctor  ...
+													</span>
+
+													<span class="msg-time">
+														<i class="ace-icon fa fa-clock-o"></i>
+														<span>10:09 am</span>
+													</span>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</li>
+
+								<li class="dropdown-footer">
+									<a href="inbox.html">
+										See all messages
+										<i class="ace-icon fa fa-arrow-right"></i>
+									</a>
+								</li>
+							</ul>
+						</li -->
+
+						<!-- #section:basics/navbar.user_menu -->
+						<li class="orangeuno">
+							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+								<!--img class="nav-user-photo" src="assets/avatars/user.jpg" alt="Jason's Photo" / -->
+								<span class="user-info">
+									<small>Bienvenido,</small>
+									{{ user.username }}
+								</span>
+
+								<i class="ace-icon fa fa-caret-down"></i>
+							</a>
+
+							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+								<!--li>
+									<a href="#">
+										<i class="ace-icon fa fa-cog"></i>
+										Settings
+									</a>
+								</li>
+
+								<li>
+									<a href="profile.html">
+										<i class="ace-icon fa fa-user"></i>
+										Profile
+									</a>
+								</li>
+
+								<li class="divider"></li-->
+
+								<li>
+									<a href="{% url 'logout' %}">
+										<i class="ace-icon fa fa-power-off"></i>
+										Logout
+									</a>
+								</li>
+							</ul >
+						</li>
+
+						<!-- /section:basics/navbar.user_menu -->
+					</ul>
+				</div>
+
+				<!-- /section:basics/navbar.dropdown -->
+			</div><!-- /.navbar-container -->
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{% block settingsbox %}
+{% endblock %}
+
 {% block content %}
 
-    <table>
-        <tr>
-            <td>{{ user.username.label_tag }}</td>
-            <td>{{ user.username }}</td>
-        </tr>
+<div class="col-xs-12 col-lg-6 middle">
+ <h2>Puedes iniciar un nuevo trabajo para validación</h2>
+    <div>
+        <label for="form-select-anio">Año</label>
+        <select class="form-control" id="form-select-anio">
+        <option value=""></option>
+        <option value="2013">2013</option>
+        <option value="2014">2014</option>
+        <option value="2015">2015</option>
+        <option value="2016">2016</option>
+        </select>
+        <br />
+        <label for="form-select-trimestre">Trimestre</label>
+        <select class="form-control" id="form-select-trimestre">
+        <option value=""></option>
+        <option value="T1">T1</option>
+        <option value="T2">T2</option>
+        <option value="T3">T3</option>
+        <option value="T4">T4</option>
+        </select>
+        <br />
+        <label for="form-select-tipopadron">Tipo de Padrón</label>
+        <select class="form-control" id="form-select-tipopadron">
+        <option value=""></option>
+        <option value="T1">Personas</option>
+        <option value="T2">Población</option>
+        <option value="T3">T3</option>
+        </select>
+        <br />
+        <div class="form-group">
+            <div class="col-xs-12">
+                <!-- #section:custom/file-input -->
+                <input type="file" id="id-input-file-2" />
+            </div>
+        </div>
+        <!-- #section:custom/file-input.filter -->
+        <br />
+    </div>
 
-        <tr>
-            <td>{{ user.email.label_tag }}</td>
-            <td>{{ user.email }}</td>
-        </tr>
 
-        <tr>
-            <td>{{ user.first_name.label_tag }}</td>
-            <td>{{ user.first_name }}</td>
-        </tr>
 
-        <tr>
-            <td>{{ user.last_name.label_tag }}</td>
-            <td>{{ user.last_name }}</td>
-        </tr>
+ <a class="btn btn-app btn-primary width-auto" href="{% url 'validar' %}">
+   <i class="ace-icon fa fa-pencil-square-o fa-2x"></i>
+     Iniciar un nuevo trabajo
+ </a>
+</div>
+<div class="col-xs-12 col-lg-6 middle">
+  <h2>... o retomar una de las tareas que tienes guardadas.</h2>
+  <div class="widget-box">
+   <div class="widget-header"></div>
+   <div class="widget-body">
+        <table id="simple-table" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="center">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace" />
+                            <span class="lbl"></span>
+                        </label>
+                    </th>
+                    <th>Archivo</th>
+                    <th>Año</th>
+                    <th>Trimestre</th>
 
-        <tr>
-            <td>{{ user.date_joined.label_tag }}</td>
-            <td>{{ user.date_joined }}</td>
-        </tr>
+                    <th>
+                        <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                        Actualización
+                    </th>
+                    <th class="hidden-480">Estatus</th>
 
-        <tr>
-            <td>{{ user.last_login.label_tag }}</td>
-            <td>{{ user.last_login }}</td>
-        </tr>
+                    <th></th>
+                </tr>
+            </thead>
 
-    </table>
+            <tbody>
+                <tr>
+                    <td class="center">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace" />
+                            <span class="lbl"></span>
+                        </label>
+                    </td>
+
+                    <td>
+                        <a href="#">Persona T1-2016</a>
+                    </td>
+                    <td>2016</td>
+                    <td class="hidden-480">T1</td>
+                    <td>Mayo 15</td>
+
+                    <td class="hidden-480">
+                        <span class="label label-sm label-warning">Sin terminar</span>
+                    </td>
+
+                    <td>
+                        <div class="hidden-sm hidden-xs btn-group">
+                            <button class="btn btn-xs btn-success">
+                                <i class="ace-icon fa fa-check bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-info">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-danger">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-warning">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+                        </div>
+
+                        <div class="hidden-md hidden-lg">
+                            <div class="inline pos-rel">
+                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                    <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                            <span class="blue">
+                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                            <span class="green">
+                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <span class="red">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="center">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace" />
+                            <span class="lbl"></span>
+                        </label>
+                    </td>
+
+                    <td>
+                        <a href="#">poblacion-3t-2015</a>
+                    </td>
+                    <td>2015</td>
+                    <td>T3</td>
+                    <td>Feb 18</td>
+
+                    <td class="hidden-480">
+                        <span class="label label-sm label-success">Completo</span>
+                    </td>
+
+                    <td>
+                        <div class="hidden-sm hidden-xs btn-group">
+                            <button class="btn btn-xs btn-success">
+                                <i class="ace-icon fa fa-check bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-info">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-danger">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-warning">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+                        </div>
+
+                        <div class="hidden-md hidden-lg">
+                            <div class="inline pos-rel">
+                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                    <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                            <span class="blue">
+                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                            <span class="green">
+                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <span class="red">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="center">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace" />
+                            <span class="lbl"></span>
+                        </label>
+                    </td>
+
+                    <td>
+                        <a href="#">max.com</a>
+                    </td>
+                    <td>$60</td>
+                    <td class="hidden-480">4,400</td>
+                    <td>Mar 11</td>
+
+                    <td class="hidden-480">
+                        <span class="label label-sm label-warning">Expiring</span>
+                    </td>
+
+                    <td>
+                        <div class="hidden-sm hidden-xs btn-group">
+                            <button class="btn btn-xs btn-success">
+                                <i class="ace-icon fa fa-check bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-info">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-danger">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-warning">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+                        </div>
+
+                        <div class="hidden-md hidden-lg">
+                            <div class="inline pos-rel">
+                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                    <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                            <span class="blue">
+                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                            <span class="green">
+                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <span class="red">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="center">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace" />
+                            <span class="lbl"></span>
+                        </label>
+                    </td>
+
+                    <td>
+                        <a href="#">best.com</a>
+                    </td>
+                    <td>$75</td>
+                    <td class="hidden-480">6,500</td>
+                    <td>Apr 03</td>
+
+                    <td class="hidden-480">
+                        <span class="label label-sm label-inverse arrowed-in">Flagged</span>
+                    </td>
+
+                    <td>
+                        <div class="hidden-sm hidden-xs btn-group">
+                            <button class="btn btn-xs btn-success">
+                                <i class="ace-icon fa fa-check bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-info">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-danger">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-warning">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+                        </div>
+
+                        <div class="hidden-md hidden-lg">
+                            <div class="inline pos-rel">
+                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                    <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                            <span class="blue">
+                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                            <span class="green">
+                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <span class="red">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="center">
+                        <label class="pos-rel">
+                            <input type="checkbox" class="ace" />
+                            <span class="lbl"></span>
+                        </label>
+                    </td>
+
+                    <td>
+                        <a href="#">pro.com</a>
+                    </td>
+                    <td>$55</td>
+                    <td class="hidden-480">4,250</td>
+                    <td>Jan 21</td>
+
+                    <td class="hidden-480">
+                        <span class="label label-sm label-success">Registered</span>
+                    </td>
+
+                    <td>
+                        <div class="hidden-sm hidden-xs btn-group">
+                            <button class="btn btn-xs btn-success">
+                                <i class="ace-icon fa fa-check bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-info">
+                                <i class="ace-icon fa fa-pencil bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-danger">
+                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                            </button>
+
+                            <button class="btn btn-xs btn-warning">
+                                <i class="ace-icon fa fa-flag bigger-120"></i>
+                            </button>
+                        </div>
+
+                        <div class="hidden-md hidden-lg">
+                            <div class="inline pos-rel">
+                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                                    <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                                </button>
+
+                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                                            <span class="blue">
+                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                                            <span class="green">
+                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                                            <span class="red">
+                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+   </div>
+  </div>
+</div>
+
 
 {% endblock %}
