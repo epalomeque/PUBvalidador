@@ -32,8 +32,8 @@ urlpatterns = [
     url(r'^home$', 'consultaCatalogos.views.home', name='home'),
     url(r'^logout$', logout, {'next_page': '/'}, name="logout"),
     url(r'^signup$', 'consultaCatalogos.views.signup', name='signup'),
-    #url(r'^home/validar/()$', views.validar, name="validar"),
-    url(r'^home/validar$', 'consultaCatalogos.views.validar', name="validar"),
+    url(r'^home/validar/(?P<folio_id>[0-9]{4})$', views.validar, name="validar"),
+    #url(r'^home/validar$', 'consultaCatalogos.views.validar', name="validar"),
     ##### Ejemplos del sitio
     #url(r'^community/', include('django_website.aggregator.urls')),
     #url(r'^contact/', include('django_website.contact.urls')),

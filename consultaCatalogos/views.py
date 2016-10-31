@@ -50,4 +50,4 @@ def home(request):
 
 @login_required()
 def validar(request):
-    return render_to_response('validar.html', {'user': request.user})
+    return render_to_response('validar.html', {'user': request.user}, context_instance=RequestContext(request))
