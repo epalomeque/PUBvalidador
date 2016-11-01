@@ -67,7 +67,7 @@
 				<!-- /section:basics/sidebar.mobile.toggle -->
 				<div class="navbar-header pull-left">
 					<!-- #section:basics/navbar.layout.brand -->
-					<a href="#" class="navbar-brand">
+					<a href="{% url 'home' %}" class="navbar-brand">
 						<small>
 							<!--i class="fa fa-leaf"></i-->
 							Validador | Padrón Único de Beneficiarios
@@ -929,6 +929,7 @@
 			<!-- /section:basics/sidebar -->
 			<div class="main-content">
 				<div class="main-content-inner">
+                    {% block breadcrumb_zone %}
 					<!-- #section:basics/content.breadcrumbs -->
 					<div class="breadcrumbs" id="breadcrumbs">
 						<script type="text/javascript">
@@ -947,6 +948,7 @@
 							<li class="active">Blank Page</li>
 						</ul><!-- /.breadcrumb -->
 
+
 						<!-- #section:basics/content.searchbox -->
 						<div class="nav-search" id="nav-search">
 							<form class="form-search">
@@ -959,6 +961,7 @@
 
 						<!-- /section:basics/content.searchbox -->
 					</div>
+                    {% endblock %}
 
 					<!-- /section:basics/content.breadcrumbs -->
 					<div class="page-content">
