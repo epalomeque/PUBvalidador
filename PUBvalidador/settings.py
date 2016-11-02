@@ -81,8 +81,10 @@ DATABASES = {
         'NAME': 'PUB_validador',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
-	    'HOST' : '10.40.13.14',
+        #'PASSWORD': 'postgres',
+        'PASSWORD' : 'Postgres1',
+	    #'HOST' : '10.40.13.14',
+        'HOST' : 'sdspgtest.vmlocal',
 	    'DATABASE_PORT' : '5432'
     },
 }
@@ -109,10 +111,12 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    'C:/Users/DTIC-SYS/PycharmProjects/PUBvalidador/static/'
+#   'C:/Users/DTIC-SYS/PycharmProjects/PUBvalidador/static/'
+    '/home/epalomeque/PycharmProjects/PUBvalidador/static'
 )
 
-MEDIA_ROOT = 'C:/Users/DTIC-SYS/PycharmProjects/PUBvalidador/media/'
+#MEDIA_ROOT = 'C:/Users/DTIC-SYS/PycharmProjects/PUBvalidador/media/'
+MEDIA_ROOT = '/home/epalomeque/PycharmProjects/PUBvalidador/media/'
 
 # Redirect when login is correct.
 LOGIN_REDIRECT_URL = "/home"

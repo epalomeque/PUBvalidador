@@ -2,6 +2,13 @@ from django.db import models
 
 
 # Create your models here.
+class Cat_AnioEjercicio(models.Model):
+    AnioEjercicio = models.CharField(max_length=4, default='')
+
+    def __unicode__(self):  # __str__ en Python 3
+        return self.AnioEjercicio
+
+
 class Cat_Sexo(models.Model):
     identSexo = models.CharField(max_length=1)
     nombreSexo = models.CharField(max_length=10)
@@ -142,6 +149,12 @@ class Cat_Frecuencia(models.Model):
     def __unicode__(self):
         return self.nombreMes
 
+class Cat_TipoPadron(models.Model):
+    nombrePadron = models.CharField(max_length=10)
+
+    def __unicode__(self):
+        return self.nombrePadron
+
 
 class FormatoPubActor(models.Model):
     # Razon Social_1
@@ -224,9 +237,28 @@ class FormatoPubActor(models.Model):
     # Mes de periodo de pago_41
     MesPeriodoPago = models.ForeignKey(Cat_Mes)
     # Anio de ejercicio_42
-    AnioEjercicio = models.IntegerField
+    AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
     # Periodicidad de entrega del beneficio_43
     PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
     # Numero de la entrega del beneficio_44
     NumeroEntregaBeneficio = models.IntegerField
 
+
+class FormatoPubPersona(models.Model):
+    Trimestre = models.ForeignKey(Cat_Periodos)
+    # Mes de periodo de pago_41
+    MesPeriodoPago = models.ForeignKey(Cat_Mes)
+    # Anio de ejercicio_42
+    AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
+    # Periodicidad de entrega del beneficio_43
+    PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
+
+
+class FormatoPubPoblacion(models.Model):
+    Trimestre = models.ForeignKey(Cat_Periodos)
+    # Mes de periodo de pago_41
+    MesPeriodoPago = models.ForeignKey(Cat_Mes)
+    # Anio de ejercicio_42
+    AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
+    # Periodicidad de entrega del beneficio_43
+    PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
