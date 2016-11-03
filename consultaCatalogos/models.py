@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -262,3 +263,23 @@ class FormatoPubPoblacion(models.Model):
     AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
     # Periodicidad de entrega del beneficio_43
     PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
+
+
+class EstatusTrabajos(models.Model):
+    nombreEstatus = models.CharField(max_length=15)
+
+    def __unicode__(self):
+        return self.nombreEstatus
+
+
+class TrabajosRealizados(models.Model):
+    archivoRelacionado = models.FileField(upload_to='csv/%Y/%m/%d')
+    Estatus = models.ForeignKey(EstatusTrabajos)
+    Usuario = models.ForeignKey(User)
+    FechaInicio = models.DateTimeField(auto_now_add=True)
+    UltimaActualizacion = models.DateField(auto_now=True)
+    TipoPadron = models.ForeignKey(Cat_TipoPadron, default='')
+    AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio, default='')
+    Trimestre = models.ForeignKey(Cat_Periodos, default='')
+    CantidadRegistros = models.IntegerField(default=0)
+    JsonTrabajo = models.TextField(blank=True, default='')

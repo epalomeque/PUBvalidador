@@ -24,4 +24,5 @@ admin.site.register(Cat_TipoPadron)
 admin.site.register(FormatoPubActor)
 admin.site.register(FormatoPubPersona)
 admin.site.register(FormatoPubPoblacion)
-
+admin.site.register(EstatusTrabajos)
+admin.site.register(TrabajosRealizados)

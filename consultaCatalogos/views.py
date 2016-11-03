@@ -5,7 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
-from forms import SignUpForm
+#from consultaCatalogos import models as LosCatalogos
+from forms import SignUpForm, nuevoTrabajoForm
 
 
 # Create your views here.
@@ -46,7 +47,12 @@ def signup(request):
 
 @login_required()
 def home(request):
-    return render_to_response('home.html', {'user': request.user}, context_instance=RequestContext(request))
+    nuevoTrabajo = nuevoTrabajoForm()
+    userData = {
+        'user': request.user,
+        'nuevoTrabajo': nuevoTrabajo
+    }
+    return render_to_response('home.html', userData, context_instance=RequestContext(request))
 
 @login_required()
 def validar(request):
