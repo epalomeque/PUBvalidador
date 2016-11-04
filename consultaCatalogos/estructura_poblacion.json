@@ -1,0 +1,42 @@
+{
+    "FORMATO POBLACIÓN": {
+        "cant_columnas" : 36,
+        "columnas" : [
+            { "Multilocalidad_1" : "" },
+            { "Registro Federal de Contribuyentes_2" : "" },
+            { "Número beneficiados_3" : "" },
+            { "Hombres beneficiados_4" : "" },
+            { "Mujeres beneficiadas_5" : "" },
+            { "Viviendas beneficiadas_6" : "" },
+            { "Clave Municipio donde se encuentra la obra_7" : "" },
+            { "Municipio donde se encuentra la obra_8" : "" },
+            { "Clave Localidad donde se encuentra la obra_9" : "" },
+            { "Localidad donde se encuentra la obra_10 Asentamiento humano_11" : "" },
+            { "Nombre vialidad_12" : "" },
+            { "Número Exterior_13" : "" },
+            { "Número Interior_14" : "" },
+            { "Código Postal_15" : "" },
+            { "Referencia del domicilio_16" : "" },
+            { "Dependencia que opera el programa_17" : "" },
+            { "Clave del programa_18" : "" },
+            { "Clave del subprograma_19" : "" },
+            { "Nombre del programa_20" : "" },
+            { "Tipo de apoyo_21" : "" },
+            { "Identificador de la Obra_22" : "" },
+            { "Descripción de la Obra_23" : "" },
+            { "Cantidad de beneficios_24" : "" },
+            { "Total en pesos de los beneficios_25" : "" },
+            { "Inversión federal_26" : "" },
+            { "Inversión estatal_27" : "" },
+            { "Inversión municipal_28" : "" },
+            { "Inversión de otras fuentes_29" : "" },
+            { "Fuentes que fondean el recurso_30" : "" },
+            { "Trimestre_31" : "" },
+            { "Año de ejercicio_32" : "" },
+            { "Fecha Inicio_33" : "" },
+            { "Fecha Fin_34" : "" },
+            { "Periodicidad de entrega del beneficio_35" : "" },
+            { "Número de la entrega del beneficio_36" : "" }
+        ]  
+    }
+}

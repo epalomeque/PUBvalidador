@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
-#from consultaCatalogos import models as LosCatalogos
 from forms import SignUpForm, nuevoTrabajoForm
+from csv_actions import *
 
 
 # Create your views here.
@@ -54,6 +54,12 @@ def home(request):
     }
     return render_to_response('home.html', userData, context_instance=RequestContext(request))
 
+
+@login_required()
+def validarfile(request):
+
+    return render_to_response('validarfile.html', {'anio': 'anualidad'}, context_instance=RequestContext(request))
+
 @login_required()
 def validar(request):
-    return render_to_response('validar.html', {'user': request.user}, context_instance=RequestContext(request))
+    return render_to_response('validarfile.html', {'user': request.user}, context_instance=RequestContext(request))

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{#% block head_printstuff %#}
+{#% endblock %#}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{#% block breadcrumb_zone %#}
+{#% endblock %#}
+
+{% block settingsbox %}
+{% endblock %}
+
+{% block content %}
+
+<div class="col-xs-12">
+    <h1>MLK was here</h1>
+    {{ anio }}<br />
+    {{ LosDatos.archivo }}<br />
+    {{ LosDatos.padron }}<br />
+    {{ LosDatos.trimestre }}
+</div>
+
+{% endblock %}

@@ -2,11 +2,13 @@
 from __future__ import unicode_literals
 
 from django.db import migrations, models
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
@@ -228,6 +230,22 @@ class Migration(migrations.Migration):
                 ('MesPeriodoPago', models.ForeignKey(to='consultaCatalogos.Cat_Mes')),
                 ('PeriodicidadEntregaBeneficio', models.ForeignKey(to='consultaCatalogos.Cat_Frecuencia')),
                 ('Trimestre', models.ForeignKey(to='consultaCatalogos.Cat_Periodos')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='TrabajosRealizados',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('archivoRelacionado', models.FileField(upload_to=b'csv/%Y/%m/%d')),
+                ('FechaInicio', models.DateTimeField(auto_now_add=True)),
+                ('UltimaActualizacion', models.DateField(auto_now=True)),
+                ('CantidadRegistros', models.IntegerField(default=0)),
+                ('JsonTrabajo', models.TextField(default=b'', blank=True)),
+                ('AnioEjercicio', models.ForeignKey(default=b'', to='consultaCatalogos.Cat_AnioEjercicio')),
+                ('Estatus', models.ForeignKey(to='consultaCatalogos.EstatusTrabajos')),
+                ('TipoPadron', models.ForeignKey(default=b'', to='consultaCatalogos.Cat_TipoPadron')),
+                ('Trimestre', models.ForeignKey(default=b'', to='consultaCatalogos.Cat_Periodos')),
+                ('Usuario', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),
         migrations.AddField(

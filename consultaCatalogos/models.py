@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 class Cat_AnioEjercicio(models.Model):
     AnioEjercicio = models.CharField(max_length=4, default='')
@@ -55,7 +54,7 @@ class Cat_Identificacion(models.Model):
     nombreIdentificacion = models.CharField(max_length=70)
 
     def __unicode__(self):
-        return '%s %s' % (self.identIdentificacion, self.nombreIdentificacion)
+        return '%s | %s' % (self.identIdentificacion, self.nombreIdentificacion)
 
 
 class Cat_Estados(models.Model):
@@ -102,7 +101,7 @@ class Cat_Asentamiento(models.Model):
 
 class Cat_Dependencias(models.Model):
      identDependencia = models.CharField(max_length=2)
-     nombreDependencia = models.CharField(max_length=60)
+     nombreDependencia = models.CharField(max_length=150)
 
      def __unicode__(self):
          return self.nombreDependencia
@@ -132,7 +131,7 @@ class Cat_Periodos(models.Model):
     nombrePeriodo = models.CharField(max_length=20)
 
     def __unicode__(self):
-        return self.nombrePeriodo
+        return '%s | %s' % (self.identPeriodo, self.nombrePeriodo)
 
 
 class Cat_Mes(models.Model):
@@ -148,7 +147,8 @@ class Cat_Frecuencia(models.Model):
     descripFrecuencia = models.CharField (max_length=45, blank=True)
 
     def __unicode__(self):
-        return self.nombreMes
+        return self.nombreFrecuencia
+
 
 class Cat_TipoPadron(models.Model):
     nombrePadron = models.CharField(max_length=10)
@@ -157,6 +157,7 @@ class Cat_TipoPadron(models.Model):
         return self.nombrePadron
 
 
+# Modelos del PUB
 class FormatoPubActor(models.Model):
     # Razon Social_1
     RazonSocial = models.CharField(max_length=20)
@@ -265,8 +266,9 @@ class FormatoPubPoblacion(models.Model):
     PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
 
 
+# Modelos del validador
 class EstatusTrabajos(models.Model):
-    nombreEstatus = models.CharField(max_length=15)
+    nombreEstatus = models.CharField(max_length=20)
 
     def __unicode__(self):
         return self.nombreEstatus

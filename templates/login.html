@@ -2,6 +2,12 @@
 
                 {% block contenido %}
 
+                {% if user.is_authenticated %}
+
+                    <meta http-equiv="REFRESH" content="0;url={% url 'home' %}">
+
+                {% else %}
+
                 <!-- Aqui empieza el login -->
                 <!-- Aqui empieza el login -->
                 <!-- Aqui empieza el login -->
@@ -22,39 +28,25 @@
 
                       <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
                         {% csrf_token %}
-                        <fieldset>
-                          <label class="block clearfix">
-                            <span class="block input-icon input-icon-right">
-                              <!--input type="text" class="form-control" placeholder="Nombre de Usuario" /-->
-                              {# { form.username.label_tag } #}
-                              <i class="ace-icon fa fa-user"></i>
-                              Usuario: {{ form.username }}
-                            </span>
-                          </label>
+                        <label class="block clearfix">Usuario: </label>
+                        {{ form.username }}
+                        <div class="space"></div>
+                        <label class="block clearfix">Contraseña: </label>
+                        {{ form.password }}
+                        <div class="space"></div>
 
-                          <label class="block clearfix">
-                            <span class="block input-icon input-icon-right">
-                              <!--input type="password" class="form-control" placeholder="Contraseña" /-->
-                              {#  { form.password.label_tag }#}
-                              C: {{ form.password }}
-                              <i class="ace-icon fa fa-lock"></i>
-                            </span>
-                          </label>
+                        <div class="clearfix">
+                          <!--label class="inline">
+                            <input type="checkbox" class="ace" />
+                            <span class="lbl"> Recordarme</span>
+                          </label-->
 
-                          <div class="space"></div>
-
-                          <div class="clearfix">
-                            <label class="inline">
-                              <input type="checkbox" class="ace" />
-                              <span class="lbl"> Recordarme</span>
-                            </label>
-
-                            <button type="submit" class="width-55 pull-right btn btn-sm btn-primary">
-                              <!--i class="ace-icon fa fa-key"></i-->
-                              <span class="bigger-110">Iniciar sesión</span>
-                              <input type="hidden" name="next" value="{{ next }}"/>
-                            </button>
-                          </div>
+                          <button type="submit" class="width-55 pull-right btn btn-sm btn-primary">
+                            <!--i class="ace-icon fa fa-key"></i-->
+                            <span class="bigger-110">Iniciar sesión</span>
+                            <input type="hidden" name="next" value="{{ next }}"/>
+                          </button>
+                        </div>
 
                           <div class="space-4"></div>
                         </fieldset>
@@ -155,5 +147,7 @@
                 <!-- Aqui termina el recuperar contraseña -->
                 <!-- Aqui termina el recuperar contraseña -->
                 <!-- Aqui termina el recuperar contraseña -->
+
+                {% endif %}
 
                 {% endblock %}

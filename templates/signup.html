@@ -21,39 +21,19 @@
                             <p>{{ form.errors }}</p>
                         {% endif %}
 
-                      <p> Ingresa tus datos: </p>
-
                       <form method="post" action="{% url 'signup' %}">
                       {% csrf_token %}
 
                         <fieldset>
-                          <label class="block clearfix">
-                            <span class="block input-icon input-icon-right">
-                              <!--input type="email" class="form-control" placeholder="Email" /-->
-                              {{ form.email.label_tag }}
-                              {{ form.email }}
-                              <i class="ace-icon fa fa-envelope"></i>
-                            </span>
-                          </label>
-
-                          <label class="block clearfix">
-                            <span class="block input-icon input-icon-right">
-                              <!--input type="text" class="form-control" placeholder="Nombre de usuario" /-->
-                                {{ form.username.label_tag }}
-                                {{ form.username }}
-                              <i class="ace-icon fa fa-user"></i>
-                            </span>
-                          </label>
-
-                          <label class="block clearfix">
-                            <span class="block input-icon input-icon-right">
-                              <!--input type="password" class="form-control" placeholder="Contraseña" /-->
-                              {{ form.password.label_tag }}
-                              {{ form.password }}
-                              <i class="ace-icon fa fa-lock"></i>
-                            </span>
-                          </label>
-
+                          <label class="block clearfix">Nombre de Usuario: </label>
+                          {{ form.username }}
+                          <div class="space-2"></div>
+                          <label class="block clearfix">Contraseña: </label>
+                          {{ form.password }}
+                          <div class="space-2"></div>
+                          <label class="block clearfix">Correo Electrónico: </label>
+                          {{ form.email }}
+                          <div class="space-2"></div>
                           <!--label class="block clearfix">
                             <span class="block input-icon input-icon-right">
                               <input type="password" class="form-control" placeholder="Repetir contraseña" />
@@ -61,15 +41,15 @@
                             </span>
                           </label-->
 
-                          <label class="block">
+                          <!--label class="block">
                             <input type="checkbox" class="ace" />
                             <span class="lbl">
                               Acepto el
                               <a href="#">Acuerdo de Usuario</a>
                             </span>
-                          </label>
+                          </label-->
 
-                          <div class="space-24"></div>
+                          <div class="space-12"></div>
 
                           <div class="clearfix">
                             <button type="reset" class="width-30 pull-left btn btn-sm">

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.forms import ModelForm
 from consultaCatalogos.models import TrabajosRealizados
 
+
 class SignUpForm(ModelForm):
     class Meta:
         model = User
@@ -11,18 +12,19 @@ class SignUpForm(ModelForm):
             'password': forms.PasswordInput(),
         }
 
+
 class nuevoTrabajoForm(ModelForm):
     class Meta:
         model = TrabajosRealizados
-        fields = ['archivoRelacionado', 'Estatus', 'Usuario', 'TipoPadron','AnioEjercicio','Trimestre', 'CantidadRegistros','JsonTrabajo']
+        fields = ['archivoRelacionado', 'Usuario', 'TipoPadron','AnioEjercicio','Trimestre']
+        #fields = ['archivoRelacionado', 'Estatus', 'Usuario', 'TipoPadron','AnioEjercicio','Trimestre', 'CantidadRegistros','JsonTrabajo']
         widgets = {
             'archivoRelacionado': forms.FileInput,
-            'Estatus': forms.HiddenInput,
+            #'Estatus': forms.HiddenInput,
             'Usuario':forms.HiddenInput,
             'TipoPadron':forms.Select,
             'AnioEjercicio':forms.Select,
             'Trimestre':forms.Select,
-            'CantidadRegistros':forms.HiddenInput,
-            'JsonTrabajo':forms.HiddenInput
+            #'CantidadRegistros':forms.HiddenInput,
+            #'JsonTrabajo':forms.HiddenInput
         }
-
