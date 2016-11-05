@@ -14,17 +14,18 @@ class SignUpForm(ModelForm):
 
 
 class nuevoTrabajoForm(ModelForm):
+#class nuevoTrabajoForm(forms.Form):
     class Meta:
         model = TrabajosRealizados
-        fields = ['archivoRelacionado', 'Usuario', 'TipoPadron','AnioEjercicio','Trimestre']
-        #fields = ['archivoRelacionado', 'Estatus', 'Usuario', 'TipoPadron','AnioEjercicio','Trimestre', 'CantidadRegistros','JsonTrabajo']
+        #fields = ['archivoRelacionado', 'TipoPadron','AnioEjercicio','Trimestre']
+        fields = ['archivoRelacionado', 'Estatus', 'Usuario', 'TipoPadron','AnioEjercicio','Trimestre', 'CantidadRegistros','JsonTrabajo']
         widgets = {
             'archivoRelacionado': forms.FileInput,
-            #'Estatus': forms.HiddenInput,
+            'Estatus': forms.HiddenInput,
             'Usuario':forms.HiddenInput,
             'TipoPadron':forms.Select,
             'AnioEjercicio':forms.Select,
             'Trimestre':forms.Select,
-            #'CantidadRegistros':forms.HiddenInput,
-            #'JsonTrabajo':forms.HiddenInput
+            'CantidadRegistros':forms.HiddenInput,
+            'JsonTrabajo':forms.HiddenInput
         }

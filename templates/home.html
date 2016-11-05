@@ -18,30 +18,32 @@
 
   <div class="well well-lg">
 
-      {% if form.errors %}
-        <p>{{ form.errors }}</p>
+      {% if nuevoTrabajo.errors %}
+        <p>{{ nuevoTrabajo.errors }}</p>
       {% endif %}
 
      <h2>Puedes iniciar un nuevo trabajo para validación</h2>
 
-      <form method="post" action="{% url 'validarfile' %}">
-        {% csrf_token %}
-         <label for="id_AnioEjercicio">Año: </label>
-         {{  nuevoTrabajo.AnioEjercicio }}
-        <div class="space-6"></div>
-         <label for="id_Trimestre">Trimestre: </label>
-         {{  nuevoTrabajo.Trimestre }}
-        <div class="space-6"></div>
-         <label for="id_TipoPadron">Tipo de Padrón: </label>
-         {{  nuevoTrabajo.TipoPadron }}
-        <div class="space-6"></div>
-         <label for="id_archivoRelacionado">Cargar archivo de datos: </label>
-         {{ nuevoTrabajo.archivoRelacionado }}
-        <div class="space-18"></div>
-        <button type="submit" class="btn btn-app btn-primary width-auto center">
-            <i class="ace-icon fa fa-pencil-square-o fa-2x"></i>
-            <span class="bigger-110">Iniciar nuevo trabajo</span>
-        </button>
+      <form enctype="multipart/form-data" method="post" action="{% url 'home' %}">
+          {% csrf_token %}
+          <label for="id_AnioEjercicio">Año: </label>
+          {{   nuevoTrabajo.AnioEjercicio }}
+          <div class="space-6"></div>
+          <label for="id_Trimestre">Trimestre: </label>
+          {{  nuevoTrabajo.Trimestre }}
+          <div class="space-6"></div>
+          <label for="id_TipoPadron">Tipo de Padrón: </label>
+          {{  nuevoTrabajo.TipoPadron }}
+          <div class="space-6"></div>
+          <label for="id_archivoRelacionado">Cargar archivo de datos: </label>
+          {{ nuevoTrabajo.archivoRelacionado }}
+          <div class="space-18"></div>
+
+          <button type="submit" class="btn btn-app btn-primary width-auto center">
+              <i class="ace-icon fa fa-pencil-square-o fa-2x"></i>
+              <span class="bigger-110">Iniciar nuevo trabajo</span>
+          </button>
+
      </form>
   </div>
 

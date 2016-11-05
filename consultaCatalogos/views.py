@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from forms import SignUpForm, nuevoTrabajoForm
+from django.core.files.uploadedfile import SimpleUploadedFile
 from csv_actions import *
 
 
@@ -47,19 +48,29 @@ def signup(request):
 
 @login_required()
 def home(request):
-    nuevoTrabajo = nuevoTrabajoForm()
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        nuevoTrabajo = nuevoTrabajoForm(request.POST, request.FILES)
+        # check whether it's valid:
+        if nuevoTrabajo.is_valid():
+            # process the data in form.cleaned_data as required
+            anio = nuevoTrabajo.cleaned_data["AnioEjercicio"]
+            padron = nuevoTrabajo.cleaned_data["TipoPadron"]
+            trimestre = nuevoTrabajo.cleaned_data["Trimestre"]
+            archivoRelacionado = nuevoTrabajo.cleaned_data["archivoRelacionado"]
+
+            # redirect to a new URL:
+            return HttpResponseRedirect(reverse('validar'))
+
     userData = {
         'user': request.user,
-        'nuevoTrabajo': nuevoTrabajo
+        'nuevoTrabajo': nuevoTrabajoForm()
     }
     return render_to_response('home.html', userData, context_instance=RequestContext(request))
 
 
 @login_required()
-def validarfile(request):
-
-    return render_to_response('validarfile.html', {'anio': 'anualidad'}, context_instance=RequestContext(request))
-
-@login_required()
 def validar(request):
-    return render_to_response('validarfile.html', {'user': request.user}, context_instance=RequestContext(request))
+
+    return render_to_response('validar.html', {'user': request.user}, context_instance=RequestContext(request))
