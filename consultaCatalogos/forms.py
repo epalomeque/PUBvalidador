@@ -17,8 +17,8 @@ class nuevoTrabajoForm(ModelForm):
 #class nuevoTrabajoForm(forms.Form):
     class Meta:
         model = TrabajosRealizados
-        #fields = ['archivoRelacionado', 'TipoPadron','AnioEjercicio','Trimestre']
-        fields = ['archivoRelacionado', 'Estatus', 'Usuario', 'TipoPadron','AnioEjercicio','Trimestre', 'CantidadRegistros','JsonTrabajo']
+        fields = ['archivoRelacionado', 'TipoPadron','AnioEjercicio','Trimestre', 'Estatus', 'Usuario']
+        #fields = ['archivoRelacionado', 'Estatus', 'Usuario', 'TipoPadron','AnioEjercicio','Trimestre', 'CantidadRegistros','JsonTrabajo']
         widgets = {
             'archivoRelacionado': forms.FileInput,
             'Estatus': forms.HiddenInput,
@@ -26,6 +26,6 @@ class nuevoTrabajoForm(ModelForm):
             'TipoPadron':forms.Select,
             'AnioEjercicio':forms.Select,
             'Trimestre':forms.Select,
-            'CantidadRegistros':forms.HiddenInput,
-            'JsonTrabajo':forms.HiddenInput
+            #'CantidadRegistros':forms.HiddenInput,
+            #'JsonTrabajo':forms.HiddenInput
         }

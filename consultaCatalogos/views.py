@@ -6,8 +6,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from forms import SignUpForm, nuevoTrabajoForm
-from django.core.files.uploadedfile import SimpleUploadedFile
-from csv_actions import *
+from models import TrabajosRealizados
+#from django.core.files.uploadedfile import SimpleUploadedFile
+#from csv_actions import *
 
 
 # Create your views here.
@@ -43,9 +44,6 @@ def signup(request):
     return render_to_response('signup.html', data, context_instance=RequestContext(request))
 
 
-#def main(request):
-#   return render_to_response('main.html', {}, context_instance=RequestContext(request))
-
 @login_required()
 def home(request):
     # if this is a POST request we need to process the form data
@@ -55,22 +53,24 @@ def home(request):
         # check whether it's valid:
         if nuevo_trabajo.is_valid():
             # process the data in form.cleaned_data as required
-            anio = nuevo_trabajo.cleaned_data["AnioEjercicio"]
-            padron = nuevo_trabajo.cleaned_data["TipoPadron"]
-            trimestre = nuevo_trabajo.cleaned_data["Trimestre"]
-            archivoRelacionado = nuevo_trabajo.cleaned_data["archivoRelacionado"]
-
+            el_trabajo = nuevo_trabajo.save()
             # redirect to a new URL:
-            return HttpResponseRedirect(reverse('validar'))
+            return HttpResponseRedirect('/validar/%s' % el_trabajo.pk)
 
+    trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=request.user, Estatus__in=[1, 2, 3])
     userData = {
         'user': request.user,
-        'nuevoTrabajo': nuevoTrabajoForm()
+        'nuevoTrabajo': nuevoTrabajoForm(initial={'Usuario':request.user, 'Estatus':4}),
+        'pendientes' : trabajos_pedientes,
+        'total_pendientes' : trabajos_pedientes.count()
     }
+
     return render_to_response('home.html', userData, context_instance=RequestContext(request))
 
 
 @login_required()
-def validar(request):
+def validar(request, trabajo_id):
+
+
 
     return render_to_response('validar.html', {'user': request.user}, context_instance=RequestContext(request))

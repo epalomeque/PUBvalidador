@@ -269,7 +269,7 @@ class FormatoPubPoblacion(models.Model):
 
 # Modelos del validador
 class EstatusTrabajos(models.Model):
-    nombreEstatus = models.CharField(max_length=20)
+    nombreEstatus = models.CharField(max_length=20, default='')
 
     def __unicode__(self):
         return self.nombreEstatus
@@ -286,3 +286,6 @@ class TrabajosRealizados(models.Model):
     Trimestre = models.ForeignKey(Cat_Periodos, default='')
     CantidadRegistros = models.IntegerField(default=0)
     JsonTrabajo = models.TextField(blank=True, default='')
+
+    def __unicode__(self):
+        return 'ID: %s | Archivo: %s | Usuario: %s' % (self.pk, self.archivoRelacionado, self.Usuario)
