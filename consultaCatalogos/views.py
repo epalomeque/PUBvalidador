@@ -51,14 +51,14 @@ def home(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        nuevoTrabajo = nuevoTrabajoForm(request.POST, request.FILES)
+        nuevo_trabajo = nuevoTrabajoForm(request.POST, request.FILES)
         # check whether it's valid:
-        if nuevoTrabajo.is_valid():
+        if nuevo_trabajo.is_valid():
             # process the data in form.cleaned_data as required
-            anio = nuevoTrabajo.cleaned_data["AnioEjercicio"]
-            padron = nuevoTrabajo.cleaned_data["TipoPadron"]
-            trimestre = nuevoTrabajo.cleaned_data["Trimestre"]
-            archivoRelacionado = nuevoTrabajo.cleaned_data["archivoRelacionado"]
+            anio = nuevo_trabajo.cleaned_data["AnioEjercicio"]
+            padron = nuevo_trabajo.cleaned_data["TipoPadron"]
+            trimestre = nuevo_trabajo.cleaned_data["Trimestre"]
+            archivoRelacionado = nuevo_trabajo.cleaned_data["archivoRelacionado"]
 
             # redirect to a new URL:
             return HttpResponseRedirect(reverse('validar'))
