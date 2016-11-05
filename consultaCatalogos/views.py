@@ -57,10 +57,14 @@ def home(request):
             # redirect to a new URL:
             return HttpResponseRedirect('/validar/%s' % el_trabajo.pk)
 
-    trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=request.user, Estatus__in=[1, 2, 3])
+    usuario_actual = request.user
+    trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual, Estatus__in=[1, 2, 3, 4])
+    print '******************************************************'
+    print trabajos_pedientes
+    print '******************************************************'
     userData = {
-        'user': request.user,
-        'nuevoTrabajo': nuevoTrabajoForm(initial={'Usuario':request.user, 'Estatus':4}),
+        'user': usuario_actual,
+        'nuevoTrabajo': nuevoTrabajoForm(initial={'Usuario':usuario_actual, 'Estatus':4}),
         'pendientes' : trabajos_pedientes,
         'total_pendientes' : trabajos_pedientes.count()
     }
