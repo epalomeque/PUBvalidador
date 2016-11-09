@@ -23,8 +23,8 @@
     <schema id="7" parent="1" name="public">
       <object-id>2200</object-id>
       <visible>1</visible>
-      <introspection-state-number>2420</introspection-state-number>
-      <introspection-timestamp>2016-11-03.15:49:18.240</introspection-timestamp>
+      <introspection-state-number>2645</introspection-state-number>
+      <introspection-timestamp>2016-11-07.08:07:47.751</introspection-timestamp>
     </schema>
     <schema id="8" parent="1" name="pg_catalog">
       <object-id>11</object-id>
@@ -283,7 +283,7 @@
     </table>
     <table id="73" parent="7" name="consultaCatalogos_estatustrabajos">
       <object-id>49810</object-id>
-      <state-number>2055</state-number>
+      <state-number>2643</state-number>
     </table>
     <table id="74" parent="7" name="consultaCatalogos_formatopubactor">
       <object-id>49818</object-id>
@@ -299,7 +299,7 @@
     </table>
     <table id="77" parent="7" name="consultaCatalogos_trabajosrealizados">
       <object-id>49842</object-id>
-      <state-number>2055</state-number>
+      <state-number>2643</state-number>
     </table>
     <table id="78" parent="7" name="csvimport_csvimport">
       <object-id>50072</object-id>
@@ -1302,7 +1302,7 @@ permission_id</columns>
       <default-expression>nextval(&apos;&quot;consultaCatalogos_estatustrabajos_id_seq&quot;&apos;::regclass)</default-expression>
     </column>
     <column id="257" parent="73" name="nombreEstatus">
-      <state-number>2126</state-number>
+      <state-number>2645</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(20)|0</data-type>
     </column>
@@ -1907,7 +1907,7 @@ permission_id</columns>
       <data-type>integer|0</data-type>
     </column>
     <column id="366" parent="77" name="Estatus_id">
-      <state-number>2055</state-number>
+      <state-number>2634</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
     </column>
@@ -1971,7 +1971,7 @@ permission_id</columns>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
     <foreign-key id="378" parent="77" name="con_Estatus_id_3d1491d1_fk_consultaCatalogos_estatustrabajos_id">
-      <object-id>50012</object-id>
+      <object-id>50236</object-id>
       <columns>Estatus_id</columns>
       <ref-key>~.consultaCatalogos_estatustrabajos.consultaCatalogos_estatustrabajos_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>

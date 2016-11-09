@@ -59,9 +59,6 @@ def home(request):
 
     usuario_actual = request.user
     trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual, Estatus__in=[1, 2, 3, 4])
-    print '******************************************************'
-    print trabajos_pedientes
-    print '******************************************************'
     userData = {
         'user': usuario_actual,
         'nuevoTrabajo': nuevoTrabajoForm(initial={'Usuario':usuario_actual, 'Estatus':4}),
@@ -74,6 +71,7 @@ def home(request):
 
 @login_required()
 def validar(request, trabajo_id):
+
 
 
 

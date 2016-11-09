@@ -56,97 +56,63 @@
 <div class="col-xs-12 col-lg-6 middle">
   <div class="well well-lg">
   <h4>... o retomar una de las tareas que tienes guardadas.</h4>
-        <table id="simple-table" class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th>Archivo</th>
-                    <th>Año</th>
-                    <th>Trimestre</th>
+    {% for record in pendientes %}
+        <div class="renglon">
+            <div class="datos">
+            <a href="validar/{{ record.pk }}">{{ record.archivoRelacionado.name }}</a>
+            <br />
+            <strong>Ejercicio: </strong> {{ record.AnioEjercicio }} | <strong>Trimestre: </strong>{{ record.Trimestre.identPeriodo }} | <strong>Última actualización: </strong>{{ record.UltimaActualizacion|date:"SHORT_DATE_FORMAT" }}
 
-                    <th>
-                        <!i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i-->
-                        Última Actualización
-                    </th>
-                    <th class="hidden-480">Estatus</th>
-
-                    <th></th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                {% for record in pendientes %}
-                <tr>
-                    <td>{{ record.archivoRelacionado.name }}</td>
-                    <td>{{ record.AnioEjercicio }}</td>
-                    <td>{{ record.Trimestre.identPeriodo }}</td>
-                    <td>{{ record.UltimaActualizacion|date:"M, Y" }}</td>
-                    <td>{{ record.Estatus }}</td>
-                    <td> Botoncitos </td>
-                </tr>
-                {% endfor %}
-
-                <tr>
-                    <td>
-                        <a href="#">Persona T1-2016</a>
-                    </td>
-                    <td>2016</td>
-                    <td class="hidden-480">T1</td>
-                    <td>Mayo 15</td>
-
-                    <td class="hidden-480">
-                        <span class="label label-sm label-warning">Sin terminar</span>
-                    </td>
-
-                    <td>
-                        <div class="hidden-sm hidden-xs btn-group">
-                            <button class="btn btn-xs btn-info">
-                                <i class="ace-icon fa fa-pencil bigger-120"></i>
-                            </button>
-
-                            <button class="btn btn-xs btn-danger">
-                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                            </button>
-                        </div>
-
-                        <div class="hidden-md hidden-lg">
-                            <div class="inline pos-rel">
-                                <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-                                    <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                                </button>
-
-                                <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-                                    <li>
-                                        <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-                                            <span class="blue">
-                                                <i class="ace-icon fa fa-search-plus bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-                                            <span class="green">
-                                                <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li>
-                                        <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-                                            <span class="red">
-                                                <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
+            </div>
+            <!-- div class="botones hidden-sm hidden-xs btn-group" -->
+            <div class="botones">
+            {% if record.Estatus_id = 1 %}
+                <span class="label label-warning">
+			        <strong>Estatus: </strong>{{ record.Estatus }}
+			    </span>
+                <br />
+                <a href="validar/{{ record.pk }}" class="btn btn-xs btn-info" >
+                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                </a>
+                <button class="btn btn-xs btn-danger">
+                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </button>
+            {% elif record.Estatus_id = 2 %}
+                <span class="label label-success">
+			        <strong>Estatus: </strong>{{ record.Estatus }}
+			    </span>
+                <br />
+                <button class="btn btn-xs btn-success">
+                    <i class="ace-icon fa fa-check bigger-120"></i>
+                </button>
+                <a href="validar/{{ record.pk }}" class="btn btn-xs btn-info">
+                        <i class="ace-icon fa fa-pencil bigger-120"></i>
+                </a>
+            {% elif record.Estatus_id = 3 %}
+                <span class="label label-inverse">
+			        <strong>Estatus: </strong>{{ record.Estatus }}
+			    </span>
+                <br />
+                <button class="btn btn-xs btn-inverse">
+                    Generar Reporte
+                </button>
+            {% elif record.Estatus_id = 4 %}
+                <span class="label">
+			        <strong>Estatus: </strong>{{ record.Estatus }}
+			    </span>
+                <br />
+                <a href="validar/{{ record.pk }}" class="btn btn-xs btn-info" >
+                    <i class="ace-icon fa fa-pencil bigger-120"></i>
+                </a>
+                <button class="btn btn-xs btn-danger">
+                        <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                    </button>
+            {% else %}
+                <p>Error en la carga, intente nuevamente</p>
+            {% endif %}
+            </div>
+        </div>
+    {% endfor %}
   </div>
 </div>
 {% else %}

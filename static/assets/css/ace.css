@@ -19924,3 +19924,22 @@ select#id_Trimestre,
 select#id_TipoPadron {
     width:100%;
 }
+
+div.renglon {
+    display: inline-block;
+    width: 100%;
+    padding: 5px;
+}
+
+div.renglon:nth-child(odd) {
+    background: #e0e0e0;
+}
+
+div.renglon div.datos {
+    display: inline-block;
+    width: 75%;
+}
+div.renglon div.botones {
+    display: inline-block;
+    width: auto;
+}
