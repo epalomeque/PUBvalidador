@@ -76,7 +76,6 @@ def validar(request, trabajo_id):
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
 
     if trabajo.Usuario == request.user :
-        print 'son iguales los usuarios'
         # Si el estatus es INCOMPLETO
         if trabajo.Estatus_id == 1 :
             print 'trabajo.Estatus_id == 1'
@@ -95,6 +94,7 @@ def validar(request, trabajo_id):
             # print trabajo.Estatus
             # archivo = trabajo.archivoRelacionado.path
             renglones = import_csv(trabajo.archivoRelacionado.path)
+            print renglones
 
             # Iniciar validacion de CSV
 
