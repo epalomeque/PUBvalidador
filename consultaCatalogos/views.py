@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf.global_settings import MEDIA_ROOT
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -8,7 +9,7 @@ from django.http.response import HttpResponseRedirect
 from forms import SignUpForm, nuevoTrabajoForm
 from models import TrabajosRealizados
 #from django.core.files.uploadedfile import SimpleUploadedFile
-#from csv_actions import *
+from csv_actions import *
 
 
 # Create your views here.
@@ -84,16 +85,33 @@ def validar(request, trabajo_id):
 
     if trabajo.Usuario == request.user :
         print 'son iguales los usuarios'
+        # Si el estatus es Iniciado
+        if trabajo.Estatus_id == 1 :
+            print 'trabajo.Estatus_id == 1'
+            print trabajo.Estatus
+            archivo = trabajo.archivoRelacionado.url
+            print 'archivo = '
+            print archivo
+            ruta = archivo.join(MEDIA_ROOT)
+            print 'ruta = '
+            print ruta
+            #import_csv(ruta)
+
+            # Iniciar validacion de CSV
+        elif trabajo.Estatus_id == 2:
+            print 'trabajo.Estatus_id == 2'
+            print trabajo.Estatus
+        elif trabajo.Estatus_id == 3:
+            print 'trabajo.Estatus_id == 3'
+            print trabajo.Estatus
+        elif trabajo.Estatus_id == 4:
+            print 'trabajo.Estatus_id == 4'
+            print trabajo.Estatus
+
+        # Si el estatus es incompleto
+
     else:
         return HttpResponseRedirect('/noautorizado')
-
-    # Si el estatus es Iniciado
-        # Iniciar validacion de CSV
-
-    # Si el estatus es incompleto
-
-
-
 
     return render_to_response('validar.html', {'user': request.user}, context_instance=RequestContext(request))
 
