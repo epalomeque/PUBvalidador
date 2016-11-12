@@ -71,8 +71,32 @@ def home(request):
 
 @login_required()
 def validar(request, trabajo_id):
+    # Abrir estatus del trabajo
+    trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
+
+    #print trabajo.archivoRelacionado
+    #print trabajo.AnioEjercicio
+    #print trabajo.Estatus
+    #print trabajo.Trimestre
+    #print trabajo.TipoPadron
+    #print trabajo.Usuario
+    #print trabajo.CantidadRegistros
+
+    if trabajo.Usuario == request.user :
+        print 'son iguales los usuarios'
+    else:
+        return HttpResponseRedirect('/noautorizado')
+
+    # Si el estatus es Iniciado
+        # Iniciar validacion de CSV
+
+    # Si el estatus es incompleto
 
 
 
 
     return render_to_response('validar.html', {'user': request.user}, context_instance=RequestContext(request))
+
+
+def no_autorizado(request):
+    return render_to_response('no_autorizado.html')
