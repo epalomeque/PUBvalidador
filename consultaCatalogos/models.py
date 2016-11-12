@@ -159,7 +159,12 @@ class Cat_TipoPadron(models.Model):
 
 
 # Modelos del PUB
+# Actor
 class FormatoPubActor(models.Model):
+    SINO_CHOICES = (
+        ('SI', 'S'),
+        ('NO', 'N'),
+    )
     # Razon Social_1
     RazonSocial = models.CharField(max_length=20)
     # Registro Federal de Contribuyentes_2
@@ -177,7 +182,7 @@ class FormatoPubActor(models.Model):
     # Estado de Nacimiento_8
     EdoNacimiento = models.ForeignKey(Cat_Estados, blank=True)
     # Titular_9
-    Titular = models.CharField(max_length=1)
+    Titular = models.CharField(max_length=1, choices=SINO_CHOICES)
     # Otro documento de identificacion_10
     OtroDocId = models.ForeignKey(Cat_Identificacion, blank=True)
     # Clave Municipio donde se paga el beneficio_11
@@ -185,7 +190,7 @@ class FormatoPubActor(models.Model):
     MunDondeSePagaBeneficio = models.ForeignKey(Cat_Municipio)
     # Clave Localidad donde se paga el beneficio_13
     # Localidad donde se paga el beneficio_14
-    LocDondeSePagaBeneficio = models.ForeignKey(Cat_Localidad, related_name='Localidad_Pago_Beneficio', default='')
+    LocDondeSePagaBeneficio = models.ForeignKey(Cat_Localidad, related_name='Localidad_Pago_Beneficio_Actor', default='')
     # Localidad de residencia actor social_15
     LocResidActorSocial = models.ForeignKey(Cat_Localidad, related_name='Localidad_Actor', default='')
     # Nombre de vialidad actor social_16
@@ -197,7 +202,7 @@ class FormatoPubActor(models.Model):
     # Codigo Postal actor social_19
     CodigoPostalActor = models.CharField(max_length=5)
     # Referencia del domicilio actor social_20
-    RefDomActor = models.CharField(max_length=60, blank=True)
+    RefDomActor = models.CharField(max_length=250, blank=True)
     # Localidad de residencia del integrante el actor social_21
     LocResidDelIntegrante = models.ForeignKey(Cat_Localidad, related_name='Localidad_Integrante', default='')
     # Nombre de vialidad integrante_22
@@ -209,7 +214,7 @@ class FormatoPubActor(models.Model):
     # Codigo Postal integrante_25
     CodigoPostalIntegrante = models.CharField(max_length=5)
     # Referencia del domicilio integrante_26
-    RefDomicilioIntegrante = models.CharField(max_length=60, blank=True)
+    RefDomicilioIntegrante = models.CharField(max_length=250, blank=True)
     # Dependencia que opera el programa_27
     Dependencia = models.ForeignKey(Cat_Dependencias)
     # Clave del programa_28
@@ -220,7 +225,7 @@ class FormatoPubActor(models.Model):
     # Tipo de apoyo_31
     TipoApoyo = models.ForeignKey(Cat_TipoApoyo)
     # Beneficio_32
-    Beneficio = models.CharField(max_length=35)
+    Beneficio = models.CharField(max_length=250)
     # Cantidad de beneficios_33
     CantBeneficios = models.IntegerField
     # Total en pesos de los beneficios_34
@@ -246,25 +251,167 @@ class FormatoPubActor(models.Model):
     # Numero de la entrega del beneficio_44
     NumeroEntregaBeneficio = models.IntegerField
 
-
+# Personas
 class FormatoPubPersona(models.Model):
+    SINO_CHOICES = (
+        ('SI', 'S'),
+        ('NO', 'N'),
+    )
+    # Identificador de Hogar_1
+    IdHogar = models.CharField(max_length=15)
+    # Identificador de Persona_2
+    IdPersona = models.CharField(max_length=15)
+    # Primer Apellido_3
+    PrimerApellido = models.CharField(max_length=20)
+    # Segundo Apellido _4
+    SegundoApellido = models.CharField(max_length=20, blank=True)
+    # Nombre (s)_5
+    Nombre = models.CharField(max_length=20)
+    # CURP_6
+    CURP = models.CharField(max_length=18)
+    # Sexo_7
+    Sexo = models.ForeignKey(Cat_Sexo)
+    # Estado Civil_8
+    EstadoCivil = models.ForeignKey(Cat_Edocivil)
+    # Titular_9
+    Titular = models.CharField(max_length=1, choices=SINO_CHOICES)
+    # Parentesco del Beneficiario con el Jefe del Hogar_10
+    # Otro documento de identificacion_11
+    OtroDocId = models.ForeignKey(Cat_Identificacion, blank=True)
+    # Clave Municipio donde se paga el beneficio_12
+    # Municipio donde se paga el beneficio_13
+    MunicipioBeneficiado = models.ForeignKey(Cat_Municipio)
+    # Clave Localidad donde se paga el beneficio_14
+    # Localidad donde se paga el beneficio_15
+    LocalidadPagoBeneficio = models.ForeignKey(Cat_Localidad, related_name='Localidad_Pago_Beneficio')
+    # Localidad de Residencia_16
+    LocalidadResidencia = models.ForeignKey(Cat_Localidad, related_name='Localidad_De_Residencia')
+    # Nombre de vialidad_17
+    NombreVialidad = models.CharField(max_length=20)
+    # Numero Exterior_18
+    NumeroExterior = models.CharField(max_length=5, blank=True)
+    # Numero Interior _19
+    NumeroInterior = models.CharField(max_length=5, blank=True)
+    # Codigo Postal_20
+    CodigoPostal = models.CharField(max_length=5)
+    # Asentamiento humano_21
+    AsentamientoHumano = models.ForeignKey(Cat_Asentamiento)
+    # Referencia del domicilio_22
+    ReferenciaDomicilio = models.CharField(max_length=250, blank=True)
+    # Dependencia que opera el programa_23
+    Dependencia = models.ForeignKey(Cat_Dependencias)
+    # Clave del programa_24
+    # Nombre del programa_26
+    ClavePrograma = models.ForeignKey(Cat_Programas)
+    # Clave del subprograma_25
+    ClaveSubprograma = models.ForeignKey(Cat_Subprogramas, blank=True)
+    # Tipo de apoyo_27
+    TipoApoyo = models.ForeignKey(Cat_TipoApoyo)
+    # Beneficio_28
+    Beneficio = models.CharField(max_length=250)
+    # Cantidad de beneficios_29
+    CantBeneficios = models.IntegerField
+    # Total en pesos de los beneficios_30
+    TotalPesosBeneficios = models.IntegerField
+    # Inversion federal_31
+    InversionFederal = models.IntegerField
+    # Inversion estatal_32
+    InversionEstatal = models.IntegerField
+    # Inversion municipal_33
+    InversionMunicipal = models.IntegerField
+    # Inversion de otras fuentes_34
+    InversionOtras = models.IntegerField
+    # Fuentes que fondean el recurso_35
+    FuentesRecurso = models.ForeignKey(Cat_Fuentes)
+    # Trimestre_36
     Trimestre = models.ForeignKey(Cat_Periodos)
-    # Mes de periodo de pago_41
+    # Mes de periodo de pago_37
     MesPeriodoPago = models.ForeignKey(Cat_Mes)
-    # Anio de ejercicio_42
+    # Anio de ejercicio_38
     AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
-    # Periodicidad de entrega del beneficio_43
+    # Periodicidad de entrega del beneficio_39
     PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
+    # Numero de la entrega del beneficio_40
+    NumeroEntregaBeneficio = models.IntegerField
 
 
+# Poblacion
 class FormatoPubPoblacion(models.Model):
-    Trimestre = models.ForeignKey(Cat_Periodos)
-    # Mes de periodo de pago_41
-    MesPeriodoPago = models.ForeignKey(Cat_Mes)
-    # Anio de ejercicio_42
-    AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
-    # Periodicidad de entrega del beneficio_43
-    PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
+
+        SINO_CHOICES = (
+            ('SI', 'SI'),
+            ('NO', 'NO'),
+        )
+
+        # Multilocalidad_1
+        Multilocalidad = models.CharField(max_length=2, choices=SINO_CHOICES)
+        # Registro Federal de Contribuyentes_2
+        RFC = models.CharField(max_length=13)
+        # Numero beneficiados_3
+        NumeroBeneficiados = models.IntegerField
+        # Hombres beneficiados_4
+        HombresBeneficiados = models.IntegerField
+        # Mujeres beneficiadas_5
+        MujeresBeneficiadas = models.IntegerField
+        # Viviendas beneficiadas_6
+        ViviendasBeneficiadas = models.IntegerField
+        # Clave Municipio donde se encuentra la obra_7
+        # Municipio donde se encuentra la obra_8
+        MunicipioBeneficiado = models.ForeignKey(Cat_Municipio)
+        # Clave Localidad donde se encuentra la obra_9
+        # Localidad donde se encuentra la obra_10
+        LocalidadBeneficiada = models.ForeignKey(Cat_Localidad)
+        # Asentamiento humano_11
+        AsentamientoHumano = models.ForeignKey(Cat_Asentamiento)
+        # Nombre vialidad_12
+        NombreVialidad = models.CharField(max_length=20)
+        # Numero Exterior_13
+        NumeroExterior = models.CharField(max_length=5, blank=True)
+        # Numero Interior_14
+        NumeroInterior = models.CharField(max_length=5, blank=True)
+        # Codigo Postal_15
+        CodigoPostal = models.CharField(max_length=5)
+        # Referencia del domicilio_16
+        ReferenciaDomicilio = models.CharField(max_length=250, blank=True)
+        # Dependencia que opera el programa_17
+        Dependencia = models.ForeignKey(Cat_Dependencias)
+        # Clave del programa_18
+        # Nombre del programa_20
+        ClavePrograma = models.ForeignKey(Cat_Programas)
+        # Clave del subprograma_19
+        ClaveSubprograma = models.ForeignKey(Cat_Subprogramas, blank=True)
+        # Tipo de apoyo_21
+        TipoApoyo = models.ForeignKey(Cat_TipoApoyo)
+        # Identificador de la Obra_22
+        IdObra = models.CharField(max_length=15)
+        # Descripcion de la Obra_23
+        DescripcionObra = models.TextField
+        # Cantidad de beneficios_24
+        CantBeneficios = models.IntegerField
+        # Total en pesos de los beneficios_25
+        TotalPesosBeneficios = models.IntegerField
+        # Inversion federal_26
+        InversionFederal = models.IntegerField
+        # Inversion estatal_27
+        InversionEstatal = models.IntegerField
+        # Inversion municipal_28
+        InversionMunicipal = models.IntegerField
+        # Inversion de otras fuentes_29
+        InversionOtras = models.IntegerField
+        # Fuentes que fondean el recurso_30
+        FuentesRecurso = models.ForeignKey(Cat_Fuentes)
+        # Trimestre_31
+        Trimestre = models.ForeignKey(Cat_Periodos)
+        # Anio de ejercicio_32
+        AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
+        # Fecha Inicio_33
+        FechaInicio = models.DateField
+        # Fecha Fin_34
+        FechaFin = models.DateField
+        # Periodicidad de entrega del beneficio_35
+        PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
+        # Numero de la entrega del beneficio_36
+        NumeroEntregaBeneficio = models.IntegerField
 
 
 # Modelos del validador

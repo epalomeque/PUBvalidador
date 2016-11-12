@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.conf.global_settings import MEDIA_ROOT
+from django.conf.global_settings import MEDIA_URL
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -75,45 +75,37 @@ def validar(request, trabajo_id):
     # Abrir estatus del trabajo
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
 
-    #print trabajo.archivoRelacionado
-    #print trabajo.AnioEjercicio
-    #print trabajo.Estatus
-    #print trabajo.Trimestre
-    #print trabajo.TipoPadron
-    #print trabajo.Usuario
-    #print trabajo.CantidadRegistros
-
     if trabajo.Usuario == request.user :
         print 'son iguales los usuarios'
-        # Si el estatus es Iniciado
+        # Si el estatus es INCOMPLETO
         if trabajo.Estatus_id == 1 :
             print 'trabajo.Estatus_id == 1'
             print trabajo.Estatus
-            archivo = trabajo.archivoRelacionado.url
-            print 'archivo = '
-            print archivo
-            ruta = archivo.join(MEDIA_ROOT)
-            print 'ruta = '
-            print ruta
-            #import_csv(ruta)
-
-            # Iniciar validacion de CSV
+        # Si el estatus es COMPLETO
         elif trabajo.Estatus_id == 2:
             print 'trabajo.Estatus_id == 2'
             print trabajo.Estatus
+        # Si el estatus es ENVIADO
         elif trabajo.Estatus_id == 3:
             print 'trabajo.Estatus_id == 3'
             print trabajo.Estatus
+        # Si el estatus es INICIADO
         elif trabajo.Estatus_id == 4:
-            print 'trabajo.Estatus_id == 4'
-            print trabajo.Estatus
+            # print 'trabajo.Estatus_id == 4'
+            # print trabajo.Estatus
+            # archivo = trabajo.archivoRelacionado.path
+            renglones = import_csv(trabajo.archivoRelacionado.path)
 
-        # Si el estatus es incompleto
+            # Iniciar validacion de CSV
 
     else:
         return HttpResponseRedirect('/noautorizado')
 
-    return render_to_response('validar.html', {'user': request.user}, context_instance=RequestContext(request))
+    data = {
+        'trabajo': trabajo
+    }
+
+    return render_to_response('validar.html', data, context_instance=RequestContext(request))
 
 
 def no_autorizado(request):
