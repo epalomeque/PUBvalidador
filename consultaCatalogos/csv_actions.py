@@ -1,19 +1,26 @@
+import codecs
+#import unicodecsv as csv
 import csv
 from django.utils import timezone
 from consultaCatalogos.models import FormatoPubActor, FormatoPubPoblacion, FormatoPubPersona
 
+"""
+def csv_unireader(f, encoding="utf-8", delimiter=','):
+    for row in csv.reader(codecs.iterencode(codecs.iterdecode(f, encoding), "utf-8"), delimiter=delimiter):
+        yield [e.decode("utf-8") for e in row]
+"""
 
 def import_csv(filename):
     f = open(filename, 'rb')
     records_added = 0
     errors = []
-    reader = csv.reader(f)
-    headers = reader.next()
-    print headers
+    #registros = csv_unireader(f)
+    registros = csv.reader(f, delimiter=',', dialect=csv.excel)
     # Generate a dict per row, with the first CSV row being the keys.
-    for row in csv.DictReader(f, delimiter=","):
-
-        print(row)
+    for row in registros:
+    #for row in registros:
+        #losdatos[] = row
+        print row
         # Bind the row data to the MyModelForm
         # form = MyModelForm(row)
         #if form.is_valid():
@@ -24,7 +31,7 @@ def import_csv(filename):
         #else:
         #    errors.append(form.errors)
 
-    return f
+    return registros
 
 
 # >>> import csv

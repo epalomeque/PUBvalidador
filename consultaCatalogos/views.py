@@ -90,8 +90,8 @@ def validar(request, trabajo_id):
             print trabajo.Estatus
         # Si el estatus es INICIADO
         elif trabajo.Estatus_id == 4:
-            # print 'trabajo.Estatus_id == 4'
-            # print trabajo.Estatus
+            print 'trabajo.Estatus_id == 4'
+            print trabajo.Estatus
             # archivo = trabajo.archivoRelacionado.path
             renglones = import_csv(trabajo.archivoRelacionado.path)
             print renglones
