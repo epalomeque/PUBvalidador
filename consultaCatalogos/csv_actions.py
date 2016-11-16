@@ -1,148 +1,151 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import codecs
+#import codecs
 #import unicodecsv as csv
 import csv
-from django.utils import timezone
-from consultaCatalogos.models import FormatoPubActor, FormatoPubPoblacion, FormatoPubPersona
+#from django.utils import timezone
+#from consultaCatalogos.models import FormatoPubActor, FormatoPubPoblacion, FormatoPubPersona
+
 
 formato_actores = {
-    'columnas': 44,
+    'cantColumnas': 44,
     'nombre_cols': [
-        {"Razón Social_1": "RazonSocial" },
-        {"Registro Federal de Contribuyentes_2": "RFC" },
-        {"Primer Apellido_3": "PrimerApellido" },
-        {"Segundo Apellido_4": "SegundoApellido" },
-        {"Nombre (s)_5": "Nombre" },
-        {"CURP_6": "CURP" },
-        {"Sexo_7": "Sexo" },
-        {"Estado de Nacimiento_8": "EdoNacimiento" },
-        {"Titular_9": "Titular" },
-        {"Otro documento de identificación_10": "OtroDocId" },
-        {"Clave Municipio donde se paga el beneficio_11": "MunDondeSePagaBeneficio" },
-        {"Municipio donde se paga el beneficio_12": "MunDondeSePagaBeneficio" },
-        {"Clave Localidad donde se paga el beneficio_13": "LocDondeSePagaBeneficio" },
-        {"Localidad donde se paga el beneficio_14": "LocDondeSePagaBeneficio" },
-        {"Localidad de residencia actor social_15": "LocResidActorSocial" },
-        {"Nombre de vialidad actor social_16": "NombreVialidadActor" },
-        {"Número Exterior actor social_17": "NumeroExtActor" },
-        {"Número Interior actor social_18": "NumeroIntActor" },
-        {"Código Postal actor social_19": "CodigoPostalActor" },
-        {"Referencia del domicilio actor social_20": "RefDomActor" },
-        {"Localidad de residencia del integrante el actor social_21": "LocResidDelIntegrante" },
-        {"Nombre de vialidad integrante_22": "NombreVialidadIntegrante" },
-        {"Número Exterior integrante_23": "NumeroExtIntegrante" },
-        {"Número Interior integrante_24": "NumeroIntIntegrante" },
-        {"Código Postal integrante_25": "CodigoPostalIntegrante" },
-        {"Referencia del domicilio integrante_26": "RefDomicilioIntegrante" },
-        {"Dependencia que opera el programa_27": "Dependencia" },
-        {"Clave del programa_28": "ClavePrograma" },
-        {"Clave del subprograma_29": "ClaveSubprograma" },
-        {"Nombre del programa_30": "ClavePrograma" },
-        {"Tipo de apoyo_31": "TipoApoyo" },
-        {"Beneficio_32": "Beneficio" },
-        {"Cantidad de beneficios_33": "CantBeneficios" },
-        {"Total en pesos de los beneficios_34": "TotalPesosBeneficios" },
-        {"Inversión federal_35": "InversionFederal" },
-        {"Inversión estatal_36": "InversionEstatal" },
-        {"Inversión municipal_37": "InversionMunicipal" },
-        {"Inversión de otras fuentes_38": "InversionOtras" },
-        {"Fuentes que fondean el recurso_39": "FuentesRecurso" },
-        {"Trimestre_40": "Trimestre" },
-        {"Mes de periodo de pago_41": "MesPeriodoPago" },
-        {"Año de ejercicio_42": "AnioEjercicio" },
-        {"Periodicidad de entrega del beneficio_43": "PeriodicidadEntregaBeneficio " },
-        {"Número de la entrega del beneficio_44": "NumeroEntregaBeneficio" }
+        u"Razón Social_1",
+        u"Registro Federal de Contribuyentes_2",
+        u"Primer Apellido_3",
+        u"Segundo Apellido_4",
+        u"Nombre (s)_5",
+        u"CURP_6",
+        u"Sexo_7",
+        u"Estado de Nacimiento_8",
+        u"Titular_9",
+        u"Otro documento de identificación_10",
+        u"Clave Municipio donde se paga el beneficio_11",
+        u"Municipio donde se paga el beneficio_12",
+        u"Clave Localidad donde se paga el beneficio_13",
+        u"Localidad donde se paga el beneficio_14",
+        u"Localidad de residencia actor social_15",
+        u"Nombre de vialidad actor social_16",
+        u"Número Exterior actor social_17",
+        u"Número Interior actor social_18",
+        u"Código Postal actor social_19",
+        u"Referencia del domicilio actor social_20",
+        u"Localidad de residencia del integrante el actor social_21",
+        u"Nombre de vialidad integrante_22",
+        u"Número Exterior integrante_23",
+        u"Número Interior integrante_24",
+        u"Código Postal integrante_25",
+        u"Referencia del domicilio integrante_26",
+        u"Dependencia que opera el programa_27",
+        u"Clave del programa_28",
+        u"Clave del subprograma_29",
+        u"Nombre del programa_30",
+        u"Tipo de apoyo_31",
+        u"Beneficio_32",
+        u"Cantidad de beneficios_33",
+        u"Total en pesos de los beneficios_34",
+        u"Inversión federal_35",
+        u"Inversión estatal_36",
+        u"Inversión municipal_37",
+        u"Inversión de otras fuentes_38",
+        u"Fuentes que fondean el recurso_39",
+        u"Trimestre_40",
+        u"Mes de periodo de pago_41",
+        u"Año de ejercicio_42",
+        u"Periodicidad de entrega del beneficio_43",
+        u"Número de la entrega del beneficio_44"
     ]
 }
 
 formato_poblacion = {
-    'columnas': 36,
+    'cantColumnas': 36,
     'nombrecols':[
-        {"Multilocalidad_1": "" },
-        {"Registro Federal de Contribuyentes_2": "" },
-        {"Número beneficiados_3": "" },
-        {"Hombres beneficiados_4": "" },
-        {"Mujeres beneficiadas_5": "" },
-        {"Viviendas beneficiadas_6": "" },
-        {"Clave Municipio donde se encuentra la obra_7": "" },
-        {"Municipio donde se encuentra la obra_8": "" },
-        {"Clave Localidad donde se encuentra la obra_9": "" },
-        {"Localidad donde se encuentra la obra_10 Asentamiento humano_11": "" },
-        {"Nombre vialidad_12": "" },
-        {"Número Exterior_13": "" },
-        {"Número Interior_14": "" },
-        {"Código Postal_15": "" },
-        {"Referencia del domicilio_16": "" },
-        {"Dependencia que opera el programa_17": "" },
-        {"Clave del programa_18": "" },
-        {"Clave del subprograma_19": "" },
-        {"Nombre del programa_20": "" },
-        {"Tipo de apoyo_21": "" },
-        {"Identificador de la Obra_22": "" },
-        {"Descripción de la Obra_23": "" },
-        {"Cantidad de beneficios_24": "" },
-        {"Total en pesos de los beneficios_25": "" },
-        {"Inversión federal_26": "" },
-        {"Inversión estatal_27": "" },
-        {"Inversión municipal_28": "" },
-        {"Inversión de otras fuentes_29": "" },
-        {"Fuentes que fondean el recurso_30": "" },
-        {"Trimestre_31": "" },
-        {"Año de ejercicio_32": "" },
-        {"Fecha Inicio_33": "" },
-        {"Fecha Fin_34": "" },
-        {"Periodicidad de entrega del beneficio_35": "" },
-        {"Número de la entrega del beneficio_36": "" }
+        u"Multilocalidad_1",
+        u"Registro Federal de Contribuyentes_2",
+        u"Número beneficiados_3",
+        u"Hombres beneficiados_4",
+        u"Mujeres beneficiadas_5",
+        u"Viviendas beneficiadas_6",
+        u"Clave Municipio donde se encuentra la obra_7",
+        u"Municipio donde se encuentra la obra_8",
+        u"Clave Localidad donde se encuentra la obra_9",
+        u"Localidad donde se encuentra la obra_10 Asentamiento humano_11",
+        u"Nombre vialidad_12",
+        u"Número Exterior_13",
+        u"Número Interior_14",
+        u"Código Postal_15",
+        u"Referencia del domicilio_16",
+        u"Dependencia que opera el programa_17",
+        u"Clave del programa_18",
+        u"Clave del subprograma_19",
+        u"Nombre del programa_20",
+        u"Tipo de apoyo_21",
+        u"Identificador de la Obra_22",
+        u"Descripción de la Obra_23",
+        u"Cantidad de beneficios_24",
+        u"Total en pesos de los beneficios_25",
+        u"Inversión federal_26",
+        u"Inversión estatal_27",
+        u"Inversión municipal_28",
+        u"Inversión de otras fuentes_29",
+        u"Fuentes que fondean el recurso_30",
+        u"Trimestre_31",
+        u"Año de ejercicio_32",
+        u"Fecha Inicio_33",
+        u"Fecha Fin_34",
+        u"Periodicidad de entrega del beneficio_35",
+        u"Número de la entrega del beneficio_36"
     ]
 }
 
 formato_personas = {
-    'columnas': 40,
+    'cantColumnas': 40,
     'nombrecols':[
-        {"Identificador de Hogar_1": "IdHogar"},
-        {"Identificador de Persona_2": "IdPersona"},
-        {"Primer Apellido_3": "PrimerApellido"},
-        {"Segundo Apellido _4": "SegundoApellido"},
-        {"Nombre (s)_5": "Nombre"},
-        {"CURP_6": "CURP"},
-        {"Sexo_7": "Sexo"},
-        {"Estado Civil_8": "EstadoCivil"},
-        {"Titular_9": "Titular"},
-        {"Parentesco del Beneficiario con el Jefe del Hogar_10": "Parentesco"},
-        {"Otro documento de identificación_11": "OtroDocId"},
-        {"Clave Municipio donde se paga el beneficio_12": "MunicipioBeneficiado"},
-        {"Municipio donde se paga el beneficio_13": "MunicipioBeneficiado"},
-        {"Clave Localidad donde se paga el beneficio_14": "LocalidadPagoBeneficio"},
-        {"Localidad donde se paga el beneficio_15": "LocalidadPagoBeneficio"},
-        {"Localidad de Residencia_16": "LocalidadResidencia"},
-        {"Nombre de vialidad_17": "NombreVialidad"},
-        {"Número Exterior_18": "NumeroExterior"},
-        {"Número Interior _19": "NumeroInterior"},
-        {"Código Postal_20": "CodigoPostal"},
-        {"Asentamiento humano_21": "AsentamientoHumano"},
-        {"Referencia del domicilio_22": "ReferenciaDomicilio"},
-        {"Dependencia que opera el programa_23": "Dependencia"},
-        {"Clave del programa_24": "ClavePrograma"},
-        {"Clave del subprograma_25": "ClaveSubprograma"},
-        {"Nombre del programa_26": "ClavePrograma"},
-        {"Tipo de apoyo_27": "TipoApoyo"},
-        {"Beneficio_28": "Beneficio"},
-        {"Cantidad de beneficios_29": "CantBeneficios"},
-        {"Total en pesos de los beneficios_30": "TotalPesosBeneficios"},
-        {"Inversión federal_31": "InversionFederal"},
-        {"Inversión estatal_32": "InversionEstatal"},
-        {"Inversión municipal_33": "InversionMunicipal"},
-        {"Inversión de otras fuentes_34": "InversionOtras"},
-        {"Fuentes que fondean el recurso_35": "FuentesRecurso"},
-        {"Trimestre_36": "Trimestre"},
-        {"Mes de periodo de pago_37": "MesPeriodoPago"},
-        {"Año de ejercicio_38": "AnioEjercicio"},
-        {"Periodicidad de entrega del beneficio_39": "PeriodicidadEntregaBeneficio"},
-        {"Número de la entrega del beneficio_40": "NumeroEntregaBeneficio"},
+        u"Identificador de Hogar_1",
+        u"Identificador de Persona_2",
+        u"Primer Apellido_3",
+        u"Segundo Apellido _4",
+        u"Nombre (s)_5",
+        u"CURP_6",
+        u"Sexo_7",
+        u"Estado Civil_8",
+        u"Titular_9",
+        u"Parentesco del Beneficiario con el Jefe del Hogar_10",
+        u"Otro documento de identificación_11",
+        u"Clave Municipio donde se paga el beneficio_12",
+        u"Municipio donde se paga el beneficio_13",
+        u"Clave Localidad donde se paga el beneficio_14",
+        u"Localidad donde se paga el beneficio_15",
+        u"Localidad de Residencia_16",
+        u"Nombre de vialidad_17",
+        u"Número Exterior_18",
+        u"Número Interior _19",
+        u"Código Postal_20",
+        u"Asentamiento humano_21",
+        u"Referencia del domicilio_22",
+        u"Dependencia que opera el programa_23",
+        u"Clave del programa_24",
+        u"Clave del subprograma_25",
+        u"Nombre del programa_26",
+        u"Tipo de apoyo_27",
+        u"Beneficio_28",
+        u"Cantidad de beneficios_29",
+        u"Total en pesos de los beneficios_30",
+        u"Inversión federal_31",
+        u"Inversión estatal_32",
+        u"Inversión municipal_33",
+        u"Inversión de otras fuentes_34",
+        u"Fuentes que fondean el recurso_35",
+        u"Trimestre_36",
+        u"Mes de periodo de pago_37",
+        u"Año de ejercicio_38",
+        u"Periodicidad de entrega del beneficio_39",
+        u"Número de la entrega del beneficio_40",
     ]
 }
+
+
 
 def import_csv(filename):
     f = open(filename, 'rb')
@@ -179,14 +182,35 @@ def CantColumnasCorrecta(CantidadColumnas, CantidadTemplate):
 
 
 def OrdenColumnasCorrecto(ListaColumnas, FormatoPadron):
+    print 'Formato de Padron'
+    print FormatoPadron
+    print len(FormatoPadron)
+    print 'Lista de Columnas'
+    print ListaColumnas
 
-    return valor
+    ListaColumnasUtf8 = list()
+
+    for elemento in ListaColumnas:
+        print elemento
+        #elementoutf8 = unicode(elemento)
+        #ListaColumnasUtf8.append(elementoutf8)
+
+    #print 'Lista de Columnas UTF-8'
+    #print ListaColumnasUtf8
+
+    for nombre in FormatoPadron:
+        nombreutf8 = nombre.encode('utf-8')
+        if nombreutf8 in ListaColumnas:
+            iguales = True
+            print nombreutf8 + ' => ' + str(iguales)
+        else:
+            iguales = False
+            print nombreutf8 + ' => ' + str(iguales)
+
+    return iguales
 
 
 def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
-    ValidacionTotalColumnas = False
-    ValidacionOrdenColumnas = False
-
     # Elegir que tipo de padron se va a revisar
     if tipo_padron == 1:
         formato = formato_actores
@@ -196,8 +220,15 @@ def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
     elif tipo_padron == 3:
         formato = formato_poblacion
 
-    ValidacionTotalColumnas = CantColumnasCorrecta(total_headers(nombrecolumnas), formato["columnas"])
+    ValidacionTotalColumnas = CantColumnasCorrecta(total_headers(lista_Columnas), formato["cantColumnas"])
+    ValidacionOrdenColumnas = False
 
+    OrdenColumnasCorrecto(lista_Columnas, formato["nombrecols"])
+
+    if ValidacionTotalColumnas and ValidacionOrdenColumnas:
+        validacion = True
+    else:
+        validacion = False
 
     return validacion
 
