@@ -93,11 +93,12 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'es-mx'
+LANGUAGE_CODE = 'es-MX'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+# Se cambia a False por que no se usan los parametros de internacionalizaion
+USE_I18N = False
 
 USE_L10N = True
 

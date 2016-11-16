@@ -92,11 +92,10 @@ def validar(request, trabajo_id):
         elif trabajo.Estatus_id == 4:
             print 'trabajo.Estatus_id == 4'
             print trabajo.Estatus
-            # archivo = trabajo.archivoRelacionado.path
-            renglones = import_csv(trabajo.archivoRelacionado.path)
-            print renglones
-
-            # Iniciar validacion de CSV
+            datos = import_csv(trabajo.archivoRelacionado.path)
+            print datos['registros']
+            print trabajo.TipoPadron_id
+            validar_columnas(datos.get('encabezados'), 3)
 
     else:
         return HttpResponseRedirect('/noautorizado')

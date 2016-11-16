@@ -1,0 +1,52 @@
+{
+    "FORMATO PERSONA": {
+        "cant_columnas" : 40,
+        "columnas" : [
+            {"Identificador de Hogar_1": "IdHogar"},
+            {"Identificador de Persona_2": "IdPersona"},
+            {"Primer Apellido_3": "PrimerApellido"},
+            {"Segundo Apellido _4": "SegundoApellido"},
+            {"Nombre (s)_5": "Nombre"},
+            {"CURP_6": "CURP"},
+            {"Sexo_7": "Sexo"},
+            {"Estado Civil_8": "EstadoCivil"},
+            {"Titular_9": "Titular"},
+            {"Parentesco del Beneficiario con el Jefe del Hogar_10": "Parentesco"},
+            {"Otro documento de identificación_11": "OtroDocId"},
+            {"Clave Municipio donde se paga el beneficio_12": "MunicipioBeneficiado"},
+            {"Municipio donde se paga el beneficio_13": "MunicipioBeneficiado"},
+            {"Clave Localidad donde se paga el beneficio_14": "LocalidadPagoBeneficio"},
+            {"Localidad donde se paga el beneficio_15": "LocalidadPagoBeneficio"},
+            {"Localidad de Residencia_16": "LocalidadResidencia"},
+            {"Nombre de vialidad_17": "NombreVialidad"},
+            {"Número Exterior_18": "NumeroExterior"},
+            {"Número Interior _19": "NumeroInterior"},
+            {"Código Postal_20": "CodigoPostal"},
+            {"Asentamiento humano_21": "AsentamientoHumano"},
+            {"Referencia del domicilio_22": "ReferenciaDomicilio"},
+            {"Dependencia que opera el programa_23": "Dependencia"},
+            {"Clave del programa_24": "ClavePrograma"},
+            {"Clave del subprograma_25": "ClaveSubprograma"},
+            {"Nombre del programa_26": "ClavePrograma"},
+            {"Tipo de apoyo_27": "TipoApoyo"},
+            {"Beneficio_28": "Beneficio"},
+            {"Cantidad de beneficios_29": "CantBeneficios"},
+            {"Total en pesos de los beneficios_30": "TotalPesosBeneficios"},
+            {"Inversión federal_31": "InversionFederal"},
+            {"Inversión estatal_32": "InversionEstatal"},
+            {"Inversión municipal_33": "InversionMunicipal"},
+            {"Inversión de otras fuentes_34": "InversionOtras"},
+            {"Fuentes que fondean el recurso_35": "FuentesRecurso"},
+            {"Trimestre_36": "Trimestre"},
+            {"Mes de periodo de pago_37": "MesPeriodoPago"},
+            {"Año de ejercicio_38": "AnioEjercicio"},
+            {"Periodicidad de entrega del beneficio_39": "PeriodicidadEntregaBeneficio"},
+            {"Número de la entrega del beneficio_40": "NumeroEntregaBeneficio"},
+            ]
+    }
+}
+
+# Personas
+    # Parentesco del Beneficiario con el Jefe del Hogar_10
+
+

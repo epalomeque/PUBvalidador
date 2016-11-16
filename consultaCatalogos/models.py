@@ -77,7 +77,7 @@ class Cat_Municipio(models.Model):
 
 class Cat_Localidad(models.Model):
     identLocalidad = models.IntegerField()
-    nombreLocalidad = models.CharField(max_length=50)
+    nombreLocalidad = models.CharField(max_length=250)
     idMunicipio = models.ForeignKey(Cat_Municipio)
 
     def __unicode__(self):
@@ -132,7 +132,7 @@ class Cat_Periodos(models.Model):
     nombrePeriodo = models.CharField(max_length=20)
 
     def __unicode__(self):
-        return '%s | %s' % (self.identPeriodo, self.nombrePeriodo)
+        return '%s' % (self.nombrePeriodo)
 
 
 class Cat_Mes(models.Model):
@@ -251,6 +251,7 @@ class FormatoPubActor(models.Model):
     # Numero de la entrega del beneficio_44
     NumeroEntregaBeneficio = models.IntegerField
 
+
 # Personas
 class FormatoPubPersona(models.Model):
     SINO_CHOICES = (
@@ -276,6 +277,7 @@ class FormatoPubPersona(models.Model):
     # Titular_9
     Titular = models.CharField(max_length=1, choices=SINO_CHOICES)
     # Parentesco del Beneficiario con el Jefe del Hogar_10
+    Parentesco = models.ForeignKey(Cat_Parentesco)
     # Otro documento de identificacion_11
     OtroDocId = models.ForeignKey(Cat_Identificacion, blank=True)
     # Clave Municipio donde se paga el beneficio_12
