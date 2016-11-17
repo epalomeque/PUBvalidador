@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-#import codecs
+import codecs
 #import unicodecsv as csv
 import csv
+import sys
+from django.utils.encoding import smart_text, smart_unicode
 #from django.utils import timezone
 #from consultaCatalogos.models import FormatoPubActor, FormatoPubPoblacion, FormatoPubPersona
 
@@ -146,16 +148,17 @@ formato_personas = {
 }
 
 
-
 def import_csv(filename):
-    f = open(filename, 'rb')
+    print 'Default Encoding => ' + sys.getdefaultencoding()
+    f = codecs.open(filename, 'r')
+    print 'f.encoding => ' + str(f.encoding)
     registros = csv.reader(f, dialect='excel', delimiter=',')
     recordsDicc = csv.DictReader(f, dialect='excel', delimiter=',')
     encabezados = registros.next()
 
     datos = {
         'encabezados': encabezados,
-        'registros' : recordsDicc
+        'registros': recordsDicc
     }
 
     return datos
@@ -182,30 +185,27 @@ def CantColumnasCorrecta(CantidadColumnas, CantidadTemplate):
 
 
 def OrdenColumnasCorrecto(ListaColumnas, FormatoPadron):
-    print 'Formato de Padron'
-    print FormatoPadron
-    print len(FormatoPadron)
-    print 'Lista de Columnas'
-    print ListaColumnas
-
+    print 'Formato de Padron => ' + str(FormatoPadron) + ' :: Tipo => ' + str(type(FormatoPadron))
+    print 'Lista de Columnas = > ' + str(ListaColumnas) + ' :: Tipo => ' + str(type(ListaColumnas))
     ListaColumnasUtf8 = list()
-
     for elemento in ListaColumnas:
-        print elemento
-        #elementoutf8 = unicode(elemento)
-        #ListaColumnasUtf8.append(elementoutf8)
+        if not son_iguales(elemento, ''):
+            print 'elemento => ' + elemento + ' :: Tipo => ' + str(type(elemento))
+            elementoutf8 = elemento.decode("utf_8_sig", "replace")
+            print 'elementoUtf8 => ' + elementoutf8 + ' :: Tipo => ' + str(type(elementoutf8))
+            ListaColumnasUtf8.append(elementoutf8)
 
-    #print 'Lista de Columnas UTF-8'
-    #print ListaColumnasUtf8
+    print 'ListaColumnasUtf8 => ' + str(ListaColumnasUtf8)
 
     for nombre in FormatoPadron:
         nombreutf8 = nombre.encode('utf-8')
-        if nombreutf8 in ListaColumnas:
-            iguales = True
-            print nombreutf8 + ' => ' + str(iguales)
+        iguales = True
+        if nombreutf8 in ListaColumnasUtf8:
+            iguales = True and iguales
+            print nombreutf8 + ' :: Iguales => ' + str(iguales) + ' :: Tipo => ' + str(type(nombreutf8))
         else:
-            iguales = False
-            print nombreutf8 + ' => ' + str(iguales)
+            iguales = False and iguales
+            print nombreutf8 + ' :: Iguales => ' + str(iguales) + ' :: Tipo => ' + str(type(nombreutf8))
 
     return iguales
 

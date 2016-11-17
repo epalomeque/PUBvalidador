@@ -94,7 +94,7 @@ def validar(request, trabajo_id):
             print trabajo.Estatus
             datos = import_csv(trabajo.archivoRelacionado.path)
             print datos['registros']
-            print EstructuraArchivoEsValida(datos.get('encabezados'), trabajo.TipoPadron_id)
+            print 'Estructura valida =>' + str(EstructuraArchivoEsValida(datos.get('encabezados'), trabajo.TipoPadron_id))
 
     else:
         return HttpResponseRedirect('/noautorizado')
