@@ -150,11 +150,15 @@ formato_personas = {
 
 def import_csv(filename):
     print 'Default Encoding => ' + sys.getdefaultencoding()
-    f = codecs.open(filename, 'r')
+    ElEencoding = 'utf-8'#sys.getdefaultencoding()
+    f = codecs.open(filename, 'r', encoding=ElEencoding, errors='replace')
     print 'f.encoding => ' + str(f.encoding)
     registros = csv.reader(f, dialect='excel', delimiter=',')
+    print 'registros => ' + str(registros)
     recordsDicc = csv.DictReader(f, dialect='excel', delimiter=',')
+    print 'recordsDicc => ' + str(recordsDicc)
     encabezados = registros.next()
+    print 'encabezados => ' + str(encabezados)
 
     datos = {
         'encabezados': encabezados,
@@ -185,17 +189,21 @@ def CantColumnasCorrecta(CantidadColumnas, CantidadTemplate):
 
 
 def OrdenColumnasCorrecto(ListaColumnas, FormatoPadron):
+    print '******************************************************************************************'
     print 'Formato de Padron => ' + str(FormatoPadron) + ' :: Tipo => ' + str(type(FormatoPadron))
+    print '******************************************************************************************'
     print 'Lista de Columnas = > ' + str(ListaColumnas) + ' :: Tipo => ' + str(type(ListaColumnas))
+    print '******************************************************************************************'
     ListaColumnasUtf8 = list()
     for elemento in ListaColumnas:
         if not son_iguales(elemento, ''):
-            print 'elemento => ' + elemento + ' :: Tipo => ' + str(type(elemento))
+            print '    elemento => ' + elemento + ' :: Tipo => ' + str(type(elemento))
             elementoutf8 = elemento.decode("utf_8_sig", "replace")
             print 'elementoUtf8 => ' + elementoutf8 + ' :: Tipo => ' + str(type(elementoutf8))
             ListaColumnasUtf8.append(elementoutf8)
-
+    print '******************************************************************************************'
     print 'ListaColumnasUtf8 => ' + str(ListaColumnasUtf8)
+    print '******************************************************************************************'
 
     for nombre in FormatoPadron:
         nombreutf8 = nombre.encode('utf-8')
