@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import codecs
-#import unicodecsv as csv
-import csv
+# import codecs
+import unicodecsv as csv
+# import csv
 import sys
-from django.utils.encoding import smart_text, smart_unicode
-#from django.utils import timezone
-#from consultaCatalogos.models import FormatoPubActor, FormatoPubPoblacion, FormatoPubPersona
+from django.utils.encoding import smart_text, smart_unicode, smart_bytes, smart_str, force_text
+# from django.utils import timezone
+# from consultaCatalogos.models import FormatoPubActor, FormatoPubPoblacion, FormatoPubPersona
 
 
 formato_actores = {
     'cantColumnas': 44,
-    'nombre_cols': [
+    'nombreCols': [
         u"Razón Social_1",
         u"Registro Federal de Contribuyentes_2",
         u"Primer Apellido_3",
@@ -62,7 +62,7 @@ formato_actores = {
 
 formato_poblacion = {
     'cantColumnas': 36,
-    'nombrecols':[
+    'nombreCols':[
         u"Multilocalidad_1",
         u"Registro Federal de Contribuyentes_2",
         u"Número beneficiados_3",
@@ -72,7 +72,8 @@ formato_poblacion = {
         u"Clave Municipio donde se encuentra la obra_7",
         u"Municipio donde se encuentra la obra_8",
         u"Clave Localidad donde se encuentra la obra_9",
-        u"Localidad donde se encuentra la obra_10 Asentamiento humano_11",
+        u"Localidad donde se encuentra la obra_10",
+        u"Asentamiento humano_11",
         u"Nombre vialidad_12",
         u"Número Exterior_13",
         u"Número Interior_14",
@@ -103,7 +104,7 @@ formato_poblacion = {
 
 formato_personas = {
     'cantColumnas': 40,
-    'nombrecols':[
+    'nombreCols':[
         u"Identificador de Hogar_1",
         u"Identificador de Persona_2",
         u"Primer Apellido_3",
@@ -149,20 +150,30 @@ formato_personas = {
 
 
 def import_csv(filename):
-    print 'Default Encoding => ' + sys.getdefaultencoding()
-    ElEencoding = 'utf-8'#sys.getdefaultencoding()
-    f = codecs.open(filename, 'r', encoding=ElEencoding, errors='replace')
-    print 'f.encoding => ' + str(f.encoding)
-    registros = csv.reader(f, dialect='excel', delimiter=',')
-    print 'registros => ' + str(registros)
-    recordsDicc = csv.DictReader(f, dialect='excel', delimiter=',')
-    print 'recordsDicc => ' + str(recordsDicc)
-    encabezados = registros.next()
-    print 'encabezados => ' + str(encabezados)
+    ElEncoding = 'cp1252' # el encoding usado por windows1252
+    f = open(filename, 'rb')
+    # obteniendo los nombres de las columnas, y limpiando los textos
+    registros = csv.reader(f, dialect='excel', delimiter=',', encoding=ElEncoding)
+    headers = registros.next()
+
+    encabezados = list()
+    for nombres in headers:
+        nombres = nombres.strip((' \t\n\r'))
+        if nombres <> '':
+            encabezados.append(nombres)
+
+    diccionario = {}
+    registrosDicc = list()
+
+    for registro in registros:
+        for celda, nombre in zip(registro, encabezados):
+            diccionario[nombre] = celda
+            print diccionario
+        registrosDicc.append(diccionario)
 
     datos = {
         'encabezados': encabezados,
-        'registros': recordsDicc
+        'registros': registrosDicc
     }
 
     return datos
@@ -188,33 +199,16 @@ def CantColumnasCorrecta(CantidadColumnas, CantidadTemplate):
     return valor
 
 
-def OrdenColumnasCorrecto(ListaColumnas, FormatoPadron):
-    print '******************************************************************************************'
-    print 'Formato de Padron => ' + str(FormatoPadron) + ' :: Tipo => ' + str(type(FormatoPadron))
-    print '******************************************************************************************'
-    print 'Lista de Columnas = > ' + str(ListaColumnas) + ' :: Tipo => ' + str(type(ListaColumnas))
-    print '******************************************************************************************'
-    ListaColumnasUtf8 = list()
-    for elemento in ListaColumnas:
-        if not son_iguales(elemento, ''):
-            print '    elemento => ' + elemento + ' :: Tipo => ' + str(type(elemento))
-            elementoutf8 = elemento.decode("utf_8_sig", "replace")
-            print 'elementoUtf8 => ' + elementoutf8 + ' :: Tipo => ' + str(type(elementoutf8))
-            ListaColumnasUtf8.append(elementoutf8)
-    print '******************************************************************************************'
-    print 'ListaColumnasUtf8 => ' + str(ListaColumnasUtf8)
-    print '******************************************************************************************'
-
-    for nombre in FormatoPadron:
-        nombreutf8 = nombre.encode('utf-8')
-        iguales = True
-        if nombreutf8 in ListaColumnasUtf8:
-            iguales = True and iguales
-            print nombreutf8 + ' :: Iguales => ' + str(iguales) + ' :: Tipo => ' + str(type(nombreutf8))
+def OrdenColumnasCorrecto(HeadersArchivo, FormatoPadron):
+    iguales = True
+    for nomArchivo, nomFormato in zip(HeadersArchivo, FormatoPadron):
+        if son_iguales(nomArchivo, nomFormato):
+            iguales = iguales and True
+            print nomArchivo + ' :: ' + nomFormato
         else:
-            iguales = False and iguales
-            print nombreutf8 + ' :: Iguales => ' + str(iguales) + ' :: Tipo => ' + str(type(nombreutf8))
-
+            iguales = iguales and False
+            print nomArchivo + ' :: ' + nomFormato
+    print 'OrdenColumnasCorrecto() => ' + str(iguales)
     return iguales
 
 
@@ -222,16 +216,16 @@ def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
     # Elegir que tipo de padron se va a revisar
     if tipo_padron == 1:
         formato = formato_actores
+        print 'Padron Actores'
     elif tipo_padron == 2:
         formato = formato_personas
         print 'Padron Personas'
     elif tipo_padron == 3:
         formato = formato_poblacion
+        print 'Padron Población'
 
     ValidacionTotalColumnas = CantColumnasCorrecta(total_headers(lista_Columnas), formato["cantColumnas"])
-    ValidacionOrdenColumnas = False
-
-    OrdenColumnasCorrecto(lista_Columnas, formato["nombrecols"])
+    ValidacionOrdenColumnas = OrdenColumnasCorrecto(lista_Columnas, formato["nombreCols"])
 
     if ValidacionTotalColumnas and ValidacionOrdenColumnas:
         validacion = True

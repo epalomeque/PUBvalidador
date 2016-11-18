@@ -127,19 +127,20 @@ class Cat_Subprogramas(models.Model):
         return self.nombreSubprograma
 
 
-class Cat_Periodos(models.Model):
-    identPeriodo = models.CharField(max_length=2)
-    nombrePeriodo = models.CharField(max_length=20)
-
-    def __unicode__(self):
-        return '%s' % (self.nombrePeriodo)
-
-
 class Cat_Mes(models.Model):
     nombreMes = models.CharField(max_length=12)
 
     def __unicode__(self):
         return self.nombreMes
+
+
+class Cat_Periodos(models.Model):
+    identPeriodo = models.CharField(max_length=2)
+    nombrePeriodo = models.CharField(max_length=20)
+    mes = models.ManyToManyField(Cat_Mes)
+
+    def __unicode__(self):
+        return '%s' % (self.nombrePeriodo)
 
 
 class Cat_Frecuencia(models.Model):
