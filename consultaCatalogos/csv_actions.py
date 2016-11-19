@@ -254,7 +254,7 @@ def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
     return validacion
 
 
-def validar_anio(anio, registros, tipo_padron):
+def validarColumnaAnio(anio, registros, tipo_padron):
     formato = seleccionarTipoPadron(tipo_padron)
     campo = obtenerCampoAnio(formato)
 
@@ -264,6 +264,7 @@ def validar_anio(anio, registros, tipo_padron):
 
 
     return True
+
 
 def validar_trimestre(trimestre, registros):
     return trimestre

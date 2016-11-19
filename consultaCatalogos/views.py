@@ -94,7 +94,7 @@ def validar(request, trabajo_id):
             print trabajo.Estatus
             datos = import_csv(trabajo.archivoRelacionado.path)
             if EstructuraArchivoEsValida(datos.get('encabezados'), trabajo.TipoPadron_id):
-                validar_anio(trabajo.AnioEjercicio, datos.get('registros'), trabajo.TipoPadron_id)
+                validarColumnaAnio(trabajo.AnioEjercicio, datos.get('registros'), trabajo.TipoPadron_id)
                 print 'Estructura valida, sigamos con las validaciones'
             else:
                 print 'estructura no valida'
