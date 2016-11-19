@@ -11,6 +11,7 @@ from django.utils.encoding import smart_text, smart_unicode, smart_bytes, smart_
 
 
 formato_actores = {
+    'nombrePadron':u'Actor',
     'cantColumnas': 44,
     'nombreCols': [
         u"Razón Social_1",
@@ -61,6 +62,7 @@ formato_actores = {
 }
 
 formato_poblacion = {
+    'nombrePadron':u'Población',
     'cantColumnas': 36,
     'nombreCols':[
         u"Multilocalidad_1",
@@ -103,6 +105,7 @@ formato_poblacion = {
 }
 
 formato_personas = {
+    'nombrePadron':u'Persona',
     'cantColumnas': 40,
     'nombreCols':[
         u"Identificador de Hogar_1",
@@ -168,7 +171,6 @@ def import_csv(filename):
     for registro in registros:
         for celda, nombre in zip(registro, encabezados):
             diccionario[nombre] = celda
-            print diccionario
         registrosDicc.append(diccionario)
 
     datos = {
@@ -208,21 +210,38 @@ def OrdenColumnasCorrecto(HeadersArchivo, FormatoPadron):
         else:
             iguales = iguales and False
             print nomArchivo + ' :: ' + nomFormato
-    print 'OrdenColumnasCorrecto() => ' + str(iguales)
     return iguales
 
 
-def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
+def seleccionarTipoPadron(tipo_padron):
     # Elegir que tipo de padron se va a revisar
     if tipo_padron == 1:
         formato = formato_actores
-        print 'Padron Actores'
     elif tipo_padron == 2:
         formato = formato_personas
-        print 'Padron Personas'
     elif tipo_padron == 3:
         formato = formato_poblacion
-        print 'Padron Población'
+    else:
+        print 'Formato de padron no definido'
+    return formato
+
+
+def obtenerCampoAnio(formato):
+    nombreCampo = ''
+    print formato.get('nombrePadron')
+    if formato['nombrePadron'] == u'Actor':
+        nombreCampo = formato['nombreCols'].pop(41)
+    elif formato['nombrePadron'] == u'Población':
+        nombreCampo = formato['nombreCols'].pop(31)
+    elif formato['nombrePadron'] == u'Persona':
+        nombreCampo = formato['nombreCols'].pop(37)
+    else:
+        nombreCampo = 'Error'
+    return nombreCampo
+
+
+def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
+    formato = seleccionarTipoPadron(tipo_padron)
 
     ValidacionTotalColumnas = CantColumnasCorrecta(total_headers(lista_Columnas), formato["cantColumnas"])
     ValidacionOrdenColumnas = OrdenColumnasCorrecto(lista_Columnas, formato["nombreCols"])
@@ -235,9 +254,16 @@ def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
     return validacion
 
 
-def validar_anio(anio, registros):
+def validar_anio(anio, registros, tipo_padron):
+    formato = seleccionarTipoPadron(tipo_padron)
+    campo = obtenerCampoAnio(formato)
 
-    return anio
+    errores = list()
+
+    #for registro in registros:
+
+
+    return True
 
 def validar_trimestre(trimestre, registros):
     return trimestre
