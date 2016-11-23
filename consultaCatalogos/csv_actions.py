@@ -172,6 +172,7 @@ def import_csv(filename):
         for celda, nombre in zip(registro, encabezados):
             diccionario[nombre] = celda
         registrosDicc.append(diccionario)
+        print registrosDicc
 
     datos = {
         'encabezados': encabezados,
@@ -240,6 +241,20 @@ def obtenerCampoAnio(formato):
     return nombreCampo
 
 
+def obtenerCampoTrimestre(formato):
+    nombreCampo = ''
+    print formato.get('nombrePadron')
+    if formato['nombrePadron'] == u'Actor':
+        nombreCampo = formato['nombreCols'].pop(39)
+    elif formato['nombrePadron'] == u'Población':
+        nombreCampo = formato['nombreCols'].pop(30)
+    elif formato['nombrePadron'] == u'Persona':
+        nombreCampo = formato['nombreCols'].pop(35)
+    else:
+        nombreCampo = 'Error'
+    return nombreCampo
+
+
 def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
     formato = seleccionarTipoPadron(tipo_padron)
 
@@ -254,16 +269,30 @@ def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
     return validacion
 
 
-def validarColumnaAnio(anio, registros, tipo_padron):
+def ErroresColumnaAnio(anio, registros, tipo_padron):
     formato = seleccionarTipoPadron(tipo_padron)
     campo = obtenerCampoAnio(formato)
 
-    errores = list()
+    errores = 0
 
-    #for registro in registros:
+    for registro in registros:
+        if not(str(registro[campo]) == str(anio)):
+            errores += 1
+
+    return errores
 
 
-    return True
+def ErroresColumnaTrimestre(trimestre, registros, tipo_padron):
+    formato = seleccionarTipoPadron(tipo_padron)
+    campo = obtenerCampoTrimestre(formato)
+
+    errores = 0
+
+    for registro in registros:
+        if not(str(registro[campo].upper()) == str(trimestre.upper())):
+            errores += 1
+
+    return errores
 
 
 def validar_trimestre(trimestre, registros):
