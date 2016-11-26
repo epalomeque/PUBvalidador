@@ -94,12 +94,10 @@ def validar(request, trabajo_id):
             print trabajo.Estatus
             datos = import_csv(trabajo.archivoRelacionado.path)
             if EstructuraArchivoEsValida(datos.get('encabezados'), trabajo.TipoPadron_id):
-                print 'Estructura valida, sigamos con las validaciones'
-                errores_anio = ErroresColumnaAnio(trabajo.AnioEjercicio, datos.get('registros'), trabajo.TipoPadron_id)
-                print 'errores en Columna de Anio: ' + str(errores_anio)
-                errores_trimestre = ErroresColumnaTrimestre(trabajo.Trimestre.identPeriodo, datos.get('registros'), trabajo.TipoPadron_id)
-                print 'errores en Columna de Trimestre: ' + str(errores_trimestre)
-
+                print 'estructura valida'
+                if not(ErroresIniciales(datos.get('registros'), trabajo.TipoPadron_id, trabajo.AnioEjercicio, trabajo.Trimestre.identPeriodo)):
+                    print 'Sin errores iniciales'
+                    GuardarRegistros(datos.get('registros'), trabajo.TipoPadron_id, trabajo.pk)
             else:
                 print 'estructura no valida'
 

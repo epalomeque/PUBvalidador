@@ -159,6 +159,29 @@ class Cat_TipoPadron(models.Model):
         return self.nombrePadron
 
 
+# Modelos del validador
+class EstatusTrabajos(models.Model):
+    nombreEstatus = models.CharField(max_length=20, default='')
+
+    def __unicode__(self):
+        return self.nombreEstatus
+
+
+class TrabajosRealizados(models.Model):
+    archivoRelacionado = models.FileField(upload_to='csv/%Y/%m/%d')
+    Estatus = models.ForeignKey(EstatusTrabajos)
+    Usuario = models.ForeignKey(User)
+    FechaInicio = models.DateTimeField(auto_now_add=True)
+    UltimaActualizacion = models.DateField(auto_now=True)
+    TipoPadron = models.ForeignKey(Cat_TipoPadron, default='')
+    AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio, default='')
+    Trimestre = models.ForeignKey(Cat_Periodos, default='')
+    CantidadRegistros = models.IntegerField(default=0)
+
+    def __unicode__(self):
+        return 'ID: %s | Archivo: %s | Usuario: %s' % (self.pk, self.archivoRelacionado, self.Usuario)
+
+
 # Modelos del PUB
 # Actor
 class FormatoPubActor(models.Model):
@@ -251,6 +274,8 @@ class FormatoPubActor(models.Model):
     PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
     # Numero de la entrega del beneficio_44
     NumeroEntregaBeneficio = models.IntegerField
+    # id del trabajo al que pertenecen
+    id_trabajo = models.ForeignKey(TrabajosRealizados, default='')
 
 
 # Personas
@@ -336,106 +361,86 @@ class FormatoPubPersona(models.Model):
     PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
     # Numero de la entrega del beneficio_40
     NumeroEntregaBeneficio = models.IntegerField
+    # id del trabajo al que pertenecen
+    id_trabajo = models.ForeignKey(TrabajosRealizados, default='')
 
 
 # Poblacion
 class FormatoPubPoblacion(models.Model):
 
-        SINO_CHOICES = (
-            ('SI', 'SI'),
-            ('NO', 'NO'),
-        )
+    SINO_CHOICES = (
+        ('SI', 'SI'),
+        ('NO', 'NO'),
+    )
 
-        # Multilocalidad_1
-        Multilocalidad = models.CharField(max_length=2, choices=SINO_CHOICES)
-        # Registro Federal de Contribuyentes_2
-        RFC = models.CharField(max_length=13)
-        # Numero beneficiados_3
-        NumeroBeneficiados = models.IntegerField
-        # Hombres beneficiados_4
-        HombresBeneficiados = models.IntegerField
-        # Mujeres beneficiadas_5
-        MujeresBeneficiadas = models.IntegerField
-        # Viviendas beneficiadas_6
-        ViviendasBeneficiadas = models.IntegerField
-        # Clave Municipio donde se encuentra la obra_7
-        # Municipio donde se encuentra la obra_8
-        MunicipioBeneficiado = models.ForeignKey(Cat_Municipio)
-        # Clave Localidad donde se encuentra la obra_9
-        # Localidad donde se encuentra la obra_10
-        LocalidadBeneficiada = models.ForeignKey(Cat_Localidad)
-        # Asentamiento humano_11
-        AsentamientoHumano = models.ForeignKey(Cat_Asentamiento)
-        # Nombre vialidad_12
-        NombreVialidad = models.CharField(max_length=20)
-        # Numero Exterior_13
-        NumeroExterior = models.CharField(max_length=5, blank=True)
-        # Numero Interior_14
-        NumeroInterior = models.CharField(max_length=5, blank=True)
-        # Codigo Postal_15
-        CodigoPostal = models.CharField(max_length=5)
-        # Referencia del domicilio_16
-        ReferenciaDomicilio = models.CharField(max_length=250, blank=True)
-        # Dependencia que opera el programa_17
-        Dependencia = models.ForeignKey(Cat_Dependencias)
-        # Clave del programa_18
-        # Nombre del programa_20
-        ClavePrograma = models.ForeignKey(Cat_Programas)
-        # Clave del subprograma_19
-        ClaveSubprograma = models.ForeignKey(Cat_Subprogramas, blank=True)
-        # Tipo de apoyo_21
-        TipoApoyo = models.ForeignKey(Cat_TipoApoyo)
-        # Identificador de la Obra_22
-        IdObra = models.CharField(max_length=15)
-        # Descripcion de la Obra_23
-        DescripcionObra = models.TextField
-        # Cantidad de beneficios_24
-        CantBeneficios = models.IntegerField
-        # Total en pesos de los beneficios_25
-        TotalPesosBeneficios = models.IntegerField
-        # Inversion federal_26
-        InversionFederal = models.IntegerField
-        # Inversion estatal_27
-        InversionEstatal = models.IntegerField
-        # Inversion municipal_28
-        InversionMunicipal = models.IntegerField
-        # Inversion de otras fuentes_29
-        InversionOtras = models.IntegerField
-        # Fuentes que fondean el recurso_30
-        FuentesRecurso = models.ForeignKey(Cat_Fuentes)
-        # Trimestre_31
-        Trimestre = models.ForeignKey(Cat_Periodos)
-        # Anio de ejercicio_32
-        AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
-        # Fecha Inicio_33
-        FechaInicio = models.DateField
-        # Fecha Fin_34
-        FechaFin = models.DateField
-        # Periodicidad de entrega del beneficio_35
-        PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
-        # Numero de la entrega del beneficio_36
-        NumeroEntregaBeneficio = models.IntegerField
-
-
-# Modelos del validador
-class EstatusTrabajos(models.Model):
-    nombreEstatus = models.CharField(max_length=20, default='')
-
-    def __unicode__(self):
-        return self.nombreEstatus
-
-
-class TrabajosRealizados(models.Model):
-    archivoRelacionado = models.FileField(upload_to='csv/%Y/%m/%d')
-    Estatus = models.ForeignKey(EstatusTrabajos)
-    Usuario = models.ForeignKey(User)
-    FechaInicio = models.DateTimeField(auto_now_add=True)
-    UltimaActualizacion = models.DateField(auto_now=True)
-    TipoPadron = models.ForeignKey(Cat_TipoPadron, default='')
-    AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio, default='')
-    Trimestre = models.ForeignKey(Cat_Periodos, default='')
-    CantidadRegistros = models.IntegerField(default=0)
-    JsonTrabajo = models.TextField(blank=True, default='')
-
-    def __unicode__(self):
-        return 'ID: %s | Archivo: %s | Usuario: %s' % (self.pk, self.archivoRelacionado, self.Usuario)
+    # Multilocalidad_1
+    Multilocalidad = models.CharField(max_length=2, choices=SINO_CHOICES)
+    # Registro Federal de Contribuyentes_2
+    RFC = models.CharField(max_length=13)
+    # Numero beneficiados_3
+    NumeroBeneficiados = models.IntegerField
+    # Hombres beneficiados_4
+    HombresBeneficiados = models.IntegerField
+    # Mujeres beneficiadas_5
+    MujeresBeneficiadas = models.IntegerField
+    # Viviendas beneficiadas_6
+    ViviendasBeneficiadas = models.IntegerField
+    # Clave Municipio donde se encuentra la obra_7
+    # Municipio donde se encuentra la obra_8
+    MunicipioBeneficiado = models.ForeignKey(Cat_Municipio)
+    # Clave Localidad donde se encuentra la obra_9
+    # Localidad donde se encuentra la obra_10
+    LocalidadBeneficiada = models.ForeignKey(Cat_Localidad)
+    # Asentamiento humano_11
+    AsentamientoHumano = models.ForeignKey(Cat_Asentamiento)
+    # Nombre vialidad_12
+    NombreVialidad = models.CharField(max_length=20)
+    # Numero Exterior_13
+    NumeroExterior = models.CharField(max_length=5, blank=True)
+    # Numero Interior_14
+    NumeroInterior = models.CharField(max_length=5, blank=True)
+    # Codigo Postal_15
+    CodigoPostal = models.CharField(max_length=5)
+    # Referencia del domicilio_16
+    ReferenciaDomicilio = models.CharField(max_length=250, blank=True)
+    # Dependencia que opera el programa_17
+    Dependencia = models.ForeignKey(Cat_Dependencias)
+    # Clave del programa_18
+    # Nombre del programa_20
+    ClavePrograma = models.ForeignKey(Cat_Programas)
+    # Clave del subprograma_19
+    ClaveSubprograma = models.ForeignKey(Cat_Subprogramas, blank=True)
+    # Tipo de apoyo_21
+    TipoApoyo = models.ForeignKey(Cat_TipoApoyo)
+    # Identificador de la Obra_22
+    IdObra = models.CharField(max_length=15)
+    # Descripcion de la Obra_23
+    DescripcionObra = models.TextField
+    # Cantidad de beneficios_24
+    CantBeneficios = models.IntegerField
+    # Total en pesos de los beneficios_25
+    TotalPesosBeneficios = models.IntegerField
+    # Inversion federal_26
+    InversionFederal = models.IntegerField
+    # Inversion estatal_27
+    InversionEstatal = models.IntegerField
+    # Inversion municipal_28
+    InversionMunicipal = models.IntegerField
+    # Inversion de otras fuentes_29
+    InversionOtras = models.IntegerField
+    # Fuentes que fondean el recurso_30
+    FuentesRecurso = models.ForeignKey(Cat_Fuentes)
+    # Trimestre_31
+    Trimestre = models.ForeignKey(Cat_Periodos)
+    # Anio de ejercicio_32
+    AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
+    # Fecha Inicio_33
+    FechaInicio = models.DateField
+    # Fecha Fin_34
+    FechaFin = models.DateField
+    # Periodicidad de entrega del beneficio_35
+    PeriodicidadEntregaBeneficio = models.ForeignKey(Cat_Frecuencia)
+    # Numero de la entrega del beneficio_36
+    NumeroEntregaBeneficio = models.IntegerField
+    # id del trabajo al que pertenecen
+    id_trabajo = models.ForeignKey(TrabajosRealizados, default='')

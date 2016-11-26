@@ -3,6 +3,9 @@
 
 # import codecs
 import unicodecsv as csv
+import json
+from models import FormatoPubPersona, FormatoPubActor, FormatoPubPoblacion
+
 # import csv
 import sys
 from django.utils.encoding import smart_text, smart_unicode, smart_bytes, smart_str, force_text
@@ -57,7 +60,7 @@ formato_actores = {
         u"Mes de periodo de pago_41",
         u"Año de ejercicio_42",
         u"Periodicidad de entrega del beneficio_43",
-        u"Número de la entrega del beneficio_44"
+        u"Número de la entrega del beneficio_44",
     ]
 }
 
@@ -100,7 +103,7 @@ formato_poblacion = {
         u"Fecha Inicio_33",
         u"Fecha Fin_34",
         u"Periodicidad de entrega del beneficio_35",
-        u"Número de la entrega del beneficio_36"
+        u"Número de la entrega del beneficio_36",
     ]
 }
 
@@ -170,7 +173,7 @@ def import_csv(filename):
 
     for registro in registros:
         for celda, nombre in zip(registro, encabezados):
-            diccionario[nombre] = celda
+            diccionario[nombre] = {'valor':celda,'esvalido':False}
         registrosDicc.append(diccionario)
         print registrosDicc
 
@@ -205,12 +208,12 @@ def CantColumnasCorrecta(CantidadColumnas, CantidadTemplate):
 def OrdenColumnasCorrecto(HeadersArchivo, FormatoPadron):
     iguales = True
     for nomArchivo, nomFormato in zip(HeadersArchivo, FormatoPadron):
-        if son_iguales(nomArchivo, nomFormato):
+        if son_iguales(nomArchivo.encode('utf-8'), nomFormato.encode('utf-8')):
             iguales = iguales and True
-            print nomArchivo + ' :: ' + nomFormato
+            #print nomArchivo.encode('utf-8') + ' :: ' + nomFormato.encode('utf-8') + ' => Iguales'
         else:
             iguales = iguales and False
-            print nomArchivo + ' :: ' + nomFormato
+            #print nomArchivo.encode('utf-8') + ' :: ' + nomFormato.encode('utf-8') + ' => No Iguales'
     return iguales
 
 
@@ -229,7 +232,7 @@ def seleccionarTipoPadron(tipo_padron):
 
 def obtenerCampoAnio(formato):
     nombreCampo = ''
-    print formato.get('nombrePadron')
+    # print formato.get('nombrePadron')
     if formato['nombrePadron'] == u'Actor':
         nombreCampo = formato['nombreCols'].pop(41)
     elif formato['nombrePadron'] == u'Población':
@@ -243,7 +246,7 @@ def obtenerCampoAnio(formato):
 
 def obtenerCampoTrimestre(formato):
     nombreCampo = ''
-    print formato.get('nombrePadron')
+    #print formato.get('nombrePadron')
     if formato['nombrePadron'] == u'Actor':
         nombreCampo = formato['nombreCols'].pop(39)
     elif formato['nombrePadron'] == u'Población':
@@ -256,10 +259,16 @@ def obtenerCampoTrimestre(formato):
 
 
 def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
+    #print 'Estructura Archivos iniciado - ' * 3
     formato = seleccionarTipoPadron(tipo_padron)
+    #print lista_Columnas
+    #print tipo_padron
+    #print formato
 
     ValidacionTotalColumnas = CantColumnasCorrecta(total_headers(lista_Columnas), formato["cantColumnas"])
+    #print ValidacionTotalColumnas
     ValidacionOrdenColumnas = OrdenColumnasCorrecto(lista_Columnas, formato["nombreCols"])
+    #print ValidacionOrdenColumnas
 
     if ValidacionTotalColumnas and ValidacionOrdenColumnas:
         validacion = True
@@ -270,30 +279,79 @@ def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
 
 
 def ErroresColumnaAnio(anio, registros, tipo_padron):
+    print '*ErroresColumnaAnio' * 10
     formato = seleccionarTipoPadron(tipo_padron)
     campo = obtenerCampoAnio(formato)
 
     errores = 0
 
     for registro in registros:
-        if not(str(registro[campo]) == str(anio)):
+        if not(str(registro[campo]['valor']) == str(anio)):
+            print registro[campo]['valor']
             errores += 1
-
+        else:
+            registro[campo]['esvalido'] = True
+            print registro[campo]['esvalido']
+    print '*' * 50
     return errores
 
 
 def ErroresColumnaTrimestre(trimestre, registros, tipo_padron):
+    print '*ErroresColumnaTrimestre'*10
     formato = seleccionarTipoPadron(tipo_padron)
     campo = obtenerCampoTrimestre(formato)
 
     errores = 0
 
     for registro in registros:
-        if not(str(registro[campo].upper()) == str(trimestre.upper())):
+        if not(str(registro[campo]['valor'].upper()) == str(trimestre.upper())):
+            print registro[campo]
             errores += 1
+        else:
+            registro[campo]['esvalido'] = True
+            print registro[campo]['esvalido']
+
+    print '*' * 50
 
     return errores
 
 
-def validar_trimestre(trimestre, registros):
-    return trimestre
+def ErroresIniciales(registros, TipoPadron_id, AnioEjercicio, TrimestreIdent):
+    valor = True
+    errores_anio = ErroresColumnaAnio(AnioEjercicio, registros, TipoPadron_id)
+    errores_trimestre = ErroresColumnaTrimestre(TrimestreIdent, registros, TipoPadron_id)
+
+    if errores_anio and errores_trimestre:
+        valor = True
+    else:
+        valor = False
+
+    return valor
+
+
+def GuardaRegistro(registro, estructura, idTrabajo):
+    print registro
+    print idTrabajo
+    record = ''
+    if estructura == u'Actor':
+        print estructura
+        record = FormatoPubActor
+    elif estructura == u'Población':
+        print estructura
+
+        print record
+    elif estructura == u'Persona':
+        print estructura
+        record = FormatoPubPersona
+    else:
+        print 'Error al seleccionar tipo de estructura'
+    return True
+
+def GuardarRegistros(registros, TipoPadron_Id, idTrabajo):
+    formato = seleccionarTipoPadron(TipoPadron_Id)
+    print formato['nombrePadron']
+
+    for registro in registros:
+        GuardaRegistro(registro, formato['nombrePadron'], idTrabajo)
+
+    return True
