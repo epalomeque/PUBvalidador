@@ -175,7 +175,7 @@ def import_csv(filename):
         for celda, nombre in zip(registro, encabezados):
             diccionario[nombre] = {'valor':celda,'esvalido':False}
         registrosDicc.append(diccionario)
-        print registrosDicc
+        # print registrosDicc
 
     datos = {
         'encabezados': encabezados,
@@ -279,7 +279,7 @@ def EstructuraArchivoEsValida(lista_Columnas, tipo_padron):
 
 
 def ErroresColumnaAnio(anio, registros, tipo_padron):
-    print '*ErroresColumnaAnio' * 10
+    # print '*ErroresColumnaAnio' * 10
     formato = seleccionarTipoPadron(tipo_padron)
     campo = obtenerCampoAnio(formato)
 
@@ -292,12 +292,12 @@ def ErroresColumnaAnio(anio, registros, tipo_padron):
         else:
             registro[campo]['esvalido'] = True
             print registro[campo]['esvalido']
-    print '*' * 50
+    # print '*' * 50
     return errores
 
 
 def ErroresColumnaTrimestre(trimestre, registros, tipo_padron):
-    print '*ErroresColumnaTrimestre'*10
+    # print '*ErroresColumnaTrimestre'*10
     formato = seleccionarTipoPadron(tipo_padron)
     campo = obtenerCampoTrimestre(formato)
 
@@ -305,13 +305,13 @@ def ErroresColumnaTrimestre(trimestre, registros, tipo_padron):
 
     for registro in registros:
         if not(str(registro[campo]['valor'].upper()) == str(trimestre.upper())):
-            print registro[campo]
+            # print registro[campo]
             errores += 1
         else:
             registro[campo]['esvalido'] = True
-            print registro[campo]['esvalido']
+            # print registro[campo]['esvalido']
 
-    print '*' * 50
+    # print '*' * 50
 
     return errores
 
@@ -338,7 +338,6 @@ def GuardaRegistro(registro, estructura, idTrabajo):
         record = FormatoPubActor
     elif estructura == u'Población':
         print estructura
-
         print record
     elif estructura == u'Persona':
         print estructura

@@ -177,6 +177,7 @@ class TrabajosRealizados(models.Model):
     AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio, default='')
     Trimestre = models.ForeignKey(Cat_Periodos, default='')
     CantidadRegistros = models.IntegerField(default=0)
+    jsondata = models.TextField(default='')
 
     def __unicode__(self):
         return 'ID: %s | Archivo: %s | Usuario: %s' % (self.pk, self.archivoRelacionado, self.Usuario)

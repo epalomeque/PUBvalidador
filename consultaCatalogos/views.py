@@ -75,24 +75,25 @@ def validar(request, trabajo_id):
     # Abrir estatus del trabajo
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
 
-    if trabajo.Usuario == request.user :
+    if trabajo.Usuario == request.user:
         # Si el estatus es INCOMPLETO
-        if trabajo.Estatus_id == 1 :
-            print 'trabajo.Estatus_id == 1'
+        if trabajo.Estatus_id == 1:
+            print 'trabajo.Estatus_id == 1 | Incompleto'
             print trabajo.Estatus
         # Si el estatus es COMPLETO
         elif trabajo.Estatus_id == 2:
-            print 'trabajo.Estatus_id == 2'
+            print 'trabajo.Estatus_id == 2 | Completo'
             print trabajo.Estatus
         # Si el estatus es ENVIADO
         elif trabajo.Estatus_id == 3:
-            print 'trabajo.Estatus_id == 3'
+            print 'trabajo.Estatus_id == 3 | Enviado'
             print trabajo.Estatus
         # Si el estatus es INICIADO
         elif trabajo.Estatus_id == 4:
-            print 'trabajo.Estatus_id == 4'
+            print 'trabajo.Estatus_id == 4 | Iniciado'
             print trabajo.Estatus
             datos = import_csv(trabajo.archivoRelacionado.path)
+            print datos.get('encabezados')
             if EstructuraArchivoEsValida(datos.get('encabezados'), trabajo.TipoPadron_id):
                 print 'estructura valida'
                 if not(ErroresIniciales(datos.get('registros'), trabajo.TipoPadron_id, trabajo.AnioEjercicio, trabajo.Trimestre.identPeriodo)):
