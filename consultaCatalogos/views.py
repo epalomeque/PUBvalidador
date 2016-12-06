@@ -74,12 +74,18 @@ def home(request):
 def validar(request, trabajo_id):
     # Abrir estatus del trabajo
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
+    tipopadronid = trabajo.TipoPadron_id
+    anioejercicio = trabajo.AnioEjercicio
+    trimperiodoid = trabajo.Trimestre.identPeriodo
+    datos = {}
 
     if trabajo.Usuario == request.user:
         # Si el estatus es INCOMPLETO
         if trabajo.Estatus_id == 1:
             print 'trabajo.Estatus_id == 1 | Incompleto'
             print trabajo.Estatus
+            datos = json.loads(trabajo.jsondata)
+            print datos.get('registros')
         # Si el estatus es COMPLETO
         elif trabajo.Estatus_id == 2:
             print 'trabajo.Estatus_id == 2 | Completo'
@@ -90,15 +96,21 @@ def validar(request, trabajo_id):
             print trabajo.Estatus
         # Si el estatus es INICIADO
         elif trabajo.Estatus_id == 4:
-            print 'trabajo.Estatus_id == 4 | Iniciado'
-            print trabajo.Estatus
+            # print 'trabajo.Estatus_id == 4 | Iniciado'
+            # print trabajo.Estatus
             datos = import_csv(trabajo.archivoRelacionado.path)
-            print datos.get('encabezados')
-            if EstructuraArchivoEsValida(datos.get('encabezados'), trabajo.TipoPadron_id):
+            # print datos.get('encabezados')
+            estrucvalida = EstructuraArchivoEsValida(datos.get('encabezados'), tipopadronid)
+            if estrucvalida:
                 print 'estructura valida'
-                if not(ErroresIniciales(datos.get('registros'), trabajo.TipoPadron_id, trabajo.AnioEjercicio, trabajo.Trimestre.identPeriodo)):
+                einiciales = ErroresIniciales(datos.get('registros'), tipopadronid, anioejercicio, trimperiodoid)
+                if not(einiciales):
                     print 'Sin errores iniciales'
-                    GuardarRegistros(datos.get('registros'), trabajo.TipoPadron_id, trabajo.pk)
+                    # GuardarRegistros(datos.get('registros'), tipopadronid, trabajo.pk)
+                    trabajo.CantidadRegistros = len(datos.get('registros'))
+                    trabajo.Estatus_id = 1
+                    trabajo.jsondata = json.dumps(datos)
+                    trabajo.save()
             else:
                 print 'estructura no valida'
 
@@ -107,7 +119,8 @@ def validar(request, trabajo_id):
         return HttpResponseRedirect('/noautorizado')
 
     data = {
-        'trabajo': trabajo
+        'trabajo': trabajo,
+        'datos': datos
     }
 
     return render_to_response('validar.html', data, context_instance=RequestContext(request))

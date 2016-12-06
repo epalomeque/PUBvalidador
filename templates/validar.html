@@ -71,13 +71,24 @@
 
     {% if trabajo.Estatus_id = 1 %}
         <p>Aqui lo del estatus 1</p>
+        {% if trabajo.TipoPadron_id == 1 %}
+            <p>El trabajo es de tipo {{ trabajo.TipoPadron.nombrePadron }}</p>
+            {% include 'tabla_actor.html' %}
+        {% elif trabajo.TipoPadron_id == 2 %}
+            <p>El trabajo es de tipo {{ trabajo.TipoPadron.nombrePadron }}</p>
+            {% include 'tabla_poblacion.html' %}
+        {% elif trabajo.TipoPadron_id == 3 %}
+            <p>El trabajo es de tipo {{ trabajo.TipoPadron.nombrePadron }}</p>
+            {% include 'tabla_poblacion.html' %}
+        {% else %}
+            <p>Hubo un error al elegir el tipo de padron</p>
+        {% endif %}
     {% elif  trabajo.Estatus_id = 2 %}
         <p>Aqui lo del estatus 2</p>
     {% elif  trabajo.Estatus_id = 3 %}
         <p>Aqui lo del estatus 3</p>
     {% elif  trabajo.Estatus_id = 4 %}
          <p>Aqui lo del estatus 4</p>
-        {% include 'tabla_poblacion.html' %}
     {% else %}
         <p>Aquí no hay nada</p>
     {% endif %}

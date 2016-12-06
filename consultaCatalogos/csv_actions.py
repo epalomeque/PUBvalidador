@@ -287,11 +287,11 @@ def ErroresColumnaAnio(anio, registros, tipo_padron):
 
     for registro in registros:
         if not(str(registro[campo]['valor']) == str(anio)):
-            print registro[campo]['valor']
+            # print registro[campo]['valor']
             errores += 1
         else:
             registro[campo]['esvalido'] = True
-            print registro[campo]['esvalido']
+            # print registro[campo]['esvalido']
     # print '*' * 50
     return errores
 
@@ -327,30 +327,3 @@ def ErroresIniciales(registros, TipoPadron_id, AnioEjercicio, TrimestreIdent):
         valor = False
 
     return valor
-
-
-def GuardaRegistro(registro, estructura, idTrabajo):
-    print registro
-    print idTrabajo
-    record = ''
-    if estructura == u'Actor':
-        print estructura
-        record = FormatoPubActor
-    elif estructura == u'Población':
-        print estructura
-        print record
-    elif estructura == u'Persona':
-        print estructura
-        record = FormatoPubPersona
-    else:
-        print 'Error al seleccionar tipo de estructura'
-    return True
-
-def GuardarRegistros(registros, TipoPadron_Id, idTrabajo):
-    formato = seleccionarTipoPadron(TipoPadron_Id)
-    print formato['nombrePadron']
-
-    for registro in registros:
-        GuardaRegistro(registro, formato['nombrePadron'], idTrabajo)
-
-    return True
