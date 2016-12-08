@@ -170,8 +170,10 @@ def import_csv(filename):
 
     diccionario = {}
     registrosDicc = list()
+    i=0
 
     for registro in registros:
+        diccionario['num_record'] = i+1
         for celda, nombre in zip(registro, encabezados):
             diccionario[nombre] = {'valor':celda,'esvalido':False}
         registrosDicc.append(diccionario)

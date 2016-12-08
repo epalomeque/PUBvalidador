@@ -1,12 +1,92 @@
 {% for registro in datos.registros %}
-<div>
-    <hr />
-    <div>
-        <ul>
-        {% for key, valor in registro.items %}
-            <li><strong>{{ key }}: </strong>{{ valor.valor }}</li>
-        {% endfor %}
-        </ul>
+<form>
+ <div class="registro numrecord">
+    <div class="data_beneficiarios">
+        1 pintando {{ registro.Multilocalidad_1.valor }}
+        {{ key='Registro Federal de Contribuyentes_2' }}
+        2 pintando {{ registro.key.valor }}
+        3 pintando {{ registro.Multilocalidad_1.valor }}
+        4 pintando {{ registro.Multilocalidad_1.valor }}
+        5 pintando {{ registro.Multilocalidad_1.valor }}
+        6 pintando {{ registro.Multilocalidad_1.valor }}
+    <ul>
+    {% for key, valor in registro.items %}
+        {% if key == 'Multilocalidad_1' %}
+            <li class="{{valor.esvalido}}"><strong>Multilocalidad: </strong>{{valor.valor}}</li>
+        {% elif key == 'Registro Federal de Contribuyentes_2' %}
+            <li class="{{valor.esvalido}}"><strong>R.F.C.: </strong>{{valor.valor}}</li>
+        {% elif key == 'Número beneficiados_3' %}
+            <li class="{{valor.esvalido}}"><strong>Total de beneficiados: </strong>{{valor.valor}}</li>
+        {% elif key == 'Hombres beneficiados_4' %}
+            <li class="{{valor.esvalido}}"><strong>Hombres beneficiados: </strong>{{valor.valor}}</li>
+        {% elif key == 'Mujeres beneficiadas_5' %}
+            <li class="{{valor.esvalido}}"><strong>Mujeres Beneficiadas: </strong>{{valor.valor}}</li>
+        {% elif key == 'Viviendas beneficiadas_6' %}
+            <li class="{{valor.esvalido}}"><strong>Viviendas Beneficiadas: </strong>{{valor.valor}}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
     </div>
+    <h6>*******</h6>
+    {% for key, valor in registro.items %}
+        {% if key == 'Municipio donde se encuentra la obra_8' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Clave Municipio donde se encuentra la obra_7' %}
+            <li class="{{valor.esvalido}}"><strong>{{key}} : </strong>{{valor.valor}}</li>
+        {% elif key == 'Clave Localidad donde se encuentra la obra_9' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Localidad donde se encuentra la obra_10' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Asentamiento humano_11' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Nombre vialidad_12' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Número Exterior_13' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Número Interior_14' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Código Postal_15' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Referencia del domicilio_16' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Dependencia que opera el programa_17' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Clave del programa_18' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Clave del subprograma_19' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Nombre del programa_20' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Tipo de apoyo_21' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Identificador de la Obra_22' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Descripción de la Obra_23' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Cantidad de beneficios_24' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Total en pesos de los beneficios_25' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Inversión federal_26' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Inversión estatal_27' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Inversión municipal_28' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Inversión de otras fuentes_29' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Fuentes que fondean el recurso_30' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Fecha Inicio_33' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Fecha Fin_34' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Periodicidad de entrega del beneficio_35' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% elif key == 'Número de la entrega del beneficio_36' %}
+            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
+        {% endif %}
+    {% endfor %}
 </div>
 {% endfor %}
+</form>

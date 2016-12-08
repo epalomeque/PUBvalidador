@@ -19943,3 +19943,19 @@ div.renglon div.botones {
     display: inline-block;
     width: auto;
 }
+div.registro ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+div.registro ul li {
+  display: inline-block;
+  width : 250px;
+  margin : 2px;
+}
+div.registro ul li.True {
+  background-color: palegreen;
+}
+div.registro ul li.False {
+  background-color: palevioletred;
+}

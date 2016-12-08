@@ -62,15 +62,7 @@
       </div>
     </div>
 
-    <div class="infobox infobox-blue2">
-      <div class="infobox-data">
-         <span class="infobox-data-number">SinDATO</span>
-         <div class="infobox-content">SinDato</div>
-      </div>
-    </div>
-
     {% if trabajo.Estatus_id = 1 %}
-        <p>Aqui lo del estatus 1</p>
         {% if trabajo.TipoPadron_id == 1 %}
             <p>El trabajo es de tipo {{ trabajo.TipoPadron.nombrePadron }}</p>
             {% include 'tabla_actor.html' %}
@@ -78,7 +70,6 @@
             <p>El trabajo es de tipo {{ trabajo.TipoPadron.nombrePadron }}</p>
             {% include 'tabla_poblacion.html' %}
         {% elif trabajo.TipoPadron_id == 3 %}
-            <p>El trabajo es de tipo {{ trabajo.TipoPadron.nombrePadron }}</p>
             {% include 'tabla_poblacion.html' %}
         {% else %}
             <p>Hubo un error al elegir el tipo de padron</p>
