@@ -67,8 +67,7 @@
             <p>El trabajo es de tipo {{ trabajo.TipoPadron.nombrePadron }}</p>
             {% include 'tabla_actor.html' %}
         {% elif trabajo.TipoPadron_id == 2 %}
-            <p>El trabajo es de tipo {{ trabajo.TipoPadron.nombrePadron }}</p>
-            {% include 'tabla_poblacion.html' %}
+            {% include 'tabla_personas.html' %}
         {% elif trabajo.TipoPadron_id == 3 %}
             {% include 'tabla_poblacion.html' %}
         {% else %}

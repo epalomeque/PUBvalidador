@@ -1,92 +1,137 @@
 {% for registro in datos.registros %}
-<form>
- <div class="registro numrecord">
-    <div class="data_beneficiarios">
-        1 pintando {{ registro.Multilocalidad_1.valor }}
-        {{ key='Registro Federal de Contribuyentes_2' }}
-        2 pintando {{ registro.key.valor }}
-        3 pintando {{ registro.Multilocalidad_1.valor }}
-        4 pintando {{ registro.Multilocalidad_1.valor }}
-        5 pintando {{ registro.Multilocalidad_1.valor }}
-        6 pintando {{ registro.Multilocalidad_1.valor }}
-    <ul>
-    {% for key, valor in registro.items %}
-        {% if key == 'Multilocalidad_1' %}
-            <li class="{{valor.esvalido}}"><strong>Multilocalidad: </strong>{{valor.valor}}</li>
-        {% elif key == 'Registro Federal de Contribuyentes_2' %}
-            <li class="{{valor.esvalido}}"><strong>R.F.C.: </strong>{{valor.valor}}</li>
-        {% elif key == 'Número beneficiados_3' %}
-            <li class="{{valor.esvalido}}"><strong>Total de beneficiados: </strong>{{valor.valor}}</li>
-        {% elif key == 'Hombres beneficiados_4' %}
-            <li class="{{valor.esvalido}}"><strong>Hombres beneficiados: </strong>{{valor.valor}}</li>
-        {% elif key == 'Mujeres beneficiadas_5' %}
-            <li class="{{valor.esvalido}}"><strong>Mujeres Beneficiadas: </strong>{{valor.valor}}</li>
-        {% elif key == 'Viviendas beneficiadas_6' %}
-            <li class="{{valor.esvalido}}"><strong>Viviendas Beneficiadas: </strong>{{valor.valor}}</li>
-        {% endif %}
-    {% endfor %}
-    </ul>
+<hr />
+
+<div class="space-12"></div>
+<div class="widget-box">
+    <div class="widget-header">
+        <h5 class="widget-title smaller">Registro no. {{ registro.num_record }}</h5>
+        <div class="widget-toolbar">
+            <span class="badge badge-danger">Tiene validaciones pendientes</span>
+        </div>
     </div>
-    <h6>*******</h6>
-    {% for key, valor in registro.items %}
-        {% if key == 'Municipio donde se encuentra la obra_8' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Clave Municipio donde se encuentra la obra_7' %}
-            <li class="{{valor.esvalido}}"><strong>{{key}} : </strong>{{valor.valor}}</li>
-        {% elif key == 'Clave Localidad donde se encuentra la obra_9' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Localidad donde se encuentra la obra_10' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Asentamiento humano_11' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Nombre vialidad_12' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Número Exterior_13' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Número Interior_14' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Código Postal_15' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Referencia del domicilio_16' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Dependencia que opera el programa_17' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Clave del programa_18' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Clave del subprograma_19' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Nombre del programa_20' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Tipo de apoyo_21' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Identificador de la Obra_22' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Descripción de la Obra_23' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Cantidad de beneficios_24' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Total en pesos de los beneficios_25' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Inversión federal_26' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Inversión estatal_27' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Inversión municipal_28' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Inversión de otras fuentes_29' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Fuentes que fondean el recurso_30' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Fecha Inicio_33' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Fecha Fin_34' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Periodicidad de entrega del beneficio_35' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% elif key == 'Número de la entrega del beneficio_36' %}
-            <li class="{{valor.esvalido}}">{{key}} : {{valor.valor}}</li>
-        {% endif %}
-    {% endfor %}
+    <div class="widget-body">
+        <form class="form-horizontal">
+
+        <div class="widget-main">
+
+            <div class="form-group {% if False %}has-error{% else %}has-success{% endif %}">
+            <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Multilocalidad:</label>
+            <div class="col-xs-12 col-sm-5">
+                <select class="width-100" name="carlist" form="carform">
+                  <option value="---">---</option>
+                  <option value="SI">SI</option>
+                  <option value="NO">NO</option>
+                </select>
+            </div>
+            {% if False %}
+            <div class="help-block col-xs-12 col-sm-reset inline">El valor debe ser SI o NO</div>
+            {% endif %}
+            </div>
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">R.F.C.:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+            </div>
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Total de beneficiados:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+            </div>
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Mujeres Beneficiadas:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+            </div>
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Viviendas Beneficiadas:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+            </div>
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Municipio donde se encuentra:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+            </div>
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Localidad donde se encuentra:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+            </div>
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Multilocalidad:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+            </div>
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Multilocalidad:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Error tip help! </div>
+            </div>
+
+
+
+
+
+
+            <div class="form-group has-success">
+                <label for="inputSuccess" class="col-xs-12 col-sm-3 control-label no-padding-right">Input with success</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                        <input id="inputSuccess" class="width-100" type="text">
+                        <i class="ace-icon fa fa-check-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline"> Success tip help! </div>
+            </div>
+        </div>
+        <div class="widget-toolbox padding-8 clearfix">
+            <button class="btn btn-xs btn-success pull-right">
+                <span class="bigger-110">Enviar validaciones</span>
+
+                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+            </button>
+        </div>
+        </form>
+    </div>
 </div>
 {% endfor %}
-</form>
