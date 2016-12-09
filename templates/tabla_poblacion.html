@@ -1,3 +1,5 @@
+{% load consulta_extras %}
+
 {% for registro in datos.registros %}
 <hr />
 
@@ -31,7 +33,7 @@
                 <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">R.F.C.:</label>
                 <div class="col-xs-12 col-sm-5">
                     <span class="block input-icon input-icon-right">
-                    <input id="inputError" class="width-100" type="text">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Registro Federal de Contribuyentes_2" }}">
                     <i class="ace-icon fa fa-times-circle"></i>
                     </span>
                 </div>
