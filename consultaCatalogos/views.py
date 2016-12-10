@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
-from forms import SignUpForm, nuevoTrabajoForm
+from forms import SignUpForm, nuevoTrabajoForm, formPoblacion
 from models import TrabajosRealizados
 #from django.core.files.uploadedfile import SimpleUploadedFile
 from csv_actions import *
@@ -82,6 +82,26 @@ def validar(request, trabajo_id):
     if trabajo.Usuario == request.user:
         # Si el estatus es INCOMPLETO
         if trabajo.Estatus_id == 1:
+            print 'Request Method: ' + request.method
+            if request.method == 'POST':
+                # create a form instance and populate it with data from the request:
+                formulario = formPoblacion()
+                print 'El formulario en POST:'
+                print formulario
+                print '-*-'
+                # check whether it's valid:
+                if formulario.is_valid():
+                    # process the data in form.cleaned_data as required
+                    # ...
+                    # redirect to a new URL:
+                    return HttpResponseRedirect('/')
+            # if a GET (or any other method) we'll create a blank form
+            else:
+                formulario = formPoblacion()
+                print 'El formulario en GET:'
+                print formulario
+                print '-*-'
+
             print 'trabajo.Estatus_id == 1 | Incompleto'
             print trabajo.Estatus
             datos = json.loads(trabajo.jsondata)
@@ -120,7 +140,8 @@ def validar(request, trabajo_id):
 
     data = {
         'trabajo': trabajo,
-        'datos': datos
+        'datos': datos,
+        'formulario': formulario
     }
 
     return render_to_response('validar.html', data, context_instance=RequestContext(request))

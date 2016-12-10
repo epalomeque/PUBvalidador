@@ -1,123 +1,94 @@
-
-value="{{ registro | get_esvalido: "Hombres beneficiados_4" }} "
-
-
-
-value="{{ registro | get_esvalido:"Mujeres beneficiadas_5" }} "
-
-
-
-value="{{ registro | get_esvalido:"Viviendas beneficiadas_6" }} "
-
-
-
-value="{{ registro | get_esvalido:"Municipio donde se encuentra la obra_8" }} "
-
-
-value="{{ registro | get_valor:"Clave Municipio donde se encuentra la obra_7" }} "
-value="{{ registro | get_esvalido:"Clave Municipio donde se encuentra la obra_7" }} "
-{{ registro | get_descrip:"Clave Municipio donde se encuentra la obra_7" }}
-
-value="{{ registro | get_valor:"Clave Localidad donde se encuentra la obra_9" }} "
-value="{{ registro | get_esvalido:"Clave Localidad donde se encuentra la obra_9" }} "
-{{ registro | get_descrip:"Clave Localidad donde se encuentra la obra_9" }}
-
-
-value="{{ registro | get_esvalido:"Localidad donde se encuentra la obra_10" }} "
-
-
-
-value="{{ registro | get_esvalido:"Asentamiento humano_11" }} "
-
-
-
-value="{{ registro | get_esvalido:"Nombre vialidad_12" }} "
-
-
-
-value="{{ registro | get_esvalido:"Número Exterior_13" }} "
-
-
-
-value="{{ registro | get_esvalido:"Número Interior_14" }} "
-
-
-
-value="{{ registro | get_esvalido:"Código Postal_15" }} "
-
-
-
-value="{{ registro | get_esvalido:"Referencia del domicilio_16" }} "
-
-
-
-value="{{ registro | get_esvalido:"Dependencia que opera el programa_17" }} "
-
-
-value="{{ registro | get_valor:"Clave del programa_18" }} "
-value="{{ registro | get_esvalido:"Clave del programa_18" }} "
-{{ registro | get_descrip:"Clave del programa_18" }}
-
-
-value="{{ registro | get_esvalido:"Clave del subprograma_19" }} "
-
-
-
-value="{{ registro | get_esvalido:"Nombre del programa_20" }} "
-
-
-
-value="{{ registro | get_esvalido:"Tipo de apoyo_21" }} "
-
-
-
-value="{{ registro | get_esvalido:"Identificador de la Obra_22" }} "
-
-
-
-value="{{ registro | get_esvalido:"Descripción de la Obra_23" }} "
-
-
-value="{{ registro | get_valor:"Cantidad de beneficios_24" }} "
-value="{{ registro | get_esvalido:"Cantidad de beneficios_24" }} "
-{{ registro | get_descrip:"Cantidad de beneficios_24" }}
-
-value="{{ registro | get_valor:"Total en pesos de los beneficios_25" }} "
-value="{{ registro | get_esvalido:"Total en pesos de los beneficios_25" }} "
-{{ registro | get_descrip:"Total en pesos de los beneficios_25" }}
-
-value="{{ registro | get_valor:"Inversión federal_26" }} "
-value="{{ registro | get_esvalido:"Inversión federal_26" }} "
-{{ registro | get_descrip:"Inversión federal_26" }}
-
-value="{{ registro | get_valor:"Inversión estatal_27" }} "
-value="{{ registro | get_esvalido:"Inversión estatal_27" }} "
-{{ registro | get_descrip:"Inversión estatal_27" }}
-
-value="{{ registro | get_valor:"Inversión municipal_28" }} "
-value="{{ registro | get_esvalido:"Inversión municipal_28" }} "
-{{ registro | get_descrip:"Inversión municipal_28" }}
-
-value="{{ registro | get_valor:"Inversión de otras fuentes_29" }} "
-value="{{ registro | get_esvalido:"Inversión de otras fuentes_29" }} "
-{{ registro | get_descrip:"Inversión de otras fuentes_29" }}
-
-value="{{ registro | get_valor:"Fuentes que fondean el recurso_30" }} "
-value="{{ registro | get_esvalido:"Fuentes que fondean el recurso_30" }} "
-{{ registro | get_descrip:"Fuentes que fondean el recurso_30" }}
-
-value="{{ registro | get_valor:"Fecha Inicio_33" }} "
-value="{{ registro | get_esvalido:"Fecha Inicio_33" }} "
-{{ registro | get_descrip:"Fecha Inicio_33" }}
-
-value="{{ registro | get_valor:"Fecha Fin_34" }} "
-value="{{ registro | get_esvalido:"Fecha Fin_34" }} "
-{{ registro | get_descrip:"Fecha Fin_34" }}
-
-value="{{ registro | get_valor:"Periodicidad de entrega del beneficio_35" }} "
-value="{{ registro | get_esvalido:"Periodicidad de entrega del beneficio_35" }} "
-{{ registro | get_descrip:"Periodicidad de entrega del beneficio_35" }}
-
-value="{{ registro | get_valor:"Número de la entrega del beneficio_36" }} "
-value="{{ registro | get_esvalido:"Número de la entrega del beneficio_36" }} "
-{{ registro | get_descrip:"Número de la entrega del beneficio_36" }}
+# Poblacion
+class FormPubPoblacion(forms.Model):
+
+    SINO_CHOICES = (
+        ('SI', 'SI'),
+        ('NO', 'NO'),
+    )
+
+    # Multilocalidad_1
+    Multilocalidad = forms.Select
+    #.CharField(max_length=2, choices=SINO_CHOICES)
+    # Registro Federal de Contribuyentes_2
+    RFC = forms.CharField(max_length=13)
+    # Numero beneficiados_3
+    NumeroBeneficiados = forms.IntegerField
+    # Hombres beneficiados_4
+    HombresBeneficiados = forms.IntegerField
+    # Mujeres beneficiadas_5
+    MujeresBeneficiadas = forms.IntegerField
+    # Viviendas beneficiadas_6
+    ViviendasBeneficiadas = forms.IntegerField
+    # Clave Municipio donde se encuentra la obra_7
+    # Municipio donde se encuentra la obra_8
+    MunicipioBeneficiado = forms.ForeignKey(Cat_Municipio)
+    # Clave Localidad donde se encuentra la obra_9
+    # Localidad donde se encuentra la obra_10
+    LocalidadBeneficiada = forms.ForeignKey(Cat_Localidad)
+    # Asentamiento humano_11
+    AsentamientoHumano = forms.ForeignKey(Cat_Asentamiento)
+    # Nombre vialidad_12
+    NombreVialidad = forms.CharField(max_length=20)
+    # Numero Exterior_13
+    NumeroExterior = forms.CharField(max_length=5)
+    # Numero Interior_14
+    NumeroInterior = forms.CharField(max_length=5)
+    # Codigo Postal_15
+    CodigoPostal = forms.CharField(max_length=5)
+    # Referencia del domicilio_16
+    ReferenciaDomicilio = forms.CharField(max_length=250)
+    # Dependencia que opera el programa_17
+    Dependencia = forms.ForeignKey(Cat_Dependencias)
+    # Clave del programa_18
+    # Nombre del programa_20
+    ClavePrograma = forms.ForeignKey(Cat_Programas)
+    # Clave del subprograma_19
+    ClaveSubprograma = forms.ForeignKey(Cat_Subprogramas)
+    # Tipo de apoyo_21
+    TipoApoyo = forms.ForeignKey(Cat_TipoApoyo)
+    # Identificador de la Obra_22
+    IdObra = forms.CharField(max_length=15)
+    # Descripcion de la Obra_23
+    DescripcionObra = forms.TextField
+    # Cantidad de beneficios_24
+    CantBeneficios = forms.IntegerField
+    # Total en pesos de los beneficios_25
+    TotalPesosBeneficios = forms.IntegerField
+    # Inversion federal_26
+    InversionFederal = forms.IntegerField
+    # Inversion estatal_27
+    InversionEstatal = forms.IntegerField
+    # Inversion municipal_28
+    InversionMunicipal = forms.IntegerField
+    # Inversion de otras fuentes_29
+    InversionOtras = forms.IntegerField
+    # Fuentes que fondean el recurso_30
+    FuentesRecurso = forms.ForeignKey(Cat_Fuentes)
+    # Trimestre_31
+    Trimestre = forms.ForeignKey(Cat_Periodos)
+    # Anio de ejercicio_32
+    AnioEjercicio = forms.ForeignKey(Cat_AnioEjercicio)
+    # Fecha Inicio_33
+    FechaInicio = forms.DateField
+    # Fecha Fin_34
+    FechaFin = forms.DateField
+    # Periodicidad de entrega del beneficio_35
+    PeriodicidadEntregaBeneficio = forms.ForeignKey(Cat_Frecuencia)
+    # Numero de la entrega del beneficio_36
+    NumeroEntregaBeneficio = forms.IntegerField
+    # id del trabajo al que pertenecen
+    id_trabajo = forms.ForeignKey(TrabajosRealizados, default='')
+
+
+
+
+
+
+    ----
+    consultar
+
+    http://stackoverflow.com/questions/17754295/can-i-have-a-django-form-without-model
+
+    https://docs.djangoproject.com/en/1.8/topics/forms/
+
+    https://media.readthedocs.org/pdf/django/1.8.x/django.pdf

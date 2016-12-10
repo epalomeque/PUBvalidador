@@ -1,0 +1,370 @@
+{% load consulta_extras %}
+
+{% for registro in datos.registros %}
+
+<div class="space-12"></div>
+<div class="widget-box">
+    <div class="widget-header">
+        <h5 class="widget-title smaller">Registro no. {{ registro.num_record }}</h5>
+        <div class="widget-toolbar">
+            <span class="badge badge-danger">Tiene validaciones pendientes</span>
+        </div>
+    </div>
+    <div class="widget-body">
+        <form class="form-horizontal">
+
+        <div class="widget-main">
+            <!-- Aqui se imprime la Multilocalidad -->
+            <div class="form-group {% if False %}has-error{% else %}has-success{% endif %}">
+            <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Multilocalidad:</label>
+            <div class="col-xs-12 col-sm-5">
+                <select class="width-100">
+                  <option value="---">---</option>
+                  <option value="SI" {{ registro | siselectedsi:"Multilocalidad_1" }}>SI</option>
+                  <option value="NO" {{ registro | siselectedno:"Multilocalidad_1" }}>NO</option>
+                </select>
+            </div>
+            <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Multilocalidad_1" }}</div>
+            </div>
+            <!-- Aqui se imprime el RFC -->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">R.F.C.:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Registro Federal de Contribuyentes_2" }}">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Registro Federal de Contribuyentes_2" }}</div>
+            </div>
+            <!-- Aqui se imprime el numero de beneficiados -->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Total de beneficiados:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Número beneficiados_3" }}">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Número beneficiados_3" }}</div>
+            </div>
+            <!-- Aqui se imprime la cantidad de hombres beneficiadas -->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Hombres Beneficiados:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Hombres beneficiados_4" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Hombres beneficiados_4" }}</div>
+            </div>
+            <!-- Aqui se imprime la cantidad de mujeres beneficiadas -->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Mujeres Beneficiadas:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Mujeres beneficiadas_5" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Mujeres beneficiadas_5" }}</div>
+            </div>
+            <!-- Aqui se imprime la cantidad de viviendas beneficiadas -->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Viviendas Beneficiadas:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Viviendas beneficiadas_6" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Viviendas beneficiadas_6" }}</div>
+            </div>
+            <!-- Aqui se imprime el municipio-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Municipio donde se encuentra:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Municipio donde se encuentra la obra_8" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Municipio donde se encuentra la obra_8" }}</div>
+            </div>
+            <!-- Aqui se imprime la localidad-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Localidad donde se encuentra:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Localidad donde se encuentra la obra_10" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Localidad donde se encuentra la obra_10" }}</div>
+            </div>
+            <!-- Aqui se imprime tipo de asentamiento humano-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Tipo de asentamiento humano:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Asentamiento humano_11" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Asentamiento humano_11" }}</div>
+            </div>
+            <!-- Aqui se imprime el nombre de la vialidad-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Nombre de la vialidad:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Nombre vialidad_12" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Nombre vialidad_12" }}</div>
+            </div>
+            <!-- Aqui se imprime el numero exterior-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Número exterior:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Número Exterior_13" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Número Exterior_13" }}</div>
+            </div>
+            <!-- Aqui se imprime el numero interior-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Número interior:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Número Interior_14" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Número Interior_14" }}</div>
+            </div>
+            <!-- Aqui se imprime el codigo postal-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Código Postal:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Código Postal_15" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Código Postal_15" }}</div>
+            </div>
+            <!-- Aqui se imprime la referencia del domicilio-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Referencia del domicilio:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Referencia del domicilio_16" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Referencia del domicilio_16" }}</div>
+            </div>
+            <!-- Aqui se imprime la dependencia que opera el programa-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Dependencia que opera el programa:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Dependencia que opera el programa_17" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Dependencia que opera el programa_17" }}</div>
+            </div>
+            <!-- Aqui se imprime el nombre del programa-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Nombre del programa:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Nombre del programa_20" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Nombre del programa_20" }}</div>
+            </div>
+            <!-- Aqui se imprime la clave del subprograma-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Clave del subprograma:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Clave del subprograma_19" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Clave del subprograma_19" }}</div>
+            </div>
+            <!-- Aqui se imprime el tipo de apoyo-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Tipo de apoyo:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Tipo de apoyo_21" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Tipo de apoyo_21" }}</div>
+            </div>
+            <!-- Aqui se imprime el id de la obra-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Identificador de la obra:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Identificador de la Obra_22" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Identificador de la Obra_22" }}</div>
+            </div>
+            <!-- Aqui se imprime la descripcion del programa-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Descricpción de la obra:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Descripción de la Obra_23" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Descripción de la Obra_23" }}</div>
+            </div>
+            <!-- Aqui se imprime la cantidad de beneficios-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Cantidad de beneficios:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Cantidad de beneficios_24" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Cantidad de beneficios_24" }}</div>
+            </div>
+            <!-- Aqui se imprime total en pesos de beneficios-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Total en pesos de los beneficios:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Total en pesos de los beneficios_25" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Total en pesos de los beneficios_25" }}</div>
+            </div>
+            <!-- Aqui se imprime la inversion federal-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Inversión federal:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Inversión federal_26" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Inversión federal_26" }}</div>
+            </div>
+            <!-- Aqui se imprime la inversion estatal-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Inversión estatal:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Inversión estatal_27" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Inversión estatal_27" }}</div>
+            </div>
+            <!-- Aqui se imprime la inversion municipal-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Inversión municipal:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Inversión municipal_28" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Inversión municipal_28" }}</div>
+            </div>
+            <!-- Aqui se imprime la inversion de otras fuentes-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Inversión de otras fuentes:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Inversión de otras fuentes_29" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Inversión de otras fuentes_29" }}</div>
+            </div>
+            <!-- Aqui se imprime fuentes que fondean-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Fuentes que fondean el recurso:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Fuentes que fondean el recurso_30" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Fuentes que fondean el recurso_30" }}</div>
+            </div>
+            <!-- Aqui se imprime fecha de inicio-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Fecha de inicio:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Fecha Inicio_33" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Fecha Inicio_33" }}</div>
+            </div>
+            <!-- Aqui se imprime fecha de fin-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Fecha de fin:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Fecha Fin_34" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Fecha Fin_34" }}</div>
+            </div>
+            <!-- Aqui se imprime la periocidad de la entrega del beneficio-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Periocidad de entrega del beneficio:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Periodicidad de entrega del beneficio_35" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Periodicidad de entrega del beneficio_35" }}</div>
+            </div>
+            <!-- Aqui se imprime el numero de entrega del beneficio-->
+            <div class="form-group has-error">
+                <label for="inputError" class="col-xs-12 col-sm-3 col-md-3 control-label no-padding-right">Número de entrega del beneficio:</label>
+                <div class="col-xs-12 col-sm-5">
+                    <span class="block input-icon input-icon-right">
+                    <input id="inputError" class="width-100" type="text" value="{{ registro | get_valor:"Número de la entrega del beneficio_36" }} ">
+                    <i class="ace-icon fa fa-times-circle"></i>
+                    </span>
+                </div>
+                <div class="help-block col-xs-12 col-sm-reset inline">{{ registro | get_descrip:"Número de la entrega del beneficio_36" }}</div>
+            </div>
+        </div>
+        <div class="widget-toolbox padding-8 clearfix">
+            <button class="btn btn-xs btn-success pull-right">
+                <span class="bigger-110">Enviar validaciones</span>
+
+                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+            </button>
+        </div>
+        </form>
+    </div>
+</div>
+{% endfor %}

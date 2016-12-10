@@ -29,3 +29,15 @@ class nuevoTrabajoForm(ModelForm):
             #'CantidadRegistros':forms.HiddenInput,
             #'JsonTrabajo':forms.HiddenInput
         }
+
+
+class formPoblacion(forms.Form):
+
+    SINO_CHOICES = (
+        ('SI', 'SI'),
+        ('NO', 'NO'),
+    )
+
+    multilocalidad = forms.Select(choices=SINO_CHOICES)
+    rfc = forms.CharField(max_length='13')
+    numerobeneficiados = forms.IntegerField
