@@ -1,0 +1,123 @@
+
+value="{{ registro | get_esvalido: "Hombres beneficiados_4" }} "
+
+
+
+value="{{ registro | get_esvalido:"Mujeres beneficiadas_5" }} "
+
+
+
+value="{{ registro | get_esvalido:"Viviendas beneficiadas_6" }} "
+
+
+
+value="{{ registro | get_esvalido:"Municipio donde se encuentra la obra_8" }} "
+
+
+value="{{ registro | get_valor:"Clave Municipio donde se encuentra la obra_7" }} "
+value="{{ registro | get_esvalido:"Clave Municipio donde se encuentra la obra_7" }} "
+{{ registro | get_descrip:"Clave Municipio donde se encuentra la obra_7" }}
+
+value="{{ registro | get_valor:"Clave Localidad donde se encuentra la obra_9" }} "
+value="{{ registro | get_esvalido:"Clave Localidad donde se encuentra la obra_9" }} "
+{{ registro | get_descrip:"Clave Localidad donde se encuentra la obra_9" }}
+
+
+value="{{ registro | get_esvalido:"Localidad donde se encuentra la obra_10" }} "
+
+
+
+value="{{ registro | get_esvalido:"Asentamiento humano_11" }} "
+
+
+
+value="{{ registro | get_esvalido:"Nombre vialidad_12" }} "
+
+
+
+value="{{ registro | get_esvalido:"Número Exterior_13" }} "
+
+
+
+value="{{ registro | get_esvalido:"Número Interior_14" }} "
+
+
+
+value="{{ registro | get_esvalido:"Código Postal_15" }} "
+
+
+
+value="{{ registro | get_esvalido:"Referencia del domicilio_16" }} "
+
+
+
+value="{{ registro | get_esvalido:"Dependencia que opera el programa_17" }} "
+
+
+value="{{ registro | get_valor:"Clave del programa_18" }} "
+value="{{ registro | get_esvalido:"Clave del programa_18" }} "
+{{ registro | get_descrip:"Clave del programa_18" }}
+
+
+value="{{ registro | get_esvalido:"Clave del subprograma_19" }} "
+
+
+
+value="{{ registro | get_esvalido:"Nombre del programa_20" }} "
+
+
+
+value="{{ registro | get_esvalido:"Tipo de apoyo_21" }} "
+
+
+
+value="{{ registro | get_esvalido:"Identificador de la Obra_22" }} "
+
+
+
+value="{{ registro | get_esvalido:"Descripción de la Obra_23" }} "
+
+
+value="{{ registro | get_valor:"Cantidad de beneficios_24" }} "
+value="{{ registro | get_esvalido:"Cantidad de beneficios_24" }} "
+{{ registro | get_descrip:"Cantidad de beneficios_24" }}
+
+value="{{ registro | get_valor:"Total en pesos de los beneficios_25" }} "
+value="{{ registro | get_esvalido:"Total en pesos de los beneficios_25" }} "
+{{ registro | get_descrip:"Total en pesos de los beneficios_25" }}
+
+value="{{ registro | get_valor:"Inversión federal_26" }} "
+value="{{ registro | get_esvalido:"Inversión federal_26" }} "
+{{ registro | get_descrip:"Inversión federal_26" }}
+
+value="{{ registro | get_valor:"Inversión estatal_27" }} "
+value="{{ registro | get_esvalido:"Inversión estatal_27" }} "
+{{ registro | get_descrip:"Inversión estatal_27" }}
+
+value="{{ registro | get_valor:"Inversión municipal_28" }} "
+value="{{ registro | get_esvalido:"Inversión municipal_28" }} "
+{{ registro | get_descrip:"Inversión municipal_28" }}
+
+value="{{ registro | get_valor:"Inversión de otras fuentes_29" }} "
+value="{{ registro | get_esvalido:"Inversión de otras fuentes_29" }} "
+{{ registro | get_descrip:"Inversión de otras fuentes_29" }}
+
+value="{{ registro | get_valor:"Fuentes que fondean el recurso_30" }} "
+value="{{ registro | get_esvalido:"Fuentes que fondean el recurso_30" }} "
+{{ registro | get_descrip:"Fuentes que fondean el recurso_30" }}
+
+value="{{ registro | get_valor:"Fecha Inicio_33" }} "
+value="{{ registro | get_esvalido:"Fecha Inicio_33" }} "
+{{ registro | get_descrip:"Fecha Inicio_33" }}
+
+value="{{ registro | get_valor:"Fecha Fin_34" }} "
+value="{{ registro | get_esvalido:"Fecha Fin_34" }} "
+{{ registro | get_descrip:"Fecha Fin_34" }}
+
+value="{{ registro | get_valor:"Periodicidad de entrega del beneficio_35" }} "
+value="{{ registro | get_esvalido:"Periodicidad de entrega del beneficio_35" }} "
+{{ registro | get_descrip:"Periodicidad de entrega del beneficio_35" }}
+
+value="{{ registro | get_valor:"Número de la entrega del beneficio_36" }} "
+value="{{ registro | get_esvalido:"Número de la entrega del beneficio_36" }} "
+{{ registro | get_descrip:"Número de la entrega del beneficio_36" }}
