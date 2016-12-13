@@ -14,7 +14,8 @@
         <form class="form-horizontal" method="post" action="">
         {% csrf_token %}
 
-        {{ formulario }}
+        {{ formulario.as_ul }}
+
 
         <div class="widget-toolbox padding-8 clearfix">
             <button class="btn btn-xs btn-success pull-right">

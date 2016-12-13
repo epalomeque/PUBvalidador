@@ -10,6 +10,7 @@ from forms import SignUpForm, nuevoTrabajoForm, formPoblacion
 from models import TrabajosRealizados
 #from django.core.files.uploadedfile import SimpleUploadedFile
 from csv_actions import *
+from django.forms import formset_factory
 
 
 # Create your views here.
@@ -97,7 +98,41 @@ def validar(request, trabajo_id):
                     return HttpResponseRedirect('/')
             # if a GET (or any other method) we'll create a blank form
             else:
-                formulario = formPoblacion()
+                datollos = {
+                    'registro':'123546',
+                    'multilocalidad':'123546',
+                    'rfc':'123546',
+                    'numerobeneficiados':'123546',
+                    'hombresbeneficiados':'123546',
+                    'mujeresbeneficiadas':'123546',
+                    'viviendasbeneficiadas':'123546',
+                    'municipiobeneficiado':'123546',
+                    'localidadbeneficiada':'123546',
+                    'asentamiento':'123546',
+                    'nombrevialidad':'123546',
+                    'numeroexterior':'123546',
+                    'numerointerior':'123546',
+                    'codigopostal':'123546',
+                    'referenciadomicilio':'123546',
+                    'dependencia':'123546',
+                    'claveprograma':'123546',
+                    'clavesubprograma':'123546',
+                    'tipoapoyo':'123546',
+                    'idobra':'123546',
+                    'descripcionobra':'123546',
+                    'cantbeneficios':'123546',
+                    'totalpesosbeneficios':'123546',
+                    'inversionfederal':'123546',
+                    'inversionestatal':'123546',
+                    'inversionmunicipal':'123546',
+                    'inversionotras':'123546',
+                    'fuentesrecurso':'123546',
+                    'fechainicio':'20160201',
+                    'fechafin':'20160301',
+                    'periodicidadentrega':'123546',
+                    'numeroentregabeneficio':'123546'
+                }
+                formulario = formPoblacion(datollos)
                 print 'El formulario en GET:'
                 print formulario
                 print '-*-'
