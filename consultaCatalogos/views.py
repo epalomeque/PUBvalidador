@@ -76,6 +76,7 @@ def validar(request, trabajo_id):
     # Abrir estatus del trabajo
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
     tipopadronid = trabajo.TipoPadron_id
+    print 'tipopadronid: ' + str(tipopadronid)
     anioejercicio = trabajo.AnioEjercicio
     trimperiodoid = trabajo.Trimestre.identPeriodo
     datos = {}
@@ -83,6 +84,10 @@ def validar(request, trabajo_id):
     if trabajo.Usuario == request.user:
         # Si el estatus es INCOMPLETO
         if trabajo.Estatus_id == 1:
+            print 'trabajo.Estatus_id = ' + str(trabajo.Estatus_id) + ' | ' + str(trabajo.Estatus)
+            datos = json.loads(trabajo.jsondata)
+            registros = datos.get('registros')
+            print registros
             print 'Request Method: ' + request.method
             if request.method == 'POST':
                 # create a form instance and populate it with data from the request:
@@ -98,49 +103,15 @@ def validar(request, trabajo_id):
                     return HttpResponseRedirect('/')
             # if a GET (or any other method) we'll create a blank form
             else:
-                datollos = {
-                    'registro':'123546',
-                    'multilocalidad':'123546',
-                    'rfc':'123546',
-                    'numerobeneficiados':'123546',
-                    'hombresbeneficiados':'123546',
-                    'mujeresbeneficiadas':'123546',
-                    'viviendasbeneficiadas':'123546',
-                    'municipiobeneficiado':'123546',
-                    'localidadbeneficiada':'123546',
-                    'asentamiento':'123546',
-                    'nombrevialidad':'123546',
-                    'numeroexterior':'123546',
-                    'numerointerior':'123546',
-                    'codigopostal':'123546',
-                    'referenciadomicilio':'123546',
-                    'dependencia':'123546',
-                    'claveprograma':'123546',
-                    'clavesubprograma':'123546',
-                    'tipoapoyo':'123546',
-                    'idobra':'123546',
-                    'descripcionobra':'123546',
-                    'cantbeneficios':'123546',
-                    'totalpesosbeneficios':'123546',
-                    'inversionfederal':'123546',
-                    'inversionestatal':'123546',
-                    'inversionmunicipal':'123546',
-                    'inversionotras':'123546',
-                    'fuentesrecurso':'123546',
-                    'fechainicio':'20160201',
-                    'fechafin':'20160301',
-                    'periodicidadentrega':'123546',
-                    'numeroentregabeneficio':'123546'
-                }
-                formulario = formPoblacion(datollos)
-                print 'El formulario en GET:'
-                print formulario
+                dato_inicial= ConvierteDatosDeFormset(registros, tipopadronid)
+                RegistroFormSet = formset_factory(formPoblacion,
+                                                  extra=trabajo.CantidadRegistros,
+                                                  max_num=3)
+                formset = RegistroFormSet(initial=dato_inicial)
+                print formset
+                # formulario = formPoblacion(dato_form)
                 print '-*-'
 
-            print 'trabajo.Estatus_id == 1 | Incompleto'
-            print trabajo.Estatus
-            datos = json.loads(trabajo.jsondata)
-            print datos.get('registros')
         # Si el estatus es COMPLETO
         elif trabajo.Estatus_id == 2:
             print 'trabajo.Estatus_id == 2 | Completo'
@@ -157,10 +128,10 @@ def validar(request, trabajo_id):
             # print datos.get('encabezados')
             estrucvalida = EstructuraArchivoEsValida(datos.get('encabezados'), tipopadronid)
             if estrucvalida:
-                print 'estructura valida'
+                # print 'estructura valida'
                 einiciales = ErroresIniciales(datos.get('registros'), tipopadronid, anioejercicio, trimperiodoid)
                 if not(einiciales):
-                    print 'Sin errores iniciales'
+                    # print 'Sin errores iniciales'
                     # GuardarRegistros(datos.get('registros'), tipopadronid, trabajo.pk)
                     trabajo.CantidadRegistros = len(datos.get('registros'))
                     trabajo.Estatus_id = 1
@@ -176,7 +147,7 @@ def validar(request, trabajo_id):
     data = {
         'trabajo': trabajo,
         'datos': datos,
-        'formulario': formulario
+        'formulario': formset
     }
 
     return render_to_response('validar.html', data, context_instance=RequestContext(request))

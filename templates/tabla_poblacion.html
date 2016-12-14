@@ -1,7 +1,5 @@
 {% load consulta_extras %}
 
-{% for registro in datos.registros %}
-
 <div class="space-12"></div>
 <div class="widget-box">
     <div class="widget-header">
@@ -14,8 +12,13 @@
         <form class="form-horizontal" method="post" action="">
         {% csrf_token %}
 
-        {{ formulario.as_ul }}
-
+        {{ formulario.management_form }}
+        {% for form in formulario %}
+            <ul>
+                <li>{{ form.registro }}</li>
+                <li>{{ form.multilocalidad }}</li>
+            </ul>
+        {% endfor %}
 
         <div class="widget-toolbox padding-8 clearfix">
             <button class="btn btn-xs btn-success pull-right">
@@ -27,4 +30,3 @@
         </form>
     </div>
 </div>
-{% endfor %}
