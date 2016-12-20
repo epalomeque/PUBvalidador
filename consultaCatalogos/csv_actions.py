@@ -3,6 +3,7 @@
 
 # import codecs
 import unicodecsv as csv
+from forms import SignUpForm, nuevoTrabajoForm, formPoblacion
 import json
 from models import FormatoPubPersona, FormatoPubActor, FormatoPubPoblacion
 
@@ -333,15 +334,15 @@ def ErroresIniciales(registros, TipoPadron_id, AnioEjercicio, TrimestreIdent):
     return valor
 
 
-def ConvierteDatosDeFormset(registros, TipoPadron_id):
-    datos_formset = list()
+def ObtenDatosEnLista(registros, TipoPadron_id):
+    datos_lista = list()
     if TipoPadron_id == 1:
         print 1
     if TipoPadron_id == 2:
         print 2
     if TipoPadron_id == 3:
         for registro in registros:
-            dato_form = {
+            dato_form = formPoblacion( {
                 'registro': registro.get(u'num_record'),
                 'multilocalidad': registro.get(u'Multilocalidad_1').get(u'valor'),
                 'rfc': registro.get(u'Registro Federal de Contribuyentes_2').get(u'valor'),
@@ -349,8 +350,10 @@ def ConvierteDatosDeFormset(registros, TipoPadron_id):
                 'hombresbeneficiados': registro.get(u'Hombres beneficiados_4').get(u'valor'),
                 'mujeresbeneficiadas': registro.get(u'Mujeres beneficiadas_5').get(u'valor'),
                 'viviendasbeneficiadas': registro.get(u'Viviendas beneficiadas_6').get(u'valor'),
-                'municipiobeneficiado': registro.get(u'Municipio donde se encuentra la obra_8').get(u'valor'),
-                'localidadbeneficiada': registro.get(u'Localidad donde se encuentra la obra_10').get(u'valor'),
+                #'municipiobeneficiado': registro.get(u'Municipio donde se encuentra la obra_8').get(u'valor'),
+                'municipiobeneficiado': int(registro.get(u'Clave Municipio donde se encuentra la obra_7').get(u'valor')),
+                #'localidadbeneficiada': registro.get(u'Localidad donde se encuentra la obra_10').get(u'valor'),
+                'localidadbeneficiada': int(registro.get(u'Clave Localidad donde se encuentra la obra_9').get(u'valor')),
                 'asentamiento': registro.get(u'Asentamiento humano_11').get(u'valor'),
                 'nombrevialidad': registro.get(u'Nombre vialidad_12').get(u'valor'),
                 'numeroexterior': registro.get(u'Número Exterior_13').get(u'valor'),
@@ -374,7 +377,9 @@ def ConvierteDatosDeFormset(registros, TipoPadron_id):
                 'fechafin': registro.get(u'Fecha Fin_34').get(u'valor'),
                 'periodicidadentrega': registro.get(u'Periodicidad de entrega del beneficio_35').get(u'valor'),
                 'numeroentregabeneficio': registro.get(u'Número de la entrega del beneficio_36').get(u'valor')
-            }
-            datos_formset.append(dato_form)
+            } )
+            #print dato_form
+            #print '--'
+            datos_lista.append(dato_form)
 
-    return datos_formset
+    return datos_lista
