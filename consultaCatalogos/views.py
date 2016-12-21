@@ -82,8 +82,12 @@ def validar(request, trabajo_id):
     trimperiodoid = trabajo.Trimestre.identPeriodo
     # Obtengo los datos del JSON
     datos = json.loads(trabajo.jsondata)
-    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
-    #if not(trabajo.modeloConvertido):
+    if not (trabajo.modeloConvertido):
+        dato_inicial = ObtenDatosEnListaInicial(datos.get('registros'), tipopadronid)
+    else:
+        print 'nada'
+        dato_inicial = ObtenDatosEnListaInicial(datos.get('registros'), tipopadronid)
+    #
     #    datos = json.loads(trabajo.jsondata)
     #    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
     #    trabajo.modeloConvertido = True
@@ -102,9 +106,14 @@ def validar(request, trabajo_id):
                 formulario = formPoblacion(request.POST)
 
                 registro = int(formulario['registro'].value())
-                print registro - 1
 
                 dato_inicial[registro-1] = formulario
+
+                # for row in f.fields.values(): print(row)
+                for record in dato_inicial:
+                    print record.fields['registro']
+                    print record.fields['multilocalidad']
+                    print record.fields['rfc']
                 #trabajo.jsondata = json.dumps(dato_inicial)
                 #trabajo.save()
 

@@ -178,7 +178,7 @@ def import_csv(filename):
         i = i + 1
         diccionario['num_record'] = i
         for celda, nombre in zip(registro, encabezados):
-            diccionario[nombre] = {'valor':celda,'esvalido':False, 'descrip':''}
+            diccionario[nombre] = {'valor':celda,'esvalido':False}
         registrosDicc.append(diccionario)
         diccionario = {}
         # print registrosDicc
@@ -335,7 +335,7 @@ def ErroresIniciales(registros, TipoPadron_id, AnioEjercicio, TrimestreIdent):
     return valor
 
 
-def ObtenDatosEnLista(registros, TipoPadron_id):
+def ObtenDatosEnListaInicial(registros, TipoPadron_id):
     datos_lista = list()
     if TipoPadron_id == 1:
         print 1
