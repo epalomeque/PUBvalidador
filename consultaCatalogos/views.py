@@ -83,10 +83,12 @@ def validar(request, trabajo_id):
     # Obtengo los datos del JSON
     datos = json.loads(trabajo.jsondata)
     if not (trabajo.modeloConvertido):
+        # si es la primera vez que se inica el proceso,
         dato_inicial = ObtenDatosEnListaInicial(datos.get('registros'), tipopadronid)
     else:
-        print 'nada'
-        dato_inicial = ObtenDatosEnListaInicial(datos.get('registros'), tipopadronid)
+
+        print 'trabajo.modeloConvertido = ' + str(trabajo.modeloConvertido)
+        dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
     #
     #    datos = json.loads(trabajo.jsondata)
     #    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
@@ -105,32 +107,33 @@ def validar(request, trabajo_id):
                 # Crea una instancia del formulario y rellenarlo con los datos del request.POST
                 formulario = formPoblacion(request.POST)
 
-                print formulario.as_p()
+                # comprobando el metodo de acceso a los datos en el formulario
+                print 'XO' * 25
+                print 'claveprograma.value() = ' + str(formulario['claveprograma'].value())
+                print formulario['claveprograma'].errors
+                print 'XO' * 25
 
-                registro = int(formulario['registro'].value())
-                print registro
+                # obteniendo el numero de registro en el diccionario de datos
+                registro = int(formulario['registro'].value()) - 1
+                print 'formulario[registro].value() = ' + str(formulario['registro'].value())
+                print 'registro = ' + str(registro)
 
-                dato_inicial[registro-1] = formulario
-
-                # for row in f.fields.values(): print(row)
-                for record in dato_inicial:
-                    print record
-                    #print record.fields['registro']
-                    #print record.fields['multilocalidad']
-                    #print record.fields['rfc']
-                #trabajo.jsondata = json.dumps(dato_inicial)
-                #trabajo.save()
+                # si hay cambio en los datos del formulario grabarlos en la lista de datos iniciales y convertirlas al json
+                if formulario.has_changed():
+                    # print("The following fields changed:\n%s" % ",\n ".join(formulario.changed_data))
+                    dato_inicial[registro] = formulario
 
                 # check whether it's valid:
                 if formulario.is_valid():
                     print 'llegue aqui'
-
-                    if dato_inicial[registro-1] == formulario:
+                    print str(request.get_host())
+                    print request.get_full_path()
+                    if dato_inicial[registro] == formulario:
                         print 'estan bien pinche iguales'
                     # process the data in form.cleaned_data as required
                     # ...
                     # redirect to a new URL:
-                    return HttpResponseRedirect('/')
+                    return HttpResponseRedirect(request.get_full_path())
             # if a GET (or any other method) we'll create a blank form
             else:
                 page = request.GET.get('page')
