@@ -7,202 +7,283 @@
     <div class="widget-header">
         <h5 class="widget-title smaller">Registro no. {{ form.registro.value }}</h5>
         <div class="widget-toolbar">
+        {% if form.is_valid %}
+            <span class="badge badge-success">Registro v&aacute;lido</span>
+        {% else %}
             <span class="badge badge-danger">Tiene validaciones pendientes</span>
+        {% endif %}
         </div>
     </div>
     <div class="widget-body">
+        <form id="record-{{ form.registro.value }}" class="form-horizontal" method="post" action="" name="record-{{ form.registro.value }}">
+        {% csrf_token %}
+
         <div class="widget-main">
-            <form id="record-{{ form.registro.value }}" class="form-horizontal" method="post" action="" name="record-{{ form.registro.value }}">
-            {% csrf_token %}
-
-            <div class="form-group">
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.multilocalidad.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right" >{{ form.multilocalidad.label }}: </label>
-                <div class="col-sm-6" >{{ form.multilocalidad | addcss:'form-control' }}</div>
-                <div class="col-sm-3" >{{ form.multilocalidad.errors }}</div>
+                <div class="col-sm-9" >{{ form.multilocalidad | addcss:'form-control' }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12 " >{{ form.multilocalidad.errors }}</div>
             </div>
-
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.rfc.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.rfc.label }}: </label>
-                <div class="col-sm-6">{{ form.rfc | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.rfc.errors }}</div>
+                <div class="col-sm-9">{{ form.rfc | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12"><p class="text-warning">{{ form.rfc.errors }}</p></div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.numerobeneficiados.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.numerobeneficiados.label }}: </label>
-                <div class="col-sm-6">{{ form.numerobeneficiados | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.numerobeneficiados.errors }}</div>
+                <div class="col-sm-9">{{ form.numerobeneficiados | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.numerobeneficiados.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.hombresbeneficiados.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.hombresbeneficiados.label }}: </label>
-                <div class="col-sm-6">{{ form.hombresbeneficiados | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.hombresbeneficiados.errors }}</div>
+                <div class="col-sm-9">{{ form.hombresbeneficiados | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.hombresbeneficiados.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.mujeresbeneficiada.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.mujeresbeneficiadas.label }}: </label>
-                <div class="col-sm-6">{{ form.mujeresbeneficiadas | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.mujeresbeneficiada.errors }}</div>
+                <div class="col-sm-9">{{ form.mujeresbeneficiadas | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.mujeresbeneficiada.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.viviendasbeneficiadas.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.viviendasbeneficiadas.label }}: </label>
-                <div class="col-sm-6">{{ form.viviendasbeneficiadas | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.viviendasbeneficiadas.errors }}</div>
+                <div class="col-sm-9">{{ form.viviendasbeneficiadas | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.viviendasbeneficiadas.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.municipiobeneficiado.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.municipiobeneficiado.label }}: </label>
-                <div class="col-sm-6">{{ form.municipiobeneficiado | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.municipiobeneficiado.errors }}</div>
+                <div class="col-sm-9">{{ form.municipiobeneficiado | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.municipiobeneficiado.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.localidadbeneficiada.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.localidadbeneficiada.label }}: </label>
-                <div class="col-sm-6">{{ form.localidadbeneficiada | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.localidadbeneficiada.errors }}</div>
+                <div class="col-sm-9">{{ form.localidadbeneficiada | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.localidadbeneficiada.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.asentamiento.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.asentamiento.label }}: </label>
-                <div class="col-sm-6">{{ form.asentamiento | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.asentamiento.errors }}</div>
+                <div class="col-sm-9">{{ form.asentamiento | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.asentamiento.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.nombrevialidad.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.nombrevialidad.label }}: </label>
-                <div class="col-sm-6">{{ form.nombrevialidad | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.nombrevialidad.errors }}</div>
+                <div class="col-sm-9">{{ form.nombrevialidad | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.nombrevialidad.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.numeroexterior.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.numeroexterior.label }}: </label>
-                <div class="col-sm-6">{{ form.numeroexterior | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.numeroexterior.errors }}</div>
+                <div class="col-sm-9">{{ form.numeroexterior | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.numeroexterior.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.numerointerior.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.numerointerior.label }}: </label>
-                <div class="col-sm-6">{{ form.numerointerior | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.numerointerior.errors }}</div>
+                <div class="col-sm-9">{{ form.numerointerior | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.numerointerior.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.codigopostal.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.codigopostal.label }}: </label>
-                <div class="col-sm-6">{{ form.codigopostal | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.codigopostal.errors }}</div>
+                <div class="col-sm-9">{{ form.codigopostal | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.codigopostal.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.referenciadomicilio.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.referenciadomicilio.label }}: </label>
-                <div class="col-sm-6">{{ form.referenciadomicilio | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.referenciadomicilio.errors }}</div>
+                <div class="col-sm-9">{{ form.referenciadomicilio | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.referenciadomicilio.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.dependencia.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.dependencia.label }}: </label>
-                <div class="col-sm-6">{{ form.dependencia | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.dependencia.errors }}</div>
+                <div class="col-sm-9">{{ form.dependencia | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.dependencia.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.claveprograma.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.claveprograma.label }}: </label>
-                <div class="col-sm-6">{{ form.claveprograma | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.claveprograma.errors }}</div>
+                <div class="col-sm-9">{{ form.claveprograma | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.claveprograma.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.clavesubprograma.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.clavesubprograma.label }}: </label>
-                <div class="col-sm-6">{{ form.clavesubprograma | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.clavesubprograma.errors }}</div>
+                <div class="col-sm-9">{{ form.clavesubprograma | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.clavesubprograma.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.tipoapoyo.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.tipoapoyo.label }}: </label>
-                <div class="col-sm-6">{{ form.tipoapoyo | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.tipoapoyo.errors }}</div>
+                <div class="col-sm-9">{{ form.tipoapoyo | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.tipoapoyo.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.idobra.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.idobra.label }}: </label>
-                <div class="col-sm-6">{{ form.idobra | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.idobra.errors }}</div>
+                <div class="col-sm-9">{{ form.idobra | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.idobra.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.descripcionobra.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.descripcionobra.label }}: </label>
-                <div class="col-sm-6">{{ form.descripcionobra | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.descripcionobra.errors }}</div>
+                <div class="col-sm-9">{{ form.descripcionobra | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.descripcionobra.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.cantbeneficios.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.cantbeneficios.label }}: </label>
-                <div class="col-sm-6">{{ form.cantbeneficios | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.cantbeneficios.errors }}</div>
+                <div class="col-sm-9">{{ form.cantbeneficios | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.cantbeneficios.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.totalpesosbeneficios.errors %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.totalpesosbeneficios.label }}: </label>
-                <div class="col-sm-6">{{  form.totalpesosbeneficios | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.totalpesosbeneficios.errors }}</div>
+                <div class="col-sm-9">{{  form.totalpesosbeneficios | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.totalpesosbeneficios.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.inversionfederal.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.inversionfederal.label }}: </label>
-                <div class="col-sm-6">{{ form.inversionfederal | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.inversionfederal.errors }}</div>
+                <div class="col-sm-9">{{ form.inversionfederal | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.inversionfederal.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.inversionestatal.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.inversionestatal.label }}: </label>
-                <div class="col-sm-6">{{ form.inversionestatal | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.inversionestatal.errors }}</div>
+                <div class="col-sm-9">{{ form.inversionestatal | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.inversionestatal.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.inversionmunicipal.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.inversionmunicipal.label }}: </label>
-                <div class="col-sm-6">{{ form.inversionmunicipal | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.inversionmunicipal.errors }}</div>
+                <div class="col-sm-9">{{ form.inversionmunicipal | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.inversionmunicipal.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.inversionotras.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.inversionotras.label }}: </label>
-                <div class="col-sm-6">{{ form.inversionotras | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.inversionotras.errors }}</div>
+                <div class="col-sm-9">{{ form.inversionotras | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.inversionotras.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.fuentesrecurso.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.fuentesrecurso.label }}: </label>
-                <div class="col-sm-6">{{ form.fuentesrecurso | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.fuentesrecurso.errors }}</div>
+                <div class="col-sm-9">{{ form.fuentesrecurso | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.fuentesrecurso.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.fechainicio.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.fechainicio.label }}: </label>
-                <div class="col-sm-6">{{ form.fechainicio | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.fechainicio.errors }}</div>
+                <div class="col-sm-9 input-group">{{ form.fechainicio | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.fechainicio.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.fechafin.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.fechafin.label }}: </label>
-                <div class="col-sm-6">{{ form.fechafin | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.fechafin.errors }}</div>
+                <div class="col-sm-9 input-group">{{ form.fechafin | addcss:'form-control' }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.fechafin.errors }}</div>
             </div>
-            <div class="form-group">
+            <div class="col-sm-6 form-group {% if form.periodicidadentrega.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.periodicidadentrega.label }}: </label>
-                <div class="col-sm-6">{{ form.periodicidadentrega | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.periodicidadentrega.errors }}</div>
+                <div class="col-sm-9">{{ form.periodicidadentrega | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.periodicidadentrega.errors }}</div>
             </div>
-            <div class="form-group">
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form.numeroentregabeneficio.errors  %}has-error{% else %}has-success{% endif %} ">
                 <label class="col-sm-3 control-label no-padding-right">{{ form.numeroentregabeneficio.label }}: </label>
-                <div class="col-sm-6">{{ form.numeroentregabeneficio | addcss:'form-control'  }}</div>
-                <div class="col-sm-3">{{ form.numeroentregabeneficio.errors }}</div>
+                <div class="col-sm-9">{{ form.numeroentregabeneficio | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12">{{ form.numeroentregabeneficio.errors }}</div>
             </div>
-
-
+        </div>
 
         </div>
+
+        {{ form.registro }}
 
         <div class="widget-toolbox padding-8 clearfix">
-            <button class="btn btn-xs btn-success pull-right">
-                <span class="bigger-110">Enviar validaciones</span>
+        <button class="btn btn-xs btn-success pull-right">
+            <span class="bigger-110">Enviar validaciones</span>
 
-                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-            </button>
+            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+        </button>
         </div>
 
-
         </form>
+
     </div>
 </div>
 
 {% endfor %}
 
-<div class="pagination">
-    <span class="step-links">
+<div class="col-sm-12">
+
+        <ul class="pagination">
         {% if formulario.has_previous %}
-            <a href="?page={{ formulario.previous_page_number }}">previous</a>
+            <li><a href="?page={{ formulario.previous_page_number }}">Previo</a></li>
         {% endif %}
-
-        <span class="current">
-            Page {{ formulario.number }} of {{ formulario.paginator.num_pages }}.
-        </span>
-
+        {% for pagina in paginador.page_range %}
+            <li><a href="?page={{ pagina }}">{{ pagina }}</a></li>
+        {% endfor %}
         {% if formulario.has_next %}
-            <a href="?page={{ formulario.next_page_number }}">next</a>
+            <li><a href="?page={{ formulario.next_page_number }}">Siguiente</a></li>
         {% endif %}
-    </span>
+        </ul>
+
 </div>

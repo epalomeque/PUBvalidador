@@ -80,57 +80,47 @@ def validar(request, trabajo_id):
     # print 'tipopadronid: ' + str(tipopadronid)
     anioejercicio = trabajo.AnioEjercicio
     trimperiodoid = trabajo.Trimestre.identPeriodo
+    # Obtengo los datos del JSON
     datos = json.loads(trabajo.jsondata)
+    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
+    #if not(trabajo.modeloConvertido):
+    #    datos = json.loads(trabajo.jsondata)
+    #    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
+    #    trabajo.modeloConvertido = True
+        #trabajo.jsondata = json.dumps(dato_inicial)
+    #    trabajo.save()
+    #else:
+    #    dato_inicial = json.loads(trabajo.jsondata)
+    page = ''
 
     if trabajo.Usuario == request.user:
         # Si el estatus es INCOMPLETO
         if trabajo.Estatus_id == 1:
-            # print 'trabajo.Estatus_id = ' + str(trabajo.Estatus_id) + ' | ' + str(trabajo.Estatus)
-            dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
-            # print registros
-            # print 'Request Method: ' + request.method
+
             if request.method == 'POST':
-                # create a form instance and populate it with data from the request:
-                formulario = formPoblacion()
-                print 'El formulario en POST:'
-                print formulario
-                print '-*-'
+                # Crea una instancia del formulario y rellenarlo con los datos del request.POST
+                formulario = formPoblacion(request.POST)
+
+                registro = int(formulario['registro'].value())
+                print registro - 1
+
+                dato_inicial[registro-1] = formulario
+                #trabajo.jsondata = json.dumps(dato_inicial)
+                #trabajo.save()
+
                 # check whether it's valid:
                 if formulario.is_valid():
-                    print  'llegue aqui'
+                    print 'llegue aqui'
+
+                    if dato_inicial[registro-1] == formulario:
+                        print 'estan bien pinche iguales'
                     # process the data in form.cleaned_data as required
                     # ...
                     # redirect to a new URL:
                     return HttpResponseRedirect('/')
             # if a GET (or any other method) we'll create a blank form
             else:
-                # inicializando paginador
-                p = Paginator(dato_inicial, 3)
-                print '-- Paginador --'
-                print p.count
-                print p.num_pages
-                print p.page_range
-                print '-- paginador --'
-                #page1 = p.page(1)
-                #page1.object_list
-
                 page = request.GET.get('page')
-
-                # RegistroFormSet = formset_factory(formPoblacion,
-                #                                  extra=trabajo.CantidadRegistros)#,
-                #                                  #max_num=3)
-                # formset = RegistroFormSet(initial=dato_inicial)
-                # print formset
-                # formulario = formPoblacion(dato_form)
-                try:
-                    records = p.page(page)
-                except PageNotAnInteger:
-                    # If page is not an integer, deliver first page.
-                    records = p.page(1)
-                except EmptyPage:
-                    # If page is out of range (e.g. 9999), deliver last page of results.
-                    records = p.page(p.num_pages)
-                # print 'records-*-'
 
         # Si el estatus es COMPLETO
         elif trabajo.Estatus_id == 2:
@@ -164,10 +154,23 @@ def validar(request, trabajo_id):
     else:
         return HttpResponseRedirect('/noautorizado')
 
+    # Iniciamos el paginador
+    p = Paginator(dato_inicial, 3)
+
+    try:
+        records = p.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        records = p.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        records = p.page(p.num_pages)
+
     data = {
         'trabajo': trabajo,
         'datos': datos,
-        'formulario': records
+        'formulario': records,
+        'paginador': p
     }
 
     return render_to_response('validar.html', data, context_instance=RequestContext(request))

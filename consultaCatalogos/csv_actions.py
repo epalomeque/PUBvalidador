@@ -4,12 +4,13 @@
 # import codecs
 import unicodecsv as csv
 from forms import SignUpForm, nuevoTrabajoForm, formPoblacion
+from django.utils.encoding import smart_text, smart_unicode, smart_bytes, smart_str, force_text
 import json
 from models import FormatoPubPersona, FormatoPubActor, FormatoPubPoblacion
 
 # import csv
 import sys
-from django.utils.encoding import smart_text, smart_unicode, smart_bytes, smart_str, force_text
+
 # from django.utils import timezone
 # from consultaCatalogos.models import FormatoPubActor, FormatoPubPoblacion, FormatoPubPersona
 
@@ -360,26 +361,24 @@ def ObtenDatosEnLista(registros, TipoPadron_id):
                 'numerointerior': registro.get(u'Número Interior_14').get(u'valor'),
                 'codigopostal': registro.get(u'Código Postal_15').get(u'valor'),
                 'referenciadomicilio': registro.get(u'Referencia del domicilio_16').get(u'valor'),
-                'dependencia': registro.get(u'Dependencia que opera el programa_17').get(u'valor'),
+                'dependencia': smart_bytes(registro.get(u'Dependencia que opera el programa_17').get(u'valor')),
                 'claveprograma': registro.get(u'Nombre del programa_20').get(u'valor'),
                 'clavesubprograma': registro.get(u'Clave del subprograma_19').get(u'valor'),
-                'tipoapoyo': registro.get(u'Tipo de apoyo_21').get(u'valor'),
+                'tipoapoyo': smart_bytes(registro.get(u'Tipo de apoyo_21').get(u'valor')),
                 'idobra': registro.get(u'Identificador de la Obra_22').get(u'valor'),
-                'descripcionobra': registro.get(u'Descripción de la Obra_23').get(u'valor'),
+                'descripcionobra': smart_bytes(registro.get(u'Descripción de la Obra_23').get(u'valor')),
                 'cantbeneficios': registro.get(u'Cantidad de beneficios_24').get(u'valor'),
                 'totalpesosbeneficios': registro.get(u'Total en pesos de los beneficios_25').get(u'valor'),
                 'inversionfederal': registro.get(u'Inversión federal_26').get(u'valor'),
                 'inversionestatal': registro.get(u'Inversión estatal_27').get(u'valor'),
                 'inversionmunicipal': registro.get(u'Inversión municipal_28').get(u'valor'),
                 'inversionotras': registro.get(u'Inversión de otras fuentes_29').get(u'valor'),
-                'fuentesrecurso': registro.get(u'Fuentes que fondean el recurso_30').get(u'valor'),
+                'fuentesrecurso': smart_bytes(registro.get(u'Fuentes que fondean el recurso_30').get(u'valor')),
                 'fechainicio': registro.get(u'Fecha Inicio_33').get(u'valor'),
                 'fechafin': registro.get(u'Fecha Fin_34').get(u'valor'),
                 'periodicidadentrega': registro.get(u'Periodicidad de entrega del beneficio_35').get(u'valor'),
                 'numeroentregabeneficio': registro.get(u'Número de la entrega del beneficio_36').get(u'valor')
             } )
-            #print dato_form
-            #print '--'
             datos_lista.append(dato_form)
 
     return datos_lista

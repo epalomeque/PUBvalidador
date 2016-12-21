@@ -31,7 +31,7 @@ class Cat_Fuentes(models.Model):
     descripcionFuentes = models.CharField(max_length=35)
 
     def __unicode__(self):
-        return self.descripcionFuentes
+        return '%s | %s' % (self.identFuentes, self.descripcionFuentes)
 
 
 class Cat_Edocivil(models.Model):
@@ -72,7 +72,7 @@ class Cat_Municipio(models.Model):
     idEstado = models.ForeignKey(Cat_Estados)
 
     def __unicode__(self):
-        return self.nombreMunicipio
+        return '%s | %s' % (self.identMunicipio, self.nombreMunicipio)
 
 
 class Cat_Localidad(models.Model):
@@ -81,7 +81,7 @@ class Cat_Localidad(models.Model):
     idMunicipio = models.ForeignKey(Cat_Municipio)
 
     def __unicode__(self):
-        return self.nombreLocalidad
+        return '%s | %s' % (self.identLocalidad, self.nombreLocalidad)
 
 
 class Cat_CodigoPostal(models.Model):
@@ -97,7 +97,7 @@ class Cat_Asentamiento(models.Model):
     nombreAsentamiento = models.CharField(max_length=50)
 
     def __unicode__(self):
-        return self.nombreAsentamiento
+        return '%s | %s' % (self.identAsentamiento, self.nombreAsentamiento)
 
 
 class Cat_Dependencias(models.Model):
@@ -105,16 +105,17 @@ class Cat_Dependencias(models.Model):
      nombreDependencia = models.CharField(max_length=150)
 
      def __unicode__(self):
-         return self.nombreDependencia
+         return '%s | %s' % (self.identDependencia, self.nombreDependencia)
 
 
 class Cat_Programas(models.Model):
     identPrograma = models.CharField(max_length=10)
     nombrePrograma = models.CharField(max_length=80)
     descripPrograma = models.TextField(blank=True)
+    idDependencia = models.ForeignKey(Cat_Dependencias)
 
     def __unicode__(self):
-        return self.nombrePrograma
+        return '%s | %s' % (self.identPrograma, self.nombrePrograma)
 
 
 class Cat_Subprogramas(models.Model):
@@ -149,7 +150,7 @@ class Cat_Frecuencia(models.Model):
     descripFrecuencia = models.CharField (max_length=45, blank=True)
 
     def __unicode__(self):
-        return self.nombreFrecuencia
+        return '%s | %s' % (self.identFrecuencia, self.nombreFrecuencia)
 
 
 class Cat_TipoPadron(models.Model):
@@ -178,6 +179,7 @@ class TrabajosRealizados(models.Model):
     Trimestre = models.ForeignKey(Cat_Periodos, default='')
     CantidadRegistros = models.IntegerField(default=0)
     jsondata = models.TextField(default='')
+    modeloConvertido = models.BooleanField(default=False)
 
     def __unicode__(self):
         return 'ID: %s | Archivo: %s | Usuario: %s' % (self.pk, self.archivoRelacionado, self.Usuario)

@@ -4,7 +4,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-#from django.forms import *
+#from django.forms import widgets
 from django.forms.extras import SelectDateWidget
 from consultaCatalogos.models import TrabajosRealizados, Cat_Municipio, Cat_Localidad
 from consultaCatalogos.models import *
@@ -45,7 +45,7 @@ class formPoblacion(forms.Form):
         ('NO', 'NO'),
     )
 
-    registro = forms.IntegerField(label='Registro No.')
+    registro = forms.IntegerField(label='Registro No.', widget=forms.HiddenInput)
     # Multilocalidad_1
     multilocalidad = forms.ChoiceField(choices=SINO_CHOICES, label='Multilocalidad')
     # Registro Federal de Contribuyentes_2
@@ -65,7 +65,7 @@ class formPoblacion(forms.Form):
     # Localidad donde se encuentra la obra_10
     localidadbeneficiada = forms.ModelChoiceField(queryset=Cat_Localidad.objects.all(), to_field_name="identLocalidad",empty_label="(Ninguno)", label='Localidad')
     # Asentamiento humano_11
-    asentamiento = forms.ModelChoiceField(queryset=Cat_Asentamiento.objects.all(), label='Tipo de asentamiento')
+    asentamiento = forms.ModelChoiceField(queryset=Cat_Asentamiento.objects.all(), to_field_name="nombreAsentamiento", label='Tipo de asentamiento')
     # Nombre vialidad_12
     nombrevialidad = forms.CharField(max_length=250, label='Nombre de la vialidad')
     # Numero Exterior_13
@@ -77,18 +77,18 @@ class formPoblacion(forms.Form):
     # Referencia del domicilio_16
     referenciadomicilio = forms.CharField(max_length=250, label='Referencia del domicilio')
     # Dependencia que opera el programa_17
-    dependencia = forms.ModelChoiceField(queryset=Cat_Dependencias.objects.all(), label='Dependencia')
+    dependencia = forms.ModelChoiceField(queryset=Cat_Dependencias.objects.all(), to_field_name='nombreDependencia', label='Dependencia')
     # Clave del programa_18
     # Nombre del programa_20
     claveprograma = forms.ModelChoiceField(queryset=Cat_Programas.objects.all(), label='Clave del programa')
     # Clave del subprograma_19
-    clavesubprograma = forms.ModelChoiceField(queryset=Cat_Subprogramas.objects.all(), label='Clave del subprograma')
+    clavesubprograma = forms.ModelChoiceField(queryset=Cat_Subprogramas.objects.all(), label='Clave del subprograma', required=False)
     # Tipo de apoyo_21
-    tipoapoyo = forms.ModelChoiceField(queryset=Cat_TipoApoyo.objects.all(), label='Tipo de apoyo')
+    tipoapoyo = forms.ModelChoiceField(queryset=Cat_TipoApoyo.objects.all(), to_field_name='identTipoApoyo', label='Tipo de apoyo')
     # Identificador de la Obra_22
     idobra = forms.CharField(max_length=15, label='Identificador de la obra')
     # Descripcion de la Obra_23
-    descripcionobra = forms.CharField(widget=forms.Textarea, label=u'Descripción de la obra')
+    descripcionobra = forms.CharField(widget=forms.Textarea(attrs={'rows':'4'}), label=u'Descripción de la obra')
     # Cantidad de beneficios_24
     cantbeneficios = forms.IntegerField(label='Cantidad de beneficios')
     # Total en pesos de los beneficios_25
@@ -102,16 +102,16 @@ class formPoblacion(forms.Form):
     # Inversion de otras fuentes_29
     inversionotras = forms.IntegerField(label=u'Inversión de otras fuentes')
     # Fuentes que fondean el recurso_30
-    fuentesrecurso = forms.ModelChoiceField(queryset=Cat_Fuentes.objects.all(), label='Fuentes que fondean el recurso')
+    fuentesrecurso = forms.ModelChoiceField(queryset=Cat_Fuentes.objects.all(), to_field_name='identFuentes',label='Fuentes que fondean el recurso')
     # Trimestre_31
     #Trimestre = models.ForeignKey(Cat_Periodos)
     # Anio de ejercicio_32
     #AnioEjercicio = models.ForeignKey(Cat_AnioEjercicio)
     # Fecha Inicio_33
-    fechainicio = forms.DateField(widget=SelectDateWidget(empty_label="Nothing"), label='Fecha de inicio')
+    fechainicio = forms.DateField(widget=SelectDateWidget(), label='Fecha de inicio')
     # Fecha Fin_34
-    fechafin = forms.DateField(label=u'Fecha de finalización')
+    fechafin = forms.DateField(widget=SelectDateWidget(), label=u'Fecha de finalización')
     # Periodicidad de entrega del beneficio_35
-    periodicidadentrega = forms.ModelChoiceField(queryset=Cat_Frecuencia.objects.all(), label='Periocidad de entrega')
+    periodicidadentrega = forms.ModelChoiceField(queryset=Cat_Frecuencia.objects.all(), to_field_name='identFrecuencia', label='Periocidad de entrega')
     # Numero de la entrega del beneficio_36
     numeroentregabeneficio = forms.IntegerField(label='No. de entrega')
