@@ -105,15 +105,19 @@ def validar(request, trabajo_id):
                 # Crea una instancia del formulario y rellenarlo con los datos del request.POST
                 formulario = formPoblacion(request.POST)
 
+                print formulario.as_p()
+
                 registro = int(formulario['registro'].value())
+                print registro
 
                 dato_inicial[registro-1] = formulario
 
                 # for row in f.fields.values(): print(row)
                 for record in dato_inicial:
-                    print record.fields['registro']
-                    print record.fields['multilocalidad']
-                    print record.fields['rfc']
+                    print record
+                    #print record.fields['registro']
+                    #print record.fields['multilocalidad']
+                    #print record.fields['rfc']
                 #trabajo.jsondata = json.dumps(dato_inicial)
                 #trabajo.save()
 
