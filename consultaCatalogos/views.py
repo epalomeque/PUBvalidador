@@ -85,11 +85,16 @@ def validar(request, trabajo_id):
         anioejercicio = trabajo.AnioEjercicio # obtengo el anio de ejercicio
         trimperiodoid = trabajo.Trimestre.identPeriodo # obtengo el trimestre registrado
         Estatus_id = trabajo.Estatus_id
-        datos = json.loads(trabajo.jsondata) # Obtengo los datos del JSON
+        if trabajo.jsondata:
+            datos = json.loads(trabajo.jsondata) # Obtengo los datos del JSON
+            dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid, False)
+        else:
+            datos = list()
+            dato_inicial = list()
 
         # si es la primera vez que se inica el proceso, se toman los datos originales,
         # de otro modo se leeen con el esquema actualizado
-        dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid, False)#trabajo.modeloConvertido)
+
         #
         #    datos = json.loads(trabajo.jsondata)
         #    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
@@ -208,8 +213,6 @@ def validar(request, trabajo_id):
                 }
 
                 return render_to_response('home.html', userData, context_instance=RequestContext(request))
-
-
 
     else:
         return HttpResponseRedirect('/noautorizado')

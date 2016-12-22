@@ -292,11 +292,11 @@ def ErroresColumnaAnio(anio, registros, tipo_padron):
     errores = 0
 
     for registro in registros:
-        if not(str(registro[campo]['valor']) == str(anio)):
+        if not(str(registro[campo]['VALOR']) == str(anio)):
             # print registro[campo]['valor']
             errores += 1
-        else:
-            registro[campo]['esvalido'] = True
+        # else:
+            # registro[campo]['esvalido'] = True
             # print registro[campo]['esvalido']
     # print '*' * 50
     return errores
@@ -310,11 +310,11 @@ def ErroresColumnaTrimestre(trimestre, registros, tipo_padron):
     errores = 0
 
     for registro in registros:
-        if not(str(registro[campo]['valor'].upper()) == str(trimestre.upper())):
+        if not(str(registro[campo]['VALOR'].upper()) == str(trimestre.upper())):
             # print registro[campo]
             errores += 1
-        else:
-            registro[campo]['esvalido'] = True
+        # else:
+            # registro[campo]['esvalido'] = True
             # print registro[campo]['esvalido']
 
     # print '*' * 50
