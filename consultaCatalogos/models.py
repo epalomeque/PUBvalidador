@@ -180,6 +180,9 @@ class TrabajosRealizados(models.Model):
     CantidadRegistros = models.IntegerField(default=0)
     jsondata = models.TextField(default='')
     modeloConvertido = models.BooleanField(default=False)
+    estructura_valida = models.BooleanField(default=False)
+    anio_valido = models.BooleanField(default=False)
+    trimestre_valido = models.BooleanField(default=False)
 
     def __unicode__(self):
         return 'ID: %s | Archivo: %s | Usuario: %s' % (self.pk, self.archivoRelacionado, self.Usuario)

@@ -69,9 +69,9 @@ class formPoblacion(forms.Form):
     # Nombre vialidad_12
     nombrevialidad = forms.CharField(max_length=250, label='Nombre de la vialidad')
     # Numero Exterior_13
-    numeroexterior = forms.CharField(max_length=5, label='No. Exterior')
+    numeroexterior = forms.CharField(max_length=5, label='No.Exterior')
     # Numero Interior_14
-    numerointerior = forms.CharField(max_length=5, label='No. Exterior')
+    numerointerior = forms.CharField(max_length=5, label='No.Interior')
     # Codigo Postal_15
     codigopostal = forms.CharField(max_length=5, label=u'Código Postal')
     # Referencia del domicilio_16
@@ -80,7 +80,7 @@ class formPoblacion(forms.Form):
     dependencia = forms.ModelChoiceField(queryset=Cat_Dependencias.objects.all(), to_field_name='nombreDependencia', label='Dependencia')
     # Clave del programa_18
     # Nombre del programa_20
-    claveprograma = forms.ModelChoiceField(queryset=Cat_Programas.objects.all(), label='Clave del programa')
+    claveprograma = forms.ModelChoiceField(queryset=Cat_Programas.objects.all(), to_field_name='identPrograma', label='Clave del programa')
     # Clave del subprograma_19
     clavesubprograma = forms.ModelChoiceField(queryset=Cat_Subprogramas.objects.all(), label='Clave del subprograma', required=False)
     # Tipo de apoyo_21

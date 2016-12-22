@@ -7,11 +7,11 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from forms import SignUpForm, nuevoTrabajoForm, formPoblacion
+from consultaCatalogos.forms import SignUpForm, nuevoTrabajoForm, formPoblacion
 from models import TrabajosRealizados, Cat_Municipio
 #from django.core.files.uploadedfile import SimpleUploadedFile
 from csv_actions import *
-from django.forms import formset_factory
+# from django.forms import formset_factory
 
 
 # Create your views here.
@@ -65,8 +65,11 @@ def home(request):
     userData = {
         'user': usuario_actual,
         'nuevoTrabajo': nuevoTrabajoForm(initial={'Usuario':usuario_actual, 'Estatus':4}),
-        'pendientes' : trabajos_pedientes,
-        'total_pendientes' : trabajos_pedientes.count()
+        'pendientes': trabajos_pedientes,
+        'total_pendientes': trabajos_pedientes.count(),
+        'error_estructura': False,
+        'error_trimestre': False,
+        'error_anio': False
     }
 
     return render_to_response('home.html', userData, context_instance=RequestContext(request))
@@ -76,47 +79,42 @@ def home(request):
 def validar(request, trabajo_id):
     # Abrir estatus del trabajo
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
-    tipopadronid = trabajo.TipoPadron_id
-    # print 'tipopadronid: ' + str(tipopadronid)
-    anioejercicio = trabajo.AnioEjercicio
-    trimperiodoid = trabajo.Trimestre.identPeriodo
-    # Obtengo los datos del JSON
-    datos = json.loads(trabajo.jsondata)
-    if not (trabajo.modeloConvertido):
-        # si es la primera vez que se inica el proceso,
-        dato_inicial = ObtenDatosEnListaInicial(datos.get('registros'), tipopadronid)
-    else:
-
-        print 'trabajo.modeloConvertido = ' + str(trabajo.modeloConvertido)
-        dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
-    #
-    #    datos = json.loads(trabajo.jsondata)
-    #    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
-    #    trabajo.modeloConvertido = True
-        #trabajo.jsondata = json.dumps(dato_inicial)
-    #    trabajo.save()
-    #else:
-    #    dato_inicial = json.loads(trabajo.jsondata)
     page = ''
-
     if trabajo.Usuario == request.user:
-        # Si el estatus es INCOMPLETO
-        if trabajo.Estatus_id == 1:
+        tipopadronid = trabajo.TipoPadron_id # obtengo el tipo de padron # print 'tipopadronid: ' + str(tipopadronid)
+        anioejercicio = trabajo.AnioEjercicio # obtengo el anio de ejercicio
+        trimperiodoid = trabajo.Trimestre.identPeriodo # obtengo el trimestre registrado
+        Estatus_id = trabajo.Estatus_id
+        datos = json.loads(trabajo.jsondata) # Obtengo los datos del JSON
+
+        # si es la primera vez que se inica el proceso, se toman los datos originales,
+        # de otro modo se leeen con el esquema actualizado
+        dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid, False)#trabajo.modeloConvertido)
+        #
+        #    datos = json.loads(trabajo.jsondata)
+        #    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
+        #    trabajo.modeloConvertido = True
+            # guarda el json en el modelo de trabajo
+            #trabajo.jsondata = json.dumps(dato_inicial)
+        #    trabajo.save()
+        #else:
+        #    dato_inicial = json.loads(trabajo.jsondata)
+
+        # Si el estatus del trabajo es INCOMPLETO
+        if Estatus_id == 1:
 
             if request.method == 'POST':
                 # Crea una instancia del formulario y rellenarlo con los datos del request.POST
                 formulario = formPoblacion(request.POST)
 
                 # comprobando el metodo de acceso a los datos en el formulario
-                print 'XO' * 25
-                print 'claveprograma.value() = ' + str(formulario['claveprograma'].value())
-                print formulario['claveprograma'].errors
-                print 'XO' * 25
+                # print 'claveprograma.value() = ' + str(formulario['claveprograma'].value())
+                # print formulario['claveprograma'].errors
 
                 # obteniendo el numero de registro en el diccionario de datos
                 registro = int(formulario['registro'].value()) - 1
-                print 'formulario[registro].value() = ' + str(formulario['registro'].value())
-                print 'registro = ' + str(registro)
+                #print 'formulario[registro].value() = ' + str(formulario['registro'].value())
+                #print 'registro = ' + str(registro)
 
                 # si hay cambio en los datos del formulario grabarlos en la lista de datos iniciales y convertirlas al json
                 if formulario.has_changed():
@@ -138,33 +136,79 @@ def validar(request, trabajo_id):
             else:
                 page = request.GET.get('page')
 
-        # Si el estatus es COMPLETO
-        elif trabajo.Estatus_id == 2:
+        # Si el estatus del trabajo es COMPLETO
+        elif Estatus_id == 2:
             print 'trabajo.Estatus_id == 2 | Completo'
             print trabajo.Estatus
-        # Si el estatus es ENVIADO
-        elif trabajo.Estatus_id == 3:
+        # Si el estatus del trabajo es ENVIADO
+        elif Estatus_id == 3:
             print 'trabajo.Estatus_id == 3 | Enviado'
             print trabajo.Estatus
-        # Si el estatus es INICIADO
-        elif trabajo.Estatus_id == 4:
-            # print 'trabajo.Estatus_id == 4 | Iniciado'
-            # print trabajo.Estatus
+        # Si el estatus del trabajo es INICIADO
+        elif Estatus_id == 4:
+            # Convierte el archivo CSV a JSON y lo guarda en el modelo trabajo
             datos = import_csv(trabajo.archivoRelacionado.path)
-            # print datos.get('encabezados')
-            estrucvalida = EstructuraArchivoEsValida(datos.get('encabezados'), tipopadronid)
-            if estrucvalida:
-                # print 'estructura valida'
-                einiciales = ErroresIniciales(datos.get('registros'), tipopadronid, anioejercicio, trimperiodoid)
-                if not(einiciales):
+            estructura_archivo_valida = EstructuraArchivoEsValida(datos.get('encabezados'), tipopadronid)
+            if estructura_archivo_valida:
+                trabajo.estructura_valida = estructura_archivo_valida
+                errores_iniciales = ErroresIniciales(datos.get('registros'), tipopadronid, anioejercicio, trimperiodoid)
+                if errores_iniciales:
+                    errores_anio = ErroresColumnaAnio(anioejercicio, datos.get('registros'), tipopadronid)
+                    if errores_anio > 0:
+                        trabajo.anio_valido = False
+                    else:
+                        trabajo.anio_valido = True
+                    errores_trimestre = ErroresColumnaTrimestre(trimperiodoid, datos.get('registros'), tipopadronid)
+                    if errores_trimestre > 0:
+                        trabajo.trimestre_valido = False
+                    else:
+                        trabajo.trimestre_valido = True
+                    trabajo.Estatus_id = 5
+                    trabajo.save()
+
+                    usuario_actual = request.user
+                    trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual,
+                                                                           Estatus__in=[1, 2, 3, 4])
+                    userData = {
+                        'user': usuario_actual,
+                        'nuevoTrabajo': nuevoTrabajoForm(initial={'Usuario': usuario_actual, 'Estatus': 4}),
+                        'pendientes': trabajos_pedientes,
+                        'total_pendientes': trabajos_pedientes.count(),
+                        'error_estructura': trabajo.estructura_valida,
+                        'error_trimestre': trabajo.trimestre_valido,
+                        'error_anio': trabajo.anio_valido
+                    }
+
+                    return render_to_response('home.html', userData, context_instance=RequestContext(request))
+
+                else:
                     # print 'Sin errores iniciales'
                     # GuardarRegistros(datos.get('registros'), tipopadronid, trabajo.pk)
                     trabajo.CantidadRegistros = len(datos.get('registros'))
                     trabajo.Estatus_id = 1
                     trabajo.jsondata = json.dumps(datos)
+                    trabajo.trimestre_valido = True
+                    trabajo.anio_valido = True
                     trabajo.save()
             else:
-                print 'estructura no valida'
+                trabajo.estructura_valida = False
+                trabajo.Estatus_id = 5
+                trabajo.save()
+
+                usuario_actual = request.user
+                trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual, Estatus__in=[1, 2, 3, 4])
+                userData = {
+                    'user': usuario_actual,
+                    'nuevoTrabajo': nuevoTrabajoForm(initial={'Usuario': usuario_actual, 'Estatus': 4}),
+                    'pendientes': trabajos_pedientes,
+                    'total_pendientes': trabajos_pedientes.count(),
+                    'error_estructura': True,
+                    'error_trimestre': False,
+                    'error_anio': False
+                }
+
+                return render_to_response('home.html', userData, context_instance=RequestContext(request))
+
 
 
     else:

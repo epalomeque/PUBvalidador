@@ -176,9 +176,9 @@ def import_csv(filename):
 
     for registro in registros:
         i = i + 1
-        diccionario['num_record'] = i
+        diccionario['REGISTRO'] = i
         for celda, nombre in zip(registro, encabezados):
-            diccionario[nombre] = {'valor':celda,'esvalido':False}
+            diccionario[nombre] = {'VALOR':celda}
         registrosDicc.append(diccionario)
         diccionario = {}
         # print registrosDicc
@@ -335,50 +335,97 @@ def ErroresIniciales(registros, TipoPadron_id, AnioEjercicio, TrimestreIdent):
     return valor
 
 
-def ObtenDatosEnListaInicial(registros, TipoPadron_id):
+def ObtenDatosEnLista(registros, TipoPadron_id, modelo_convertido):
     datos_lista = list()
-    if TipoPadron_id == 1:
-        print 1
-    if TipoPadron_id == 2:
-        print 2
-    if TipoPadron_id == 3:
-        for registro in registros:
-            dato_form = formPoblacion( {
-                'registro': registro.get(u'num_record'),
-                'multilocalidad': registro.get(u'Multilocalidad_1').get(u'valor'),
-                'rfc': registro.get(u'Registro Federal de Contribuyentes_2').get(u'valor'),
-                'numerobeneficiados': registro.get(u'Número beneficiados_3').get(u'valor'),
-                'hombresbeneficiados': registro.get(u'Hombres beneficiados_4').get(u'valor'),
-                'mujeresbeneficiadas': registro.get(u'Mujeres beneficiadas_5').get(u'valor'),
-                'viviendasbeneficiadas': registro.get(u'Viviendas beneficiadas_6').get(u'valor'),
-                #'municipiobeneficiado': registro.get(u'Municipio donde se encuentra la obra_8').get(u'valor'),
-                'municipiobeneficiado': int(registro.get(u'Clave Municipio donde se encuentra la obra_7').get(u'valor')),
-                #'localidadbeneficiada': registro.get(u'Localidad donde se encuentra la obra_10').get(u'valor'),
-                'localidadbeneficiada': int(registro.get(u'Clave Localidad donde se encuentra la obra_9').get(u'valor')),
-                'asentamiento': registro.get(u'Asentamiento humano_11').get(u'valor'),
-                'nombrevialidad': registro.get(u'Nombre vialidad_12').get(u'valor'),
-                'numeroexterior': registro.get(u'Número Exterior_13').get(u'valor'),
-                'numerointerior': registro.get(u'Número Interior_14').get(u'valor'),
-                'codigopostal': registro.get(u'Código Postal_15').get(u'valor'),
-                'referenciadomicilio': registro.get(u'Referencia del domicilio_16').get(u'valor'),
-                'dependencia': smart_bytes(registro.get(u'Dependencia que opera el programa_17').get(u'valor')),
-                'claveprograma': registro.get(u'Nombre del programa_20').get(u'valor'),
-                'clavesubprograma': registro.get(u'Clave del subprograma_19').get(u'valor'),
-                'tipoapoyo': smart_bytes(registro.get(u'Tipo de apoyo_21').get(u'valor')),
-                'idobra': registro.get(u'Identificador de la Obra_22').get(u'valor'),
-                'descripcionobra': smart_bytes(registro.get(u'Descripción de la Obra_23').get(u'valor')),
-                'cantbeneficios': registro.get(u'Cantidad de beneficios_24').get(u'valor'),
-                'totalpesosbeneficios': registro.get(u'Total en pesos de los beneficios_25').get(u'valor'),
-                'inversionfederal': registro.get(u'Inversión federal_26').get(u'valor'),
-                'inversionestatal': registro.get(u'Inversión estatal_27').get(u'valor'),
-                'inversionmunicipal': registro.get(u'Inversión municipal_28').get(u'valor'),
-                'inversionotras': registro.get(u'Inversión de otras fuentes_29').get(u'valor'),
-                'fuentesrecurso': smart_bytes(registro.get(u'Fuentes que fondean el recurso_30').get(u'valor')),
-                'fechainicio': registro.get(u'Fecha Inicio_33').get(u'valor'),
-                'fechafin': registro.get(u'Fecha Fin_34').get(u'valor'),
-                'periodicidadentrega': registro.get(u'Periodicidad de entrega del beneficio_35').get(u'valor'),
-                'numeroentregabeneficio': registro.get(u'Número de la entrega del beneficio_36').get(u'valor')
-            } )
-            datos_lista.append(dato_form)
+    # Si el modelo del JSON esta convertido
+    if modelo_convertido:
+        if TipoPadron_id == 1:
+            print 1
+        if TipoPadron_id == 2:
+            print 2
+        if TipoPadron_id == 3:
+            for registro in registros:
+                dato_form = formPoblacion( {
+                    'registro': registro.get(u'registro'),
+                    'multilocalidad': registro.get(u'multilocalidad'),
+                    'rfc': registro.get(u'rfc'),
+                    'numerobeneficiados': registro.get(u'numerobeneficiados'),
+                    'hombresbeneficiados': registro.get(u'hombresbeneficiados'),
+                    'mujeresbeneficiadas': registro.get(u'mujeresbeneficiadas'),
+                    'viviendasbeneficiadas': registro.get(u'viviendasbeneficiadas'),
+                    'municipiobeneficiado': registro.get(u'municipiobeneficiado'),
+                    'localidadbeneficiada': registro.get(u'localidadbeneficiada'),
+                    'asentamiento': registro.get(u'asentamiento'),
+                    'nombrevialidad': registro.get(u'nombrevialidad'),
+                    'numeroexterior': registro.get(u'numeroexterior'),
+                    'numerointerior': registro.get(u'numerointerior'),
+                    'codigopostal': registro.get(u'codigopostal'),
+                    'referenciadomicilio': registro.get(u'referenciadomicilio'),
+                    'dependencia': registro.get(u'dependencia'),
+                    'claveprograma': registro.get(u'claveprograma'),
+                    'clavesubprograma': registro.get(u'clavesubprograma'),
+                    'tipoapoyo': registro.get(u'tipoapoyo'),
+                    'idobra': registro.get(u'idobra'),
+                    'descripcionobra': registro.get(u'descripcionobra'),
+                    'cantbeneficios': registro.get(u'cantbeneficios'),
+                    'totalpesosbeneficios': registro.get(u'totalpesosbeneficios'),
+                    'inversionfederal': registro.get(u'inversionfederal'),
+                    'inversionestatal': registro.get(u'inversionestatal'),
+                    'inversionmunicipal': registro.get(u'inversionmunicipal'),
+                    'inversionotras': registro.get(u'inversionotras'),
+                    'fuentesrecurso': registro.get(u'fuentesrecurso'),
+                    'fechainicio': registro.get(u'fechainicio'),
+                    'fechafin': registro.get(u'fechafin'),
+                    'periodicidadentrega': registro.get(u'periodicidadentrega'),
+                    'numeroentregabeneficio': registro.get(u'numeroentregabeneficio')
+                } )
+                datos_lista.append(dato_form)
+    # Si el modelo aun no ha sido convertido
+    else:
+        if TipoPadron_id == 1:
+            print 1
+        if TipoPadron_id == 2:
+            print 2
+        if TipoPadron_id == 3:
+            for registro in registros:
+                dato_form = formPoblacion({
+                    'registro': registro.get(u'REGISTRO'),
+                    'multilocalidad': registro.get(u'Multilocalidad_1').get(u'VALOR'),
+                    'rfc': registro.get(u'Registro Federal de Contribuyentes_2').get(u'VALOR'),
+                    'numerobeneficiados': registro.get(u'Número beneficiados_3').get(u'VALOR'),
+                    'hombresbeneficiados': registro.get(u'Hombres beneficiados_4').get(u'VALOR'),
+                    'mujeresbeneficiadas': registro.get(u'Mujeres beneficiadas_5').get(u'VALOR'),
+                    'viviendasbeneficiadas': registro.get(u'Viviendas beneficiadas_6').get(u'VALOR'),
+                    # 'municipiobeneficiado': registro.get(u'Municipio donde se encuentra la obra_8').get(u'VALOR'),
+                    'municipiobeneficiado': int(
+                        registro.get(u'Clave Municipio donde se encuentra la obra_7').get(u'VALOR')),
+                    # 'localidadbeneficiada': registro.get(u'Localidad donde se encuentra la obra_10').get(u'VALOR'),
+                    'localidadbeneficiada': int(
+                        registro.get(u'Clave Localidad donde se encuentra la obra_9').get(u'VALOR')),
+                    'asentamiento': registro.get(u'Asentamiento humano_11').get(u'VALOR'),
+                    'nombrevialidad': registro.get(u'Nombre vialidad_12').get(u'VALOR'),
+                    'numeroexterior': registro.get(u'Número Exterior_13').get(u'VALOR'),
+                    'numerointerior': registro.get(u'Número Interior_14').get(u'VALOR'),
+                    'codigopostal': registro.get(u'Código Postal_15').get(u'VALOR'),
+                    'referenciadomicilio': registro.get(u'Referencia del domicilio_16').get(u'VALOR'),
+                    'dependencia': smart_bytes(registro.get(u'Dependencia que opera el programa_17').get(u'VALOR')),
+                    'claveprograma': smart_bytes(registro.get(u'Clave del programa_18').get(u'VALOR')),
+                    'clavesubprograma': registro.get(u'Clave del subprograma_19').get(u'VALOR'),
+                    'tipoapoyo': smart_bytes(registro.get(u'Tipo de apoyo_21').get(u'VALOR')),
+                    'idobra': registro.get(u'Identificador de la Obra_22').get(u'VALOR'),
+                    'descripcionobra': smart_bytes(registro.get(u'Descripción de la Obra_23').get(u'VALOR')),
+                    'cantbeneficios': registro.get(u'Cantidad de beneficios_24').get(u'VALOR'),
+                    'totalpesosbeneficios': registro.get(u'Total en pesos de los beneficios_25').get(u'VALOR'),
+                    'inversionfederal': registro.get(u'Inversión federal_26').get(u'VALOR'),
+                    'inversionestatal': registro.get(u'Inversión estatal_27').get(u'VALOR'),
+                    'inversionmunicipal': registro.get(u'Inversión municipal_28').get(u'VALOR'),
+                    'inversionotras': registro.get(u'Inversión de otras fuentes_29').get(u'VALOR'),
+                    'fuentesrecurso': smart_bytes(registro.get(u'Fuentes que fondean el recurso_30').get(u'VALOR')),
+                    'fechainicio': registro.get(u'Fecha Inicio_33').get(u'VALOR'),
+                    'fechafin': registro.get(u'Fecha Fin_34').get(u'VALOR'),
+                    'periodicidadentrega': registro.get(u'Periodicidad de entrega del beneficio_35').get(u'VALOR'),
+                    'numeroentregabeneficio': registro.get(u'Número de la entrega del beneficio_36').get(u'VALOR')
+                })
+                datos_lista.append(dato_form)
 
     return datos_lista

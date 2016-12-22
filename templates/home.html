@@ -52,6 +52,22 @@
 
 </div>
 
+{% if error_estructura %}
+    <div class="col-xs-12 col-lg-6 middle">
+    <h2>Existen errores en la estructura del archivo que intentas utilizar para tu trabajo, verificalo por favor e intentalo nuevamente </h2>
+    </div>
+{% endif %}
+{% if error_trimestre %}
+    <div class="col-xs-12 col-lg-6 middle">
+    <h2>El trimestre señalado al iniciar tu trabajo no corresponde con los cargado en el archivo, verificalo por favor e intentalo nuevamente</h2>
+    </div>
+{% endif %}
+{% if error_anio %}
+    <div class="col-xs-12 col-lg-6 middle">
+    <h2>El año señalado al iniciar tu trabajo no corresponde con lo cargado en el archivo, verificalo por favor e intentalo nuevamente</h2>
+    </div>
+{% endif %}
+
 {% if total_pendientes > 0  %}
 <div class="col-xs-12 col-lg-6 middle">
   <div class="well well-lg">
@@ -115,8 +131,6 @@
     {% endfor %}
   </div>
 </div>
-{% else %}
-    <h1>CERO CHAMBAS</h1>
 {% endif %}
 
 {% endblock %}
