@@ -185,7 +185,7 @@ class TrabajosRealizados(models.Model):
     trimestre_valido = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return 'ID: %s | Archivo: %s | Usuario: %s' % (self.pk, self.archivoRelacionado, self.Usuario)
+        return 'ID: %s | Archivo: %s | Usuario: %s | Estatus: %s' % (self.pk, self.archivoRelacionado, self.Usuario, self.Estatus)
 
 
 # Modelos del PUB

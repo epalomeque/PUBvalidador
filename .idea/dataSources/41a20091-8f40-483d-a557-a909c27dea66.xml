@@ -23,8 +23,8 @@
     <schema id="7" parent="1" name="public">
       <object-id>2200</object-id>
       <visible>1</visible>
-      <introspection-state-number>5208</introspection-state-number>
-      <introspection-timestamp>2016-12-21.08:39:27.450</introspection-timestamp>
+      <introspection-state-number>5220</introspection-state-number>
+      <introspection-timestamp>2016-12-22.08:29:47.401</introspection-timestamp>
     </schema>
     <schema id="8" parent="1" name="pg_catalog">
       <object-id>11</object-id>
@@ -307,7 +307,7 @@
     </table>
     <table id="79" parent="7" name="consultaCatalogos_trabajosrealizados">
       <object-id>49842</object-id>
-      <state-number>5208</state-number>
+      <state-number>5218</state-number>
     </table>
     <table id="80" parent="7" name="csvimport_csvimport">
       <object-id>50072</object-id>
@@ -2522,377 +2522,392 @@ cat_mes_id</columns>
       <mandatory>1</mandatory>
       <data-type>boolean|0</data-type>
     </column>
-    <index id="478" parent="79" name="consultaCatalogos_trabajosrealizados_pkey">
+    <column id="478" parent="79" name="anio_valido">
+      <state-number>5220</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+    </column>
+    <column id="479" parent="79" name="trimestre_valido">
+      <state-number>5220</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+    </column>
+    <column id="480" parent="79" name="estructura_valida">
+      <state-number>5218</state-number>
+      <mandatory>1</mandatory>
+      <data-type>boolean|0</data-type>
+    </column>
+    <index id="481" parent="79" name="consultaCatalogos_trabajosrealizados_pkey">
       <object-id>49849</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="479" parent="79" name="consultaCatalogos_trabajosrealizados_5b9247da">
+    <index id="482" parent="79" name="consultaCatalogos_trabajosrealizados_5b9247da">
       <object-id>50032</object-id>
       <columns>Estatus_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="480" parent="79" name="consultaCatalogos_trabajosrealizados_3592bfa3">
+    <index id="483" parent="79" name="consultaCatalogos_trabajosrealizados_3592bfa3">
       <object-id>50033</object-id>
       <columns>TipoPadron_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="481" parent="79" name="consultaCatalogos_trabajosrealizados_89969398">
+    <index id="484" parent="79" name="consultaCatalogos_trabajosrealizados_89969398">
       <object-id>50034</object-id>
       <columns>Trimestre_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="482" parent="79" name="consultaCatalogos_trabajosrealizados_f0115ab9">
+    <index id="485" parent="79" name="consultaCatalogos_trabajosrealizados_f0115ab9">
       <object-id>50035</object-id>
       <columns>Usuario_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="483" parent="79" name="consultaCatalogos_trabajosrealizados_ae6be32e">
+    <index id="486" parent="79" name="consultaCatalogos_trabajosrealizados_ae6be32e">
       <object-id>50036</object-id>
       <columns>jsondata</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="484" parent="79" name="consultaCatalogos_trabajosrealizados_pkey">
+    <key id="487" parent="79" name="consultaCatalogos_trabajosrealizados_pkey">
       <object-id>49850</object-id>
       <columns>id</columns>
       <underlying-index>consultaCatalogos_trabajosrealizados_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <foreign-key id="485" parent="79" name="D5ad631e11a94c060436d3ad03ee4ca9">
+    <foreign-key id="488" parent="79" name="D5ad631e11a94c060436d3ad03ee4ca9">
       <object-id>50007</object-id>
       <columns>Estatus_id</columns>
       <ref-key>~.consultaCatalogos_cat_anioejercicio.consultaCatalogos_cat_anioejercicio_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="486" parent="79" name="con_Estatus_id_3d1491d1_fk_consultaCatalogos_estatustrabajos_id">
+    <foreign-key id="489" parent="79" name="con_Estatus_id_3d1491d1_fk_consultaCatalogos_estatustrabajos_id">
       <object-id>50236</object-id>
       <columns>TipoPadron_id</columns>
       <ref-key>~.consultaCatalogos_estatustrabajos.consultaCatalogos_estatustrabajos_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="487" parent="79" name="c_TipoPadron_id_1b853eed_fk_consultaCatalogos_cat_tipopadron_id">
+    <foreign-key id="490" parent="79" name="c_TipoPadron_id_1b853eed_fk_consultaCatalogos_cat_tipopadron_id">
       <object-id>50017</object-id>
       <columns>Trimestre_id</columns>
       <ref-key>~.consultaCatalogos_cat_tipopadron.consultaCatalogos_cat_tipopadron_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="488" parent="79" name="cons_Trimestre_id_617a18c9_fk_consultaCatalogos_cat_periodos_id">
+    <foreign-key id="491" parent="79" name="cons_Trimestre_id_617a18c9_fk_consultaCatalogos_cat_periodos_id">
       <object-id>50022</object-id>
       <columns>Usuario_id</columns>
       <ref-key>~.consultaCatalogos_cat_periodos.consultaCatalogos_cat_periodos_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="489" parent="79" name="consultaCatalogos_trabajosr_Usuario_id_51f8a702_fk_auth_user_id">
+    <foreign-key id="492" parent="79" name="consultaCatalogos_trabajosr_Usuario_id_51f8a702_fk_auth_user_id">
       <object-id>50027</object-id>
       <columns>jsondata</columns>
       <ref-key>~.auth_user.auth_user_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <column id="490" parent="80" name="id">
+    <column id="493" parent="80" name="id">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;csvimport_csvimport_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="491" parent="80" name="model_name">
+    <column id="494" parent="80" name="model_name">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="492" parent="80" name="field_list">
+    <column id="495" parent="80" name="field_list">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="493" parent="80" name="upload_file">
+    <column id="496" parent="80" name="upload_file">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(100)|0</data-type>
     </column>
-    <column id="494" parent="80" name="file_name">
+    <column id="497" parent="80" name="file_name">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="495" parent="80" name="encoding">
+    <column id="498" parent="80" name="encoding">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(32)|0</data-type>
     </column>
-    <column id="496" parent="80" name="upload_method">
+    <column id="499" parent="80" name="upload_method">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(50)|0</data-type>
     </column>
-    <column id="497" parent="80" name="error_log">
+    <column id="500" parent="80" name="error_log">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="498" parent="80" name="import_date">
+    <column id="501" parent="80" name="import_date">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>date|0</data-type>
     </column>
-    <column id="499" parent="80" name="import_user">
+    <column id="502" parent="80" name="import_user">
       <state-number>2411</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <index id="500" parent="80" name="csvimport_csvimport_pkey">
+    <index id="503" parent="80" name="csvimport_csvimport_pkey">
       <object-id>50079</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="501" parent="80" name="csvimport_csvimport_pkey">
+    <key id="504" parent="80" name="csvimport_csvimport_pkey">
       <object-id>50080</object-id>
       <columns>id</columns>
       <underlying-index>csvimport_csvimport_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <column id="502" parent="81" name="id">
+    <column id="505" parent="81" name="id">
       <state-number>2412</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;csvimport_importmodel_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="503" parent="81" name="csvimport_id">
+    <column id="506" parent="81" name="csvimport_id">
       <state-number>2412</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
     </column>
-    <column id="504" parent="81" name="numeric_id">
+    <column id="507" parent="81" name="numeric_id">
       <state-number>2412</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
     </column>
-    <column id="505" parent="81" name="natural_key">
+    <column id="508" parent="81" name="natural_key">
       <state-number>2412</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(100)|0</data-type>
     </column>
-    <index id="506" parent="81" name="csvimport_importmodel_pkey">
+    <index id="509" parent="81" name="csvimport_importmodel_pkey">
       <object-id>50088</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="507" parent="81" name="csvimport_importmodel_5180b393">
+    <index id="510" parent="81" name="csvimport_importmodel_5180b393">
       <object-id>50095</object-id>
       <columns>csvimport_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="508" parent="81" name="csvimport_importmodel_pkey">
+    <key id="511" parent="81" name="csvimport_importmodel_pkey">
       <object-id>50089</object-id>
       <columns>id</columns>
       <underlying-index>csvimport_importmodel_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <foreign-key id="509" parent="81" name="csvimport_impor_csvimport_id_300566f3_fk_csvimport_csvimport_id">
+    <foreign-key id="512" parent="81" name="csvimport_impor_csvimport_id_300566f3_fk_csvimport_csvimport_id">
       <object-id>50090</object-id>
       <columns>csvimport_id</columns>
       <ref-key>~.csvimport_csvimport.csvimport_csvimport_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <check id="510" parent="81" name="csvimport_importmodel_numeric_id_check">
+    <check id="513" parent="81" name="csvimport_importmodel_numeric_id_check">
       <object-id>50087</object-id>
       <columns>numeric_id</columns>
       <predicate>numeric_id &gt;= 0</predicate>
     </check>
-    <column id="511" parent="82" name="id">
+    <column id="514" parent="82" name="id">
       <state-number>2043</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;django_admin_log_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="512" parent="82" name="action_time">
+    <column id="515" parent="82" name="action_time">
       <state-number>2043</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp with time zone|0</data-type>
     </column>
-    <column id="513" parent="82" name="object_id">
+    <column id="516" parent="82" name="object_id">
       <state-number>2043</state-number>
       <data-type>text|0</data-type>
     </column>
-    <column id="514" parent="82" name="object_repr">
+    <column id="517" parent="82" name="object_repr">
       <state-number>2043</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(200)|0</data-type>
     </column>
-    <column id="515" parent="82" name="action_flag">
+    <column id="518" parent="82" name="action_flag">
       <state-number>2043</state-number>
       <mandatory>1</mandatory>
       <data-type>smallint|0</data-type>
     </column>
-    <column id="516" parent="82" name="change_message">
+    <column id="519" parent="82" name="change_message">
       <state-number>2043</state-number>
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="517" parent="82" name="content_type_id">
+    <column id="520" parent="82" name="content_type_id">
       <state-number>2043</state-number>
       <data-type>integer|0</data-type>
     </column>
-    <column id="518" parent="82" name="user_id">
+    <column id="521" parent="82" name="user_id">
       <state-number>2043</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
     </column>
-    <index id="519" parent="82" name="django_admin_log_pkey">
+    <index id="522" parent="82" name="django_admin_log_pkey">
       <object-id>49636</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="520" parent="82" name="django_admin_log_417f1b1c">
+    <index id="523" parent="82" name="django_admin_log_417f1b1c">
       <object-id>49648</object-id>
       <columns>content_type_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="521" parent="82" name="django_admin_log_e8701ad4">
+    <index id="524" parent="82" name="django_admin_log_e8701ad4">
       <object-id>49649</object-id>
       <columns>user_id</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="522" parent="82" name="django_admin_log_pkey">
+    <key id="525" parent="82" name="django_admin_log_pkey">
       <object-id>49637</object-id>
       <columns>id</columns>
       <underlying-index>django_admin_log_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <foreign-key id="523" parent="82" name="django_admin_content_type_id_5151027a_fk_django_content_type_id">
+    <foreign-key id="526" parent="82" name="django_admin_content_type_id_5151027a_fk_django_content_type_id">
       <object-id>49638</object-id>
       <columns>content_type_id</columns>
       <ref-key>~.django_content_type.django_content_type_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <foreign-key id="524" parent="82" name="django_admin_log_user_id_1c5f563_fk_auth_user_id">
+    <foreign-key id="527" parent="82" name="django_admin_log_user_id_1c5f563_fk_auth_user_id">
       <object-id>49643</object-id>
       <columns>user_id</columns>
       <ref-key>~.auth_user.auth_user_pkey</ref-key>
       <cascade-update-rule>restrict</cascade-update-rule>
       <cascade-delete-rule>restrict</cascade-delete-rule>
     </foreign-key>
-    <check id="525" parent="82" name="django_admin_log_action_flag_check">
+    <check id="528" parent="82" name="django_admin_log_action_flag_check">
       <object-id>49632</object-id>
       <columns>action_flag</columns>
       <predicate>action_flag &gt;= 0</predicate>
     </check>
-    <column id="526" parent="83" name="id">
+    <column id="529" parent="83" name="id">
       <state-number>2039</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;django_content_type_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="527" parent="83" name="app_label">
+    <column id="530" parent="83" name="app_label">
       <state-number>2039</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(100)|0</data-type>
     </column>
-    <column id="528" parent="83" name="model">
+    <column id="531" parent="83" name="model">
       <state-number>2039</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(100)|0</data-type>
     </column>
-    <index id="529" parent="83" name="django_content_type_pkey">
+    <index id="532" parent="83" name="django_content_type_pkey">
       <object-id>49518</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="530" parent="83" name="django_content_type_app_label_3ec8c61c_uniq">
+    <index id="533" parent="83" name="django_content_type_app_label_3ec8c61c_uniq">
       <object-id>49520</object-id>
       <columns>app_label
 model</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="531" parent="83" name="django_content_type_pkey">
+    <key id="534" parent="83" name="django_content_type_pkey">
       <object-id>49519</object-id>
       <columns>id</columns>
       <underlying-index>django_content_type_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <key id="532" parent="83" name="django_content_type_app_label_3ec8c61c_uniq">
+    <key id="535" parent="83" name="django_content_type_app_label_3ec8c61c_uniq">
       <object-id>49521</object-id>
       <columns>app_label
 model</columns>
       <underlying-index>django_content_type_app_label_3ec8c61c_uniq</underlying-index>
     </key>
-    <column id="533" parent="84" name="id">
+    <column id="536" parent="84" name="id">
       <state-number>2038</state-number>
       <mandatory>1</mandatory>
       <data-type>integer|0</data-type>
       <default-expression>nextval(&apos;django_migrations_id_seq&apos;::regclass)</default-expression>
     </column>
-    <column id="534" parent="84" name="app">
+    <column id="537" parent="84" name="app">
       <state-number>2038</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="535" parent="84" name="name">
+    <column id="538" parent="84" name="name">
       <state-number>2038</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(255)|0</data-type>
     </column>
-    <column id="536" parent="84" name="applied">
+    <column id="539" parent="84" name="applied">
       <state-number>2038</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp with time zone|0</data-type>
     </column>
-    <index id="537" parent="84" name="django_migrations_pkey">
+    <index id="540" parent="84" name="django_migrations_pkey">
       <object-id>49510</object-id>
       <columns>id</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <key id="538" parent="84" name="django_migrations_pkey">
+    <key id="541" parent="84" name="django_migrations_pkey">
       <object-id>49511</object-id>
       <columns>id</columns>
       <underlying-index>django_migrations_pkey</underlying-index>
       <primary>1</primary>
     </key>
-    <column id="539" parent="85" name="session_key">
+    <column id="542" parent="85" name="session_key">
       <state-number>2057</state-number>
       <mandatory>1</mandatory>
       <data-type>varchar(40)|0</data-type>
     </column>
-    <column id="540" parent="85" name="session_data">
+    <column id="543" parent="85" name="session_data">
       <state-number>2057</state-number>
       <mandatory>1</mandatory>
       <data-type>text|0</data-type>
     </column>
-    <column id="541" parent="85" name="expire_date">
+    <column id="544" parent="85" name="expire_date">
       <state-number>2057</state-number>
       <mandatory>1</mandatory>
       <data-type>timestamp with time zone|0</data-type>
     </column>
-    <index id="542" parent="85" name="django_session_pkey">
+    <index id="545" parent="85" name="django_session_pkey">
       <object-id>50055</object-id>
       <columns>session_key</columns>
       <desc-columns></desc-columns>
       <unique>1</unique>
     </index>
-    <index id="543" parent="85" name="django_session_session_key_630ca218_like">
+    <index id="546" parent="85" name="django_session_session_key_630ca218_like">
       <object-id>50058</object-id>
       <columns>session_key</columns>
       <desc-columns></desc-columns>
     </index>
-    <index id="544" parent="85" name="django_session_de54fa62">
+    <index id="547" parent="85" name="django_session_de54fa62">
       <object-id>50057</object-id>
       <columns>expire_date</columns>
       <desc-columns></desc-columns>
     </index>
-    <key id="545" parent="85" name="django_session_pkey">
+    <key id="548" parent="85" name="django_session_pkey">
       <object-id>50056</object-id>
       <columns>session_key</columns>
       <underlying-index>django_session_pkey</underlying-index>

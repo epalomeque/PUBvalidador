@@ -9,9 +9,11 @@
         <div class="widget-toolbar">
         {% if form.is_valid %}
             <span class="badge badge-success">Registro v&aacute;lido</span>
+
             <a href="#" data-action="collapse">
                 <i class="ace-icon fa fa-chevron-up"></i>
             </a>
+
         {% else %}
             <span class="badge badge-danger">Tiene validaciones pendientes</span>
         {% endif %}
@@ -261,11 +263,32 @@
         {{ form.registro }}
 
         <div class="widget-toolbox padding-8 clearfix">
-        <button class="btn btn-xs btn-success pull-right">
-            <span class="bigger-110">Enviar validaciones</span>
 
+        <label class="pull-left inline">
+            <small class="muted smaller-90">Permitir corrección:</small>
+            <input id="id-button-borders-{{ form.registro.value }}" class="ace ace-switch ace-switch-5" type="checkbox">
+            <span class="lbl middle"></span>
+        </label>
+
+        <button class="btn btn-xs btn-success pull-right disabled" id="boton-enviar-{{ form.registro.value }}">
+            <span class="bigger-110">Enviar validaciones</span>
             <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
         </button>
+
+        <script type="text/javascript">
+            $(function() {
+                $('#id-button-borders-{{ form.registro.value }}').on('click', function () {
+                    var inp = $('#boton-enviar-{{ form.registro.value }}').get(0);
+                    if (inp.hasAttribute('disabled')) {
+                        inp.removeAttribute('disabled');
+                    }
+                    else {
+                        inp.setAttribute('disabled', 'disabled');
+                    }
+                });
+            });
+        </script>
+
         </div>
 
         </form>

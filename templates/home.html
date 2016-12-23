@@ -53,19 +53,47 @@
 </div>
 
 {% if error_estructura %}
-    <div class="col-xs-12 col-lg-6 middle">
-    <h2>Existen errores en la estructura del archivo que intentas utilizar para tu trabajo, verificalo por favor e intentalo nuevamente </h2>
-    </div>
+<div class="col-xs-12 col-lg-6 middle alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">
+        <i class="ace-icon fa fa-times"></i>
+    </button>
+
+    <strong>
+        <i class="ace-icon fa fa-times"></i>
+        ¡Error!
+    </strong>
+
+    La estructura del archivo que intentas usar no corresponde con lo reportado para el inicio del trabajo, por favor, verificalo e intentalo nuevamente
+    <br>
+</div>
 {% endif %}
+
 {% if error_trimestre %}
-    <div class="col-xs-12 col-lg-6 middle">
-    <h2>El trimestre señalado al iniciar tu trabajo no corresponde con los cargado en el archivo, verificalo por favor e intentalo nuevamente</h2>
-    </div>
+<div class="col-xs-12 col-lg-6 middle alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">
+        <i class="ace-icon fa fa-times"></i>
+    </button>
+    <strong>
+        <i class="ace-icon fa fa-times"></i>
+        ¡Error!
+    </strong>
+    El trimestre señalado al iniciar tu trabajo no corresponde con los cargados en el archivo, verificalo por favor e intentalo nuevamente
+    <br>
+</div>
 {% endif %}
+
 {% if error_anio %}
-    <div class="col-xs-12 col-lg-6 middle">
-    <h2>El año señalado al iniciar tu trabajo no corresponde con lo cargado en el archivo, verificalo por favor e intentalo nuevamente</h2>
-    </div>
+<div class="col-xs-12 col-lg-6 middle alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">
+        <i class="ace-icon fa fa-times"></i>
+    </button>
+    <strong>
+        <i class="ace-icon fa fa-times"></i>
+        ¡Error!
+    </strong>
+    El año señalado al iniciar tu trabajo no corresponde con los cargados en el archivo, verificalo por favor e intentalo nuevamente
+    <br>
+</div>
 {% endif %}
 
 {% if total_pendientes > 0  %}

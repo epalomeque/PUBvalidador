@@ -346,48 +346,49 @@ def ObtenDatosEnLista(registros, TipoPadron_id, modelo_convertido):
         if TipoPadron_id == 3:
             for registro in registros:
                 dato_form = formPoblacion( {
-                    'registro': registro.get(u'registro'),
-                    'multilocalidad': registro.get(u'multilocalidad'),
-                    'rfc': registro.get(u'rfc'),
-                    'numerobeneficiados': registro.get(u'numerobeneficiados'),
-                    'hombresbeneficiados': registro.get(u'hombresbeneficiados'),
-                    'mujeresbeneficiadas': registro.get(u'mujeresbeneficiadas'),
-                    'viviendasbeneficiadas': registro.get(u'viviendasbeneficiadas'),
-                    'municipiobeneficiado': registro.get(u'municipiobeneficiado'),
-                    'localidadbeneficiada': registro.get(u'localidadbeneficiada'),
-                    'asentamiento': registro.get(u'asentamiento'),
-                    'nombrevialidad': registro.get(u'nombrevialidad'),
-                    'numeroexterior': registro.get(u'numeroexterior'),
-                    'numerointerior': registro.get(u'numerointerior'),
-                    'codigopostal': registro.get(u'codigopostal'),
-                    'referenciadomicilio': registro.get(u'referenciadomicilio'),
-                    'dependencia': registro.get(u'dependencia'),
-                    'claveprograma': registro.get(u'claveprograma'),
-                    'clavesubprograma': registro.get(u'clavesubprograma'),
-                    'tipoapoyo': registro.get(u'tipoapoyo'),
-                    'idobra': registro.get(u'idobra'),
-                    'descripcionobra': registro.get(u'descripcionobra'),
-                    'cantbeneficios': registro.get(u'cantbeneficios'),
-                    'totalpesosbeneficios': registro.get(u'totalpesosbeneficios'),
-                    'inversionfederal': registro.get(u'inversionfederal'),
-                    'inversionestatal': registro.get(u'inversionestatal'),
-                    'inversionmunicipal': registro.get(u'inversionmunicipal'),
-                    'inversionotras': registro.get(u'inversionotras'),
-                    'fuentesrecurso': registro.get(u'fuentesrecurso'),
-                    'fechainicio': registro.get(u'fechainicio'),
-                    'fechafin': registro.get(u'fechafin'),
-                    'periodicidadentrega': registro.get(u'periodicidadentrega'),
-                    'numeroentregabeneficio': registro.get(u'numeroentregabeneficio')
+                    'registro': registro[u'registro'],
+                    'multilocalidad': registro[u'multilocalidad'],
+                    'rfc': registro[u'rfc'],
+                    'numerobeneficiados': registro[u'numerobeneficiados'],
+                    'hombresbeneficiados': registro[u'hombresbeneficiados'],
+                    'mujeresbeneficiadas': registro[u'mujeresbeneficiadas'],
+                    'viviendasbeneficiadas': registro[u'viviendasbeneficiadas'],
+                    'municipiobeneficiado': registro[u'municipiobeneficiado'],
+                    'localidadbeneficiada': registro[u'localidadbeneficiada'],
+                    'asentamiento': registro[u'asentamiento'],
+                    'nombrevialidad': registro[u'nombrevialidad'],
+                    'numeroexterior': registro[u'numeroexterior'],
+                    'numerointerior': registro[u'numerointerior'],
+                    'codigopostal': registro[u'codigopostal'],
+                    'referenciadomicilio': registro[u'referenciadomicilio'],
+                    'dependencia': registro[u'dependencia'],
+                    'claveprograma': registro[u'claveprograma'],
+                    'clavesubprograma': registro[u'clavesubprograma'],
+                    'tipoapoyo': registro[u'tipoapoyo'],
+                    'idobra': registro[u'idobra'],
+                    'descripcionobra': registro[u'descripcionobra'],
+                    'cantbeneficios': registro[u'cantbeneficios'],
+                    'totalpesosbeneficios': registro[u'totalpesosbeneficios'],
+                    'inversionfederal': registro[u'inversionfederal'],
+                    'inversionestatal': registro[u'inversionestatal'],
+                    'inversionmunicipal': registro[u'inversionmunicipal'],
+                    'inversionotras': registro[u'inversionotras'],
+                    'fuentesrecurso': registro[u'fuentesrecurso'],
+                    'fechainicio': registro[u'fechainicio'],
+                    'fechafin': registro[u'fechafin'],
+                    'periodicidadentrega': registro[u'periodicidadentrega'],
+                    'numeroentregabeneficio': registro[u'numeroentregabeneficio']
                 } )
                 datos_lista.append(dato_form)
     # Si el modelo aun no ha sido convertido
     else:
+        registrosIniciales = registros.get('registros')
         if TipoPadron_id == 1:
             print 1
         if TipoPadron_id == 2:
             print 2
         if TipoPadron_id == 3:
-            for registro in registros:
+            for registro in registrosIniciales:
                 dato_form = formPoblacion({
                     'registro': registro.get(u'REGISTRO'),
                     'multilocalidad': registro.get(u'Multilocalidad_1').get(u'VALOR'),
@@ -429,3 +430,58 @@ def ObtenDatosEnLista(registros, TipoPadron_id, modelo_convertido):
                 datos_lista.append(dato_form)
 
     return datos_lista
+
+
+def contar_registros_con_errores(dato_inicial):
+    i = 0
+    for registro in dato_inicial:
+        if registro.errors:
+            i = i + 1
+            # print str(i) + ': '+ str(registro.errors)
+    return i
+
+
+def ActualizarInformacionAModeloNormalizado(formulario_de_registros, TipoPadron_id):
+    diccionario_normalizado = list()
+    if TipoPadron_id == 1:
+        print 1
+    if TipoPadron_id == 2:
+        print 2
+    if TipoPadron_id == 3:
+        for registro in formulario_de_registros:
+            diccionario_temporal = {
+                'registro': registro['registro'].value(),
+                'multilocalidad': registro['multilocalidad'].value(),
+                'rfc': registro['rfc'].value(),
+                'numerobeneficiados': registro['numerobeneficiados'].value(),
+                'hombresbeneficiados': registro['hombresbeneficiados'].value(),
+                'mujeresbeneficiadas': registro['mujeresbeneficiadas'].value(),
+                'viviendasbeneficiadas': registro['viviendasbeneficiadas'].value(),
+                'municipiobeneficiado': registro['municipiobeneficiado'].value(),
+                'localidadbeneficiada': registro['localidadbeneficiada'].value(),
+                'asentamiento': registro['asentamiento'].value(),
+                'nombrevialidad': registro['nombrevialidad'].value(),
+                'numeroexterior': registro['numeroexterior'].value(),
+                'numerointerior': registro['numerointerior'].value(),
+                'codigopostal': registro['codigopostal'].value(),
+                'referenciadomicilio': registro['referenciadomicilio'].value(),
+                'dependencia': registro['dependencia'].value(),
+                'claveprograma': registro['claveprograma'].value(),
+                'clavesubprograma': registro['clavesubprograma'].value(),
+                'tipoapoyo': registro['tipoapoyo'].value(),
+                'idobra': registro['idobra'].value(),
+                'descripcionobra': registro['descripcionobra'].value(),
+                'cantbeneficios': registro['cantbeneficios'].value(),
+                'totalpesosbeneficios': registro['totalpesosbeneficios'].value(),
+                'inversionfederal': registro['inversionfederal'].value(),
+                'inversionestatal': registro['inversionestatal'].value(),
+                'inversionmunicipal': registro['inversionmunicipal'].value(),
+                'inversionotras': registro['inversionotras'].value(),
+                'fuentesrecurso': registro['fuentesrecurso'].value(),
+                'fechainicio': registro['fechainicio'].value(),
+                'fechafin': registro['fechafin'].value(),
+                'periodicidadentrega': registro['periodicidadentrega'].value(),
+                'numeroentregabeneficio': registro['numeroentregabeneficio'].value()
+            }
+            diccionario_normalizado.append(diccionario_temporal)
+    return diccionario_normalizado

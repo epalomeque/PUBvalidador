@@ -58,7 +58,7 @@ def home(request):
             # process the data in form.cleaned_data as required
             el_trabajo = nuevo_trabajo.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('/validar/%s' % el_trabajo.pk)
+            return HttpResponseRedirect('validar/%s' % el_trabajo.pk)
 
     usuario_actual = request.user
     trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual, Estatus__in=[1, 2, 3, 4])
@@ -81,29 +81,27 @@ def validar(request, trabajo_id):
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
     page = ''
     if trabajo.Usuario == request.user:
-        tipopadronid = trabajo.TipoPadron_id # obtengo el tipo de padron # print 'tipopadronid: ' + str(tipopadronid)
-        anioejercicio = trabajo.AnioEjercicio # obtengo el anio de ejercicio
-        trimperiodoid = trabajo.Trimestre.identPeriodo # obtengo el trimestre registrado
+
+        tipopadronid = trabajo.TipoPadron_id  # obtengo el tipo de padron # print 'tipopadronid: ' + str(tipopadronid)
+        anioejercicio = trabajo.AnioEjercicio  # obtengo el anio de ejercicio
+        trimperiodoid = trabajo.Trimestre.identPeriodo  # obtengo el trimestre registrado
         Estatus_id = trabajo.Estatus_id
-        if trabajo.jsondata:
-            datos = json.loads(trabajo.jsondata) # Obtengo los datos del JSON
-            dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid, False)
+
+        if trabajo.jsondata:  # Si existen datos en el campo de JSON
+            datos = json.loads(trabajo.jsondata)  # Obtengo los datos del JSON
+            #  Creamos una lista de formularios con los datos del JSON
+            dato_inicial = ObtenDatosEnLista(datos, tipopadronid, trabajo.modeloConvertido)
+            # Revisamos la cantidad de registros por corregir
+            registros_por_validar = contar_registros_con_errores(dato_inicial)
+            if (registros_por_validar == 0) and (trabajo.Estatus_id == 1):
+                trabajo.Estatus_id = 2
+                trabajo.save()
+
         else:
+            # print 'No hay datos en el JSON'
             datos = list()
             dato_inicial = list()
-
-        # si es la primera vez que se inica el proceso, se toman los datos originales,
-        # de otro modo se leeen con el esquema actualizado
-
-        #
-        #    datos = json.loads(trabajo.jsondata)
-        #    dato_inicial = ObtenDatosEnLista(datos.get('registros'), tipopadronid)
-        #    trabajo.modeloConvertido = True
-            # guarda el json en el modelo de trabajo
-            #trabajo.jsondata = json.dumps(dato_inicial)
-        #    trabajo.save()
-        #else:
-        #    dato_inicial = json.loads(trabajo.jsondata)
+            registros_por_validar = 0
 
         # Si el estatus del trabajo es INCOMPLETO
         if Estatus_id == 1:
@@ -112,31 +110,35 @@ def validar(request, trabajo_id):
                 # Crea una instancia del formulario y rellenarlo con los datos del request.POST
                 formulario = formPoblacion(request.POST)
 
-                # comprobando el metodo de acceso a los datos en el formulario
-                # print 'claveprograma.value() = ' + str(formulario['claveprograma'].value())
-                # print formulario['claveprograma'].errors
-
                 # obteniendo el numero de registro en el diccionario de datos
                 registro = int(formulario['registro'].value()) - 1
-                #print 'formulario[registro].value() = ' + str(formulario['registro'].value())
-                #print 'registro = ' + str(registro)
 
-                # si hay cambio en los datos del formulario grabarlos en la lista de datos iniciales y convertirlas al json
+                # si hay cambio en los datos del formulario grabarlos en la lista de datos iniciales y guardar JSON
                 if formulario.has_changed():
-                    # print("The following fields changed:\n%s" % ",\n ".join(formulario.changed_data))
-                    dato_inicial[registro] = formulario
+                    dato_inicial[registro] = formulario # Actualizando el registro en la lista de formularios
+                    datos = {} # limpiamos datos
+                    datos = ActualizarInformacionAModeloNormalizado(dato_inicial, tipopadronid)
+                    if not(trabajo.modeloConvertido):
+                        trabajo.modeloConvertido = True
+                    trabajo.jsondata = json.dumps(datos)
+                    trabajo.save()
+
+                    return HttpResponseRedirect(request.get_full_path())
+                    # comprobando el metodo de acceso a los datos en el formulario
+                    # print 'claveprograma.value() = ' + str(formulario['claveprograma'].value())
+                    # print formulario['claveprograma'].errors
 
                 # check whether it's valid:
-                if formulario.is_valid():
-                    print 'llegue aqui'
-                    print str(request.get_host())
-                    print request.get_full_path()
-                    if dato_inicial[registro] == formulario:
-                        print 'estan bien pinche iguales'
+                #if formulario.is_valid():
+                #    print 'llegue aqui'
+                #    print str(request.get_host())
+                #    print request.get_full_path()
+                #    if dato_inicial[registro] == formulario:
+                #        print 'estan bien pinche iguales'
                     # process the data in form.cleaned_data as required
                     # ...
                     # redirect to a new URL:
-                    return HttpResponseRedirect(request.get_full_path())
+
             # if a GET (or any other method) we'll create a blank form
             else:
                 page = request.GET.get('page')
@@ -145,31 +147,45 @@ def validar(request, trabajo_id):
         elif Estatus_id == 2:
             print 'trabajo.Estatus_id == 2 | Completo'
             print trabajo.Estatus
+            page = request.GET.get('page')
+
         # Si el estatus del trabajo es ENVIADO
         elif Estatus_id == 3:
             print 'trabajo.Estatus_id == 3 | Enviado'
             print trabajo.Estatus
+
         # Si el estatus del trabajo es INICIADO
         elif Estatus_id == 4:
+            print 'El estatus es INICIADO'
             # Convierte el archivo CSV a JSON y lo guarda en el modelo trabajo
             datos = import_csv(trabajo.archivoRelacionado.path)
             estructura_archivo_valida = EstructuraArchivoEsValida(datos.get('encabezados'), tipopadronid)
-            if estructura_archivo_valida:
+
+            if estructura_archivo_valida:  # Si la estructura del archivo es valida se realizan otras comprobaciones
+
+                print 'la estructura de archivo es' + str(estructura_archivo_valida)
                 trabajo.estructura_valida = estructura_archivo_valida
                 errores_iniciales = ErroresIniciales(datos.get('registros'), tipopadronid, anioejercicio, trimperiodoid)
-                if errores_iniciales:
+
+                if errores_iniciales:  # Si existen errores en el anio o trimestre
+
+                    print 'errores iniciales es: ' + str(errores_iniciales)
+                    # Validar si los errores son en la columna de anio
                     errores_anio = ErroresColumnaAnio(anioejercicio, datos.get('registros'), tipopadronid)
                     if errores_anio > 0:
                         trabajo.anio_valido = False
                     else:
                         trabajo.anio_valido = True
+
+                    # Validar si los errores son en la columna de trimestre
                     errores_trimestre = ErroresColumnaTrimestre(trimperiodoid, datos.get('registros'), tipopadronid)
                     if errores_trimestre > 0:
                         trabajo.trimestre_valido = False
                     else:
                         trabajo.trimestre_valido = True
-                    trabajo.Estatus_id = 5
-                    trabajo.save()
+
+                    trabajo.Estatus_id = 5  # Se cambia el ID del estatus a INVALIDO
+                    trabajo.save()  # Se guarda el estatus del trabajo en la base de datos
 
                     usuario_actual = request.user
                     trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual,
@@ -186,19 +202,22 @@ def validar(request, trabajo_id):
 
                     return render_to_response('home.html', userData, context_instance=RequestContext(request))
 
-                else:
-                    # print 'Sin errores iniciales'
-                    # GuardarRegistros(datos.get('registros'), tipopadronid, trabajo.pk)
-                    trabajo.CantidadRegistros = len(datos.get('registros'))
-                    trabajo.Estatus_id = 1
-                    trabajo.jsondata = json.dumps(datos)
-                    trabajo.trimestre_valido = True
-                    trabajo.anio_valido = True
-                    trabajo.save()
-            else:
+                else:  # Si no existen errores en las columnas de anio y trimestre
+
+                    print 'errores iniciales es: ' + str(errores_iniciales)
+                    trabajo.CantidadRegistros = len(datos.get('registros'))  # Obtenemos el total de registros
+                    trabajo.Estatus_id = 1  # Actualizamos el estatus del trabajo a INCOMPLETO
+                    trabajo.jsondata = json.dumps(datos)  # Vaciamos los datos iniciales en formato JSON
+                    trabajo.trimestre_valido = True  # Validamos bandera de trimestre
+                    trabajo.anio_valido = True  # Validamos bandera de anio
+                    trabajo.save()  # Salvamos trabajo actual
+
+                    return HttpResponseRedirect('validar/%s' % trabajo.pk)
+
+            else:  # Si la estructura del archivo no es valida
                 trabajo.estructura_valida = False
-                trabajo.Estatus_id = 5
-                trabajo.save()
+                trabajo.Estatus_id = 5  # Se cambia el ID del estatus a INVALIDO
+                trabajo.save()  # Se guarda el trabajo en la base de datos
 
                 usuario_actual = request.user
                 trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual, Estatus__in=[1, 2, 3, 4])
@@ -233,7 +252,8 @@ def validar(request, trabajo_id):
         'trabajo': trabajo,
         'datos': datos,
         'formulario': records,
-        'paginador': p
+        'paginador': p,
+        'registros_invalidos': registros_por_validar
     }
 
     return render_to_response('validar.html', data, context_instance=RequestContext(request))
