@@ -188,6 +188,7 @@ def import_csv(filename):
         'registros': registrosDicc
     }
 
+    print 'Saliendo de import_csv'
     return datos
 
 

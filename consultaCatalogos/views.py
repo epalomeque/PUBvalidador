@@ -160,6 +160,7 @@ def validar(request, trabajo_id):
             # Convierte el archivo CSV a JSON y lo guarda en el modelo trabajo
             datos = import_csv(trabajo.archivoRelacionado.path)
             estructura_archivo_valida = EstructuraArchivoEsValida(datos.get('encabezados'), tipopadronid)
+            print 'estructura_archivo_valida = ' + str(estructura_archivo_valida)
 
             if estructura_archivo_valida:  # Si la estructura del archivo es valida se realizan otras comprobaciones
 
