@@ -157,7 +157,7 @@ class Cat_TipoPadron(models.Model):
     nombrePadron = models.CharField(max_length=10)
 
     def __unicode__(self):
-        return self.nombrePadron
+        return '%s | %s' % (self.pk, self.nombrePadron)
 
 
 # Modelos del validador
@@ -371,7 +371,7 @@ class FormatoPubPersona(models.Model):
     id_trabajo = models.ForeignKey(TrabajosRealizados, default='')
 
 
-# Poblacion
+# Poblacion Listo
 class FormatoPubPoblacion(models.Model):
 
     SINO_CHOICES = (

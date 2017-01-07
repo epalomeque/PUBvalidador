@@ -338,12 +338,56 @@ def ErroresIniciales(registros, TipoPadron_id, AnioEjercicio, TrimestreIdent):
 
 def ObtenDatosEnLista(registros, TipoPadron_id, modelo_convertido):
     datos_lista = list()
+    ###
     # Si el modelo del JSON esta convertido
     if modelo_convertido:
+        # Tipo padron ACTORES
         if TipoPadron_id == 1:
             print 1
+        # Tipo padron PERSONAS
         if TipoPadron_id == 2:
-            print 2
+            for registro in registros:
+                dato_form = formPoblacion({
+                    'registro': registro[u'registro'],
+                    'IdHogar': registro[u'IdHogar'],
+                    'IdPersona': registro[u'IdPersona'],
+                    'PrimerApellido': registro[u'PrimerApellido'],
+                    'SegundoApellido': registro[u'SegundoApellido'],
+                    'Nombre': registro[u'Nombre'],
+                    'CURP': registro[u'CURP'],
+                    'Sexo': registro[u'Sexo'],
+                    'EstadoCivil': registro[u'EstadoCivil'],
+                    'Titular': registro[u'Titular'],
+                    'Parentesco': registro[u'Parentesco'],
+                    'OtroDocId': registro[u'OtroDocId'],
+                    'MunicipioDondePagaBeneficio': registro[u'MunicipioDondePagaBeneficio'],
+                    'LocalidadPagoBeneficio': registro[u'LocalidadPagoBeneficio'],
+                    'LocalidadResidencia': registro[u'LocalidadResidencia'],
+                    'NombreVialidad': registro[u'NombreVialidad'],
+                    'NumeroExterior': registro[u'NumeroExterior'],
+                    'NumeroInterior': registro[u'NumeroInterior'],
+                    'CodigoPostal': registro[u'CodigoPostal'],
+                    'AsentamientoHumano': registro[u'AsentamientoHumano'],
+                    'ReferenciaDomicilio': registro[u'ReferenciaDomicilio'],
+                    'Dependencia': registro[u'Dependencia'],
+                    'NombrePrograma': registro[u'NombrePrograma'],
+                    'NombreSubprograma': registro[u'NombreSubprograma'],
+                    'TipoApoyo': registro[u'TipoApoyo'],
+                    'Beneficio': registro[u'Beneficio'],
+                    'CantBeneficios': registro[u'CantBeneficios'],
+                    'TotalPesosBeneficios': registro[u'TotalPesosBeneficios'],
+                    'InversionFederal': registro[u'InversionFederal'],
+                    'InversionEstatal': registro[u'InversionEstatal'],
+                    'InversionMunicipal': registro[u'InversionMunicipal'],
+                    'InversionOtras': registro[u'InversionOtras'],
+                    'FuentesRecurso': registro[u'FuentesRecurso'],
+                    'MesPeriodoPago': registro[u'MesPeriodoPago'],
+                    'PeriodicidadEntregaBeneficio': registro[u'PeriodicidadEntregaBeneficio'],
+                    'NumeroEntregaBeneficio': registro[u'NumeroEntregaBeneficio']
+                })
+                datos_lista.append(dato_form)
+
+        # Tipo padron POBLACION
         if TipoPadron_id == 3:
             for registro in registros:
                 dato_form = formPoblacion( {
@@ -381,13 +425,57 @@ def ObtenDatosEnLista(registros, TipoPadron_id, modelo_convertido):
                     'numeroentregabeneficio': registro[u'numeroentregabeneficio']
                 } )
                 datos_lista.append(dato_form)
+    ###
     # Si el modelo aun no ha sido convertido
     else:
         registrosIniciales = registros.get('registros')
+        # Tipo padron ACTORES
         if TipoPadron_id == 1:
             print 1
+        # Tipo padron PERSONAS
         if TipoPadron_id == 2:
-            print 2
+            for registro in registrosIniciales:
+                dato_form = formPoblacion({
+                    'registro': registro.get(u'REGISTRO'),
+                    'IdHogar': registro.get(u'Identificador de Hogar_1').get(u'VALOR'),
+                    'IdPersona': registro.get(u'Identificador de Persona_2').get(u'VALOR'),
+                    'PrimerApellido': registro.get(u'Primer Apellido_3').get(u'VALOR'),
+                    'SegundoApellido': registro.get(u'Segundo Apellido _4').get(u'VALOR'),
+                    'Nombre': registro.get(u'Nombre (s)_5').get(u'VALOR'),
+                    'CURP': registro.get(u'CURP_6').get(u'VALOR'),
+                    'Sexo': registro.get(u'Sexo_7').get(u'VALOR'),
+                    'EstadoCivil': registro.get(u'Estado Civil_8').get(u'VALOR'),
+                    'Titular': registro.get(u'Titular_9').get(u'VALOR'),
+                    'Parentesco': registro.get(u'Parentesco del Beneficiario con el Jefe del Hogar_10').get(u'VALOR'),
+                    'OtroDocId': registro.get(u'Otro documento de identificación_11').get(u'VALOR'),
+                    'MunicipioDondePagaBeneficio': int(registro.get(u'Clave Municipio donde se paga el beneficio_12').get(u'VALOR')),
+                    'LocalidadPagoBeneficio': int(registro.get(u'Clave Localidad donde se paga el beneficio_14').get(u'VALOR')),
+                    'LocalidadResidencia': int(registro.get(u'Localidad de Residencia_16').get(u'VALOR')),
+                    'NombreVialidad': registro.get(u'Nombre de vialidad_17').get(u'VALOR'),
+                    'NumeroExterior': registro.get(u'Número Exterior_18').get(u'VALOR'),
+                    'NumeroInterior': registro.get(u'Número Interior _19').get(u'VALOR'),
+                    'CodigoPostal': registro.get(u'Código Postal_20').get(u'VALOR'),
+                    'AsentamientoHumano': registro.get(u'Asentamiento humano_21').get(u'VALOR'),
+                    'ReferenciaDomicilio': registro.get(u'Referencia del domicilio_22').get(u'VALOR'),
+                    'Dependencia': registro.get(u'Dependencia que opera el programa_23').get(u'VALOR'),
+                    'NombrePrograma': registro.get(u'Clave del programa_24').get(u'VALOR'),
+                    'NombreSubprograma': registro.get(u'Clave del subprograma_25').get(u'VALOR'),
+                    'TipoApoyo': registro.get(u'Tipo de apoyo_27').get(u'VALOR'),
+                    'Beneficio': registro.get(u'Beneficio_28').get(u'VALOR'),
+                    'CantBeneficios': registro.get(u'Cantidad de beneficios_29').get(u'VALOR'),
+                    'TotalPesosBeneficios': registro.get(u'Total en pesos de los beneficios_30').get(u'VALOR'),
+                    'InversionFederal': registro.get(u'Inversión federal_31').get(u'VALOR'),
+                    'InversionEstatal': registro.get(u'Inversión estatal_32').get(u'VALOR'),
+                    'InversionMunicipal': registro.get(u'Inversión municipal_33').get(u'VALOR'),
+                    'InversionOtras': registro.get(u'Inversión de otras fuentes_34').get(u'VALOR'),
+                    'FuentesRecurso': registro.get(u'Fuentes que fondean el recurso_35').get(u'VALOR'),
+                    'MesPeriodoPago': registro.get(u'Mes de periodo de pago_37').get(u'VALOR'),
+                    'PeriodicidadEntregaBeneficio': registro.get(u'Periodicidad de entrega del beneficio_39').get(u'VALOR'),
+                    'NumeroEntregaBeneficio': registro.get(u'Número de la entrega del beneficio_40').get(u'VALOR')
+                })
+                datos_lista.append(dato_form)
+
+        # Tipo padron POBLACION
         if TipoPadron_id == 3:
             for registro in registrosIniciales:
                 dato_form = formPoblacion({
@@ -447,7 +535,8 @@ def ActualizarInformacionAModeloNormalizado(formulario_de_registros, TipoPadron_
     if TipoPadron_id == 1:
         print 1
     if TipoPadron_id == 2:
-        print 2
+
+    #
     if TipoPadron_id == 3:
         for registro in formulario_de_registros:
             diccionario_temporal = {
