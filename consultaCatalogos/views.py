@@ -156,30 +156,32 @@ def validar(request, trabajo_id):
 
         # Si el estatus del trabajo es INICIADO
         elif Estatus_id == 4:
-            print 'El estatus es INICIADO'
+            # print 'El estatus es INICIADO'
             # Convierte el archivo CSV a JSON y lo guarda en el modelo trabajo
             datos = import_csv(trabajo.archivoRelacionado.path)
             estructura_archivo_valida = EstructuraArchivoEsValida(datos.get('encabezados'), tipopadronid)
-            print 'estructura_archivo_valida = ' + str(estructura_archivo_valida)
+            print 'La estructura del archivo es valida : ' + str(estructura_archivo_valida)
 
             if estructura_archivo_valida:  # Si la estructura del archivo es valida se realizan otras comprobaciones
 
-                print 'la estructura de archivo es' + str(estructura_archivo_valida)
+                # print 'La estructura de archivo es valida: ' + str(estructura_archivo_valida)
                 trabajo.estructura_valida = estructura_archivo_valida
-                errores_iniciales = ErroresIniciales(datos.get('registros'), tipopadronid, anioejercicio, trimperiodoid)
+                errores_anio = ErroresColumnaAnio(anioejercicio, datos.get('registros'), tipopadronid)
+                errores_trimestre = ErroresColumnaTrimestre(trimperiodoid, datos.get('registros'), tipopadronid)
 
-                if errores_iniciales:  # Si existen errores en el anio o trimestre
+                #errores_iniciales = ErroresIniciales(datos.get('registros'), tipopadronid, anioejercicio, trimperiodoid)
+                print 'Errores en la columna anio: ' + str(errores_anio)
+                print 'Errores en la columna trimestre: ' + str(errores_trimestre)
 
-                    print 'errores iniciales es: ' + str(errores_iniciales)
+                if (errores_anio > 0) or (errores_trimestre > 0):  # Si existen errores en el anio o trimestre
+
                     # Validar si los errores son en la columna de anio
-                    errores_anio = ErroresColumnaAnio(anioejercicio, datos.get('registros'), tipopadronid)
                     if errores_anio > 0:
                         trabajo.anio_valido = False
                     else:
                         trabajo.anio_valido = True
 
                     # Validar si los errores son en la columna de trimestre
-                    errores_trimestre = ErroresColumnaTrimestre(trimperiodoid, datos.get('registros'), tipopadronid)
                     if errores_trimestre > 0:
                         trabajo.trimestre_valido = False
                     else:
@@ -205,7 +207,7 @@ def validar(request, trabajo_id):
 
                 else:  # Si no existen errores en las columnas de anio y trimestre
 
-                    print 'errores iniciales es: ' + str(errores_iniciales)
+                    print 'Errores iniciales es: ' + str(errores_iniciales)
                     trabajo.CantidadRegistros = len(datos.get('registros'))  # Obtenemos el total de registros
                     trabajo.Estatus_id = 1  # Actualizamos el estatus del trabajo a INCOMPLETO
                     trabajo.jsondata = json.dumps(datos)  # Vaciamos los datos iniciales en formato JSON
@@ -213,7 +215,7 @@ def validar(request, trabajo_id):
                     trabajo.anio_valido = True  # Validamos bandera de anio
                     trabajo.save()  # Salvamos trabajo actual
 
-                    return HttpResponseRedirect('validar/%s' % trabajo.pk)
+                    return HttpResponseRedirect('/validar/%s' % trabajo.pk)
 
             else:  # Si la estructura del archivo no es valida
                 trabajo.estructura_valida = False

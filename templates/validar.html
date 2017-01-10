@@ -63,7 +63,7 @@
     </div>
 
     {# Estatus es INCOMPLETO #}
-    {% if trabajo.Estatus_id = 1 %}
+    {% if trabajo.Estatus_id == 1 %}
         {% if trabajo.TipoPadron_id == 1 %}
             {% include 'tabla_actor.html' %}
         {% elif trabajo.TipoPadron_id == 2 %}
@@ -74,7 +74,7 @@
             <p>Hubo un error al elegir el tipo de padron</p>
         {% endif %}
     {# Estatus es COMPLETO #}
-    {% elif  trabajo.Estatus_id = 2 %}
+    {% elif  trabajo.Estatus_id == 2 %}
         {% if trabajo.TipoPadron_id == 1 %}
             {% include 'tabla_actor.html' %}
         {% elif trabajo.TipoPadron_id == 2 %}
@@ -85,10 +85,10 @@
             <p>Hubo un error al elegir el tipo de padron</p>
         {% endif %}
     {# Estatus es ENVIADO #}
-    {% elif  trabajo.Estatus_id = 3 %}
+    {% elif  trabajo.Estatus_id == 3 %}
         <p>Aqui lo del estatus 3</p>
     {# Estatus es INICIADO #}
-    {% elif  trabajo.Estatus_id = 4 %}
+    {% elif  trabajo.Estatus_id == 4 %}
          <p>Aqui lo del estatus 4</p>
     {% else %}
         <p>Aquí no hay nada</p>

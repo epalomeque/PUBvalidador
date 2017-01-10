@@ -52,48 +52,31 @@
 
 </div>
 
-{% if error_estructura %}
-<div class="col-xs-12 col-lg-6 middle alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert">
-        <i class="ace-icon fa fa-times"></i>
-    </button>
-
-    <strong>
-        <i class="ace-icon fa fa-times"></i>
-        ¡Error!
-    </strong>
-
-    La estructura del archivo que intentas usar no corresponde con lo reportado para el inicio del trabajo, por favor, verificalo e intentalo nuevamente
-    <br>
-</div>
+{% if error_estructura == False %}
+    <div class="col-xs-12 col-lg-6 middle alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+        <strong> <i class="ace-icon fa fa-times"></i>¡Error! </strong>
+        La estructura del archivo que intentas usar no corresponde con lo reportado para el inicio del trabajo, por favor, verificalo e intentalo nuevamente
+        <br>
+    </div>
 {% endif %}
 
-{% if error_trimestre %}
-<div class="col-xs-12 col-lg-6 middle alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert">
-        <i class="ace-icon fa fa-times"></i>
-    </button>
-    <strong>
-        <i class="ace-icon fa fa-times"></i>
-        ¡Error!
-    </strong>
-    El trimestre señalado al iniciar tu trabajo no corresponde con los cargados en el archivo, verificalo por favor e intentalo nuevamente
-    <br>
-</div>
+{% if error_trimestre == False %}
+    <div class="col-xs-12 col-lg-6 middle alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+        <strong><i class="ace-icon fa fa-times"></i>¡Error!</strong>
+        El trimestre señalado al iniciar tu trabajo no corresponde con los cargados en el archivo, verificalo por favor e intentalo nuevamente
+        <br>
+    </div>
 {% endif %}
 
-{% if error_anio %}
-<div class="col-xs-12 col-lg-6 middle alert alert-danger">
-    <button type="button" class="close" data-dismiss="alert">
-        <i class="ace-icon fa fa-times"></i>
-    </button>
-    <strong>
-        <i class="ace-icon fa fa-times"></i>
-        ¡Error!
-    </strong>
-    El año señalado al iniciar tu trabajo no corresponde con los cargados en el archivo, verificalo por favor e intentalo nuevamente
-    <br>
-</div>
+{% if error_anio == False %}
+    <div class="col-xs-12 col-lg-6 middle alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert"><i class="ace-icon fa fa-times"></i></button>
+        <strong><i class="ace-icon fa fa-times"></i>¡Error!</strong>
+        El año señalado al iniciar tu trabajo no corresponde con los cargados en el archivo, verificalo por favor e intentalo nuevamente
+        <br>
+    </div>
 {% endif %}
 
 {% if total_pendientes > 0  %}
@@ -110,7 +93,7 @@
             </div>
             <!-- div class="botones hidden-sm hidden-xs btn-group" -->
             <div class="botones">
-            {% if record.Estatus_id = 1 %}
+            {% if record.Estatus_id == 1 %}
                 <span class="label label-warning">
 			        <strong>Estatus: </strong>{{ record.Estatus }}
 			    </span>
@@ -121,7 +104,7 @@
                 <button class="btn btn-xs btn-danger">
                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                     </button>
-            {% elif record.Estatus_id = 2 %}
+            {% elif record.Estatus_id == 2 %}
                 <span class="label label-success">
 			        <strong>Estatus: </strong>{{ record.Estatus }}
 			    </span>
@@ -132,7 +115,7 @@
                 <a href="validar/{{ record.pk }}" class="btn btn-xs btn-info">
                         <i class="ace-icon fa fa-pencil bigger-120"></i>
                 </a>
-            {% elif record.Estatus_id = 3 %}
+            {% elif record.Estatus_id == 3 %}
                 <span class="label label-inverse">
 			        <strong>Estatus: </strong>{{ record.Estatus }}
 			    </span>
@@ -140,7 +123,7 @@
                 <button class="btn btn-xs btn-inverse">
                     Generar Reporte
                 </button>
-            {% elif record.Estatus_id = 4 %}
+            {% elif record.Estatus_id == 4 %}
                 <span class="label">
 			        <strong>Estatus: </strong>{{ record.Estatus }}
 			    </span>

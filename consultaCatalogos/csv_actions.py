@@ -535,7 +535,7 @@ def ActualizarInformacionAModeloNormalizado(formulario_de_registros, TipoPadron_
     if TipoPadron_id == 1:
         print 1
     if TipoPadron_id == 2:
-        print 2|
+        print 2
     #
     if TipoPadron_id == 3:
         for registro in formulario_de_registros:
