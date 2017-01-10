@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from consultaCatalogos.forms import SignUpForm, nuevoTrabajoForm, formPoblacion
+from consultaCatalogos.forms import SignUpForm, nuevoTrabajoForm, formPoblacion, formPersonas
 from models import TrabajosRealizados, Cat_Municipio
 #from django.core.files.uploadedfile import SimpleUploadedFile
 from csv_actions import *
@@ -58,7 +58,7 @@ def home(request):
             # process the data in form.cleaned_data as required
             el_trabajo = nuevo_trabajo.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('validar/%s' % el_trabajo.pk)
+            return HttpResponseRedirect('/validar/%s' % el_trabajo.pk)
 
     usuario_actual = request.user
     trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual, Estatus__in=[1, 2, 3, 4])
@@ -67,9 +67,9 @@ def home(request):
         'nuevoTrabajo': nuevoTrabajoForm(initial={'Usuario':usuario_actual, 'Estatus':4}),
         'pendientes': trabajos_pedientes,
         'total_pendientes': trabajos_pedientes.count(),
-        'error_estructura': False,
-        'error_trimestre': False,
-        'error_anio': False
+        'error_estructura': True, # al inicio las banderas estan en True para que no impriman mensaje de error
+        'error_trimestre': True,
+        'error_anio': True
     }
 
     return render_to_response('home.html', userData, context_instance=RequestContext(request))
@@ -108,7 +108,13 @@ def validar(request, trabajo_id):
 
             if request.method == 'POST':
                 # Crea una instancia del formulario y rellenarlo con los datos del request.POST
-                formulario = formPoblacion(request.POST)
+                ####
+                #### Hacer if para que seleccione el tipo de padron
+                ####
+                if tipopadronid == 3:
+                    formulario = formPoblacion(request.POST)
+                elif tipopadronid == 2:
+                    formulario = formPersonas(request.POST)
 
                 # obteniendo el numero de registro en el diccionario de datos
                 registro = int(formulario['registro'].value()) - 1
@@ -207,7 +213,7 @@ def validar(request, trabajo_id):
 
                 else:  # Si no existen errores en las columnas de anio y trimestre
 
-                    print 'Errores iniciales es: ' + str(errores_iniciales)
+                    # print 'Errores iniciales es: ' + str(errores_iniciales)
                     trabajo.CantidadRegistros = len(datos.get('registros'))  # Obtenemos el total de registros
                     trabajo.Estatus_id = 1  # Actualizamos el estatus del trabajo a INCOMPLETO
                     trabajo.jsondata = json.dumps(datos)  # Vaciamos los datos iniciales en formato JSON

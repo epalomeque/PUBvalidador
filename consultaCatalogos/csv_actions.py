@@ -450,7 +450,7 @@ def ObtenDatosEnLista(registros, TipoPadron_id, modelo_convertido):
                     'OtroDocId': registro.get(u'Otro documento de identificación_11').get(u'VALOR'),
                     'MunicipioDondePagaBeneficio': int(registro.get(u'Clave Municipio donde se paga el beneficio_12').get(u'VALOR')),
                     'LocalidadPagoBeneficio': int(registro.get(u'Clave Localidad donde se paga el beneficio_14').get(u'VALOR')),
-                    'LocalidadResidencia': int(registro.get(u'Localidad de Residencia_16').get(u'VALOR')),
+                    'LocalidadResidencia': registro.get(u'Localidad de Residencia_16').get(u'VALOR'),
                     'NombreVialidad': registro.get(u'Nombre de vialidad_17').get(u'VALOR'),
                     'NumeroExterior': registro.get(u'Número Exterior_18').get(u'VALOR'),
                     'NumeroInterior': registro.get(u'Número Interior _19').get(u'VALOR'),
@@ -534,9 +534,50 @@ def ActualizarInformacionAModeloNormalizado(formulario_de_registros, TipoPadron_
     diccionario_normalizado = list()
     if TipoPadron_id == 1:
         print 1
+    # Tipo de padron PERSONAS
     if TipoPadron_id == 2:
-        print 2
-    #
+        for registro in formulario_de_registros:
+            diccionario_temporal = {
+                'registro': registro['registro'].value(),
+                'IdHogar': registro['IdHogar'].value(),
+                'IdPersona': registro['IdPersona'].value(),
+                'PrimerApellido': registro['PrimerApellido'].value(),
+                'SegundoApellido': registro['SegundoApellido'].value(),
+                'Nombre': registro['Nombre'].value(),
+                'CURP': registro['CURP'].value(),
+                'Sexo': registro['Sexo'].value(),
+                'EstadoCivil': registro['EstadoCivil'].value(),
+                'Titular': registro['Titular'].value(),
+                'Parentesco': registro['Parentesco'].value(),
+                'OtroDocId': registro['OtroDocId'].value(),
+                'MunicipioDondePagaBeneficio': registro['MunicipioDondePagaBeneficio'].value(),
+                'LocalidadPagoBeneficio': registro['LocalidadPagoBeneficio'].value(),
+                'LocalidadResidencia': registro['LocalidadResidencia'].value(),
+                'NombreVialidad': registro['NombreVialidad'].value(),
+                'NumeroExterior': registro['NumeroExterior'].value(),
+                'NumeroInterior': registro['NumeroInterior'].value(),
+                'CodigoPostal': registro['CodigoPostal'].value(),
+                'AsentamientoHumano': registro['AsentamientoHumano'].value(),
+                'ReferenciaDomicilio': registro['ReferenciaDomicilio'].value(),
+                'Dependencia': registro['Dependencia'].value(),
+                'NombrePrograma': registro['NombrePrograma'].value(),
+                'NombreSubprograma': registro['NombreSubprograma'].value(),
+                'TipoApoyo': registro['TipoApoyo'].value(),
+                'Beneficio': registro['Beneficio'].value(),
+                'CantBeneficios': registro['CantBeneficios'].value(),
+                'TotalPesosBeneficios': registro['TotalPesosBeneficios'].value(),
+                'InversionFederal': registro['InversionFederal'].value(),
+                'InversionEstatal': registro['InversionEstatal'].value(),
+                'InversionMunicipal': registro['InversionMunicipal'].value(),
+                'InversionOtras': registro['InversionOtras'].value(),
+                'FuentesRecurso': registro['FuentesRecurso'].value(),
+                'MesPeriodoPago': registro['MesPeriodoPago'].value(),
+                'PeriodicidadEntregaBeneficio': registro['PeriodicidadEntregaBeneficio'].value(),
+                'NumeroEntregaBeneficio': registro['NumeroEntregaBeneficio'].value()
+            }
+            diccionario_normalizado.append(diccionario_temporal)
+
+    # Tipo de padron POBLACION
     if TipoPadron_id == 3:
         for registro in formulario_de_registros:
             diccionario_temporal = {
@@ -574,4 +615,5 @@ def ActualizarInformacionAModeloNormalizado(formulario_de_registros, TipoPadron_
                 'numeroentregabeneficio': registro['numeroentregabeneficio'].value()
             }
             diccionario_normalizado.append(diccionario_temporal)
+
     return diccionario_normalizado

@@ -81,8 +81,8 @@ DATABASES = {
         'NAME': 'PUB_validador',
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        #'PASSWORD' : 'Postgres1',
+        #'PASSWORD': 'postgres',
+        'PASSWORD' : 'Postgres1',
 	    #'HOST' : '10.40.13.14',
         'HOST' : 'sdspgtest.vmlocal',
 	    'DATABASE_PORT' : '5432'

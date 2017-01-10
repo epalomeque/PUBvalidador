@@ -126,7 +126,7 @@ class formPersonas(forms.Form):
 
     registro = forms.IntegerField(label='Registro No.', widget=forms.HiddenInput)
     # Identificador de Hogar_1
-    IdHogar = forms.CharField(max_length=15, label=u'Identificador de Hogar')
+    IdHogar = forms.CharField(max_length=15, label=u'Identificador de Hogar', widget=forms.TextInput)
     # Identificador de Persona_2
     IdPersona = forms.CharField(max_length=15, label=u'Identificador de Persona')
     # Primer Apellido_3

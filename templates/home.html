@@ -22,7 +22,7 @@
         <p>{{ nuevoTrabajo.errors }}</p>
       {% endif %}
 
-     <h2>Puedes iniciar un nuevo trabajo para validación</h2>
+     <h2>Iniciar un trabajo para validación</h2>
 
       <form enctype="multipart/form-data" method="post" action="{% url 'home' %}">
           {% csrf_token %}
@@ -82,7 +82,7 @@
 {% if total_pendientes > 0  %}
 <div class="col-xs-12 col-lg-6 middle">
   <div class="well well-lg">
-  <h4>... o retomar una de las tareas que tienes guardadas.</h4>
+  <h2>Recuperar una tarea pendiente.</h2>
     {% for record in pendientes %}
         <div class="renglon">
             <div class="datos">
