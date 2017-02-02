@@ -21,7 +21,6 @@ class SignUpForm(ModelForm):
 
 
 class nuevoTrabajoForm(ModelForm):
-#class nuevoTrabajoForm(forms.Form):
     class Meta:
         model = TrabajosRealizados
         fields = ['archivoRelacionado', 'TipoPadron','AnioEjercicio','Trimestre', 'Estatus', 'Usuario']
@@ -271,8 +270,8 @@ class formPersonas(forms.Form):
                                             label=u'Mes de periodo de pago')
     # Periodicidad de entrega del beneficio_39
     periodicidadentrega = forms.ModelChoiceField(queryset=Cat_Frecuencia.objects.all(),
-                                                          empty_label=u'-----',
-                                                          label=u'Periocidad de entrega')
+                                                 empty_label=u'-----',
+                                                 label=u'Periocidad de entrega')
     # Numero de la entrega del beneficio_40
     numentrega = forms.IntegerField(label='No. de entrega')
 

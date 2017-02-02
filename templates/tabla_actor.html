@@ -1,53 +1,90 @@
-<div>
-    <hr />
-    <div>
-        <ul>
-        <li><strong>Multilocalidad: </strong>Multilocalidad_1</li>
-        <li><strong>R.F.C.: </strong>Registro Federal de Contribuyentes_2</li>
+{% load consulta_extras %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="pagination">
+        {% if formulario.has_previous %}
+            <li><a href="?page={{ formulario.previous_page_number }}">Previo</a></li>
+        {% endif %}
+        {% for pagina in paginador.page_range %}
+            <li><a href="?page={{ pagina }}">{{ pagina }}</a></li>
+        {% endfor %}
+        {% if formulario.has_next %}
+            <li><a href="?page={{ formulario.next_page_number }}">Siguiente</a></li>
+        {% endif %}
         </ul>
     </div>
-    <div>
-        <ul>
-        <li><strong>No. Beneficiados: </strong>Número beneficiados_3</li>
-        <li><strong>Hombres Beneficiados: </strong>Hombres beneficiados_4</li>
-        <li><strong>Mujeres Beneficiadas: </strong>Mujeres beneficiadas_5</li>
-        <li><strong>Viviendas Beneficiadas: </strong>Viviendas beneficiadas_6</li>
-        </ul>
+</div>
+
+{% for form in formulario %}
+<div class="space-12"></div>
+
+<div class="widget-box">
+    <div class="widget-header">
+        <h5 class="widget-title smaller">Registro no. {{ form.registro.value }}</h5>
+        <div class="widget-toolbar">
+        {% if form.is_valid %}
+            <span class="badge badge-success">Registro v&aacute;lido</span>
+            <a href="#" data-action="collapse">
+                <i class="ace-icon fa fa-chevron-up"></i>
+            </a>
+        {% else %}
+            <span class="badge badge-danger">Tiene validaciones pendientes</span>
+        {% endif %}
+        </div>
     </div>
-    <div>
-        <ul>
-        <li><strong>Clave Municipio: </strong>Clave Municipio donde se encuentra la obra_7</li>
-        <li><strong>Nombre Mnicipio: </strong>Municipio donde se encuentra la obra_8</li>
-        <li><strong>Clave Localidad: </strong>Clave Localidad donde se encuentra la obra_9</li>
-        <li><strong>Nombre Localidad: </strong>Localidad donde se encuentra la obra_10</li>
-        <li><strong>Tipo Asentamiento: </strong>Asentamiento humano_11</li>
-        <li><strong>Nombre Vialidad: </strong>Nombre vialidad_12</li>
-        <li><strong>No.Exterior: </strong>Número Exterior_13</li>
-        <li><strong>No.Interior: </strong>Número Interior_14</li>
-        <li><strong>C.P.: </strong>Código Postal_15</li>.
-        <li><strong>Referencia del Domicilio: </strong>Referencia del domicilio_16</li>
-        </ul>
+    <div class="widget-body">
+        <form id="record-{{ form.registro.value }}" class="form-horizontal" method="post" action="" name="record-{{ form.registro.value }}">
+        {% csrf_token %}
+
+        <div class="widget-main">
+
+        <div class="row">
+            <div class="col-sm-6 form-group {% if form..errors  %}has-error{% else %}has-success{% endif %} ">
+                <label class="col-sm-3 control-label no-padding-right" >{{ form..label }}: </label>
+                <div class="col-sm-9" >{{ form. | addcss:'form-control' }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12 " >{{ form..errors }}</div>
+            </div>
+            <div class="col-sm-6 form-group {% if form..errors %}has-error{% else %}has-success{% endif %} ">
+                <label class="col-sm-3 control-label no-padding-right">{{ form..label }}: </label>
+                <div class="col-sm-9">{{ form. | addcss:'form-control'  }}</div>
+                <div class="space-2"></div>
+                <div class="col-sm-12"><p class="text-warning">{{ form..errors }}</p></div>
+            </div>
+        </div>
+
+        </div>
+
+        {{ form.registro }}
+
+        <div class="widget-toolbox padding-8 clearfix">
+        <button class="btn btn-xs btn-success pull-right">
+            <span class="bigger-110">Enviar validaciones</span>
+
+            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+        </button>
+        </div>
+
+        </form>
+
     </div>
-    <div>
-        <ul>
-        <li><strong>Dependencia: </strong>Dependencia que opera el programa_17</li>
-        <li><strong>Clave del Programa: </strong>Clave del programa_18</li>
-        <li><strong>Clave del Subprograma: </strong>Clave del subprograma_19</li>
-        <li><strong>Nombre del Programa: </strong>Nombre del programa_20</li>
-        <li><strong>Tipo de apoyo: </strong>Tipo de apoyo_21</li>
-        <li><strong>Identificador: </strong>Identificador de la Obra_22</li>
-        <li><strong>Descripción: </strong>Descripción de la Obra_23</li>
-        <li><strong>Cant.Beneficios</strong>Cantidad de beneficios_24</li>
-        <li><strong>Total en pesos de beneficios: </strong>Total en pesos de los beneficios_25</li>
-        <li><strong>Inversión Federal: </strong>Inversión federal_26</li>
-        <li><strong>Inversión Estatal: </strong>Inversión estatal_27</li>
-        <li><strong>Inversión Municipal: </strong>Inversión municipal_28</li>
-        <li><strong>Inversión de otras fuentes: </strong>Inversión de otras fuentes_29</li>
-        <li><strong>Fuentes que fondean el recurso: </strong>Fuentes que fondean el recurso_30</li>
-        <li><strong>Fecha de Inicio: </strong>Fecha Inicio_33</li>
-        <li><strong>Fecha de Fin: </strong>Fecha Fin_34</li>
-        <li><strong>Periocidad de entrega: </strong>Periodicidad de entrega del beneficio_35</li>
-        <li><strong>No. de entrega: </strong>Número de la entrega del beneficio_36</li>
+</div>
+
+{% endfor %}
+
+<div class="col-sm-12">
+
+        <ul class="pagination">
+        {% if formulario.has_previous %}
+            <li><a href="?page={{ formulario.previous_page_number }}">Previo</a></li>
+        {% endif %}
+        {% for pagina in paginador.page_range %}
+            <li><a href="?page={{ pagina }}">{{ pagina }}</a></li>
+        {% endfor %}
+        {% if formulario.has_next %}
+            <li><a href="?page={{ formulario.next_page_number }}">Siguiente</a></li>
+        {% endif %}
         </ul>
-    </div>
+
 </div>

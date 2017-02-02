@@ -98,7 +98,7 @@ def validar(request, trabajo_id):
                 trabajo.save()
 
         else:
-            # print 'No hay datos en el JSON'
+            print 'No hay datos en el JSON'
             datos = list()
             dato_inicial = list()
             registros_por_validar = 0

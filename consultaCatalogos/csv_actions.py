@@ -3,7 +3,7 @@
 
 # import codecs
 import unicodecsv as csv
-from forms import SignUpForm, nuevoTrabajoForm, formPoblacion
+from forms import SignUpForm, nuevoTrabajoForm, formPoblacion, formPersonas, formActores
 from django.utils.encoding import smart_text, smart_unicode, smart_bytes, smart_str, force_text
 import json
 from models import FormatoPubPersona, FormatoPubActor, FormatoPubPoblacion
@@ -427,7 +427,7 @@ def ObtenDatosEnLista(registros, TipoPadron_id, modelo_convertido):
                     'inversionotras': registro[u'inversionotras'],
                     'fuentesrecurso': registro[u'fuentesrecurso'],
                     'mesperiodopago': registro[u'mesperiodopago'],
-                    'periocidadentrega': registro[u'periocidadentrega'],
+                    'periodicidadentrega': registro[u'periodicidadentrega'],
                     'numentrega': registro[u'numentrega']
                 })
                 datos_lista.append(dato_form)
@@ -559,7 +559,7 @@ def ObtenDatosEnLista(registros, TipoPadron_id, modelo_convertido):
                     'inversionotras': registro.get(u'Inversión de otras fuentes_34').get(u'VALOR'),
                     'fuentesrecurso': registro.get(u'Fuentes que fondean el recurso_35').get(u'VALOR'),
                     'mesperiodopago': registro.get(u'Mes de periodo de pago_37').get(u'VALOR'),
-                    'periocidadentrega': registro.get(u'Periodicidad de entrega del beneficio_39').get(u'VALOR'),
+                    'periodicidadentrega': registro.get(u'Periodicidad de entrega del beneficio_39').get(u'VALOR'),
                     'numentrega': registro.get(u'Número de la entrega del beneficio_40').get(u'VALOR')
                 })
                 datos_lista.append(dato_form)
@@ -611,54 +611,98 @@ def contar_registros_con_errores(dato_inicial):
     for registro in dato_inicial:
         if registro.errors:
             i = i + 1
-            # print str(i) + ': '+ str(registro.errors)
+
     return i
 
 
 def ActualizarInformacionAModeloNormalizado(formulario_de_registros, TipoPadron_id):
     diccionario_normalizado = list()
     if TipoPadron_id == 1:
-        print 1
+        for registro in formulario_de_registros:
+            diccionario_temporal = {
+                    'registro': registro[u'registro'].value(),
+                    'razonsocial': registro[u'razonsocial'].value(),
+                    'rfc': registro[u'rfc'].value(),
+                    'primerapellido': registro[u'primerapellido'].value(),
+                    'segundoapellido': registro[u'segundoapellido'].value(),
+                    'nombre': registro[u'nombre'].value(),
+                    'curp': registro[u'curp'].value(),
+                    'sexo': registro[u'sexo'].value(),
+                    'estadonacimiento': registro[u'estadonacimiento'].value(),
+                    'titular': registro[u'titular'].value(),
+                    'otrodocto': registro[u'otrodocto'].value(),
+                    'cvemunicipiopago': registro[u'cvemunicipiopago'].value(),
+                    'localidadpago': registro[u'localidadpago'].value(),
+                    'localidadresidencia_as': registro[u'localidadresidencia_as'].value(),
+                    'nombrevialidad_as': registro[u'nombrevialidad_as'].value(),
+                    'numexterior_as': registro[u'numexterior_as'].value(),
+                    'numinterior_as': registro[u'numinterior_as'].value(),
+                    'codigopostal_as': registro[u'codigopostal_as'].value(),
+                    'referenciadomicilio_as': registro[u'referenciadomicilio_as'].value(),
+                    'localidadresidencia_int': registro[u'localidadresidencia_int'].value(),
+                    'nombrevialidad_int': registro[u'nombrevialidad_int'].value(),
+                    'numexterior_int': registro[u'numexterior_int'].value(),
+                    'numinterior_int': registro[u'numinterior_int'].value(),
+                    'codigopostal_int': registro[u'codigopostal_int'].value(),
+                    'referenciadomicilio_int': registro[u'referenciadomicilio_int'].value(),
+                    'dependencia': registro[u'dependencia'].value(),
+                    'claveprograma': registro[u'claveprograma'].value(),
+                    'clavesubprograma': registro[u'clavesubprograma'].value(),
+                    'tipoapoyo': registro[u'tipoapoyo'].value(),
+                    'beneficio': registro[u'beneficio'].value(),
+                    'cantbeneficios': registro[u'cantbeneficios'].value(),
+                    'totalpesosbeneficios': registro[u'totalpesosbeneficios'].value(),
+                    'inversionfederal': registro[u'inversionfederal'].value(),
+                    'inversionestatal': registro[u'inversionestatal'].value(),
+                    'inversionmunicipal': registro[u'inversionmunicipal'].value(),
+                    'inversionotras': registro[u'inversionotras'].value(),
+                    'fuentesrecurso': registro[u'fuentesrecurso'].value(),
+                    'mesperiodopago': registro[u'mesperiodopago'].value(),
+                    'periodicidadentrega': registro[u'periodicidadentrega'].value(),
+                    'numentrega': registro[u'numentrega'].value()
+            }
+            diccionario_normalizado.append(diccionario_temporal)
+
     # Tipo de padron PERSONAS
     if TipoPadron_id == 2:
         for registro in formulario_de_registros:
             diccionario_temporal = {
                 'registro': registro['registro'].value(),
-                'IdHogar': registro['IdHogar'].value(),
-                'IdPersona': registro['IdPersona'].value(),
-                'PrimerApellido': registro['PrimerApellido'].value(),
-                'SegundoApellido': registro['SegundoApellido'].value(),
-                'Nombre': registro['Nombre'].value(),
-                'CURP': registro['CURP'].value(),
-                'Sexo': registro['Sexo'].value(),
-                'EstadoCivil': registro['EstadoCivil'].value(),
-                'Titular': registro['Titular'].value(),
-                'Parentesco': registro['Parentesco'].value(),
-                'OtroDocId': registro['OtroDocId'].value(),
-                'MunicipioDondePagaBeneficio': registro['MunicipioDondePagaBeneficio'].value(),
-                'LocalidadPagoBeneficio': registro['LocalidadPagoBeneficio'].value(),
-                'LocalidadResidencia': registro['LocalidadResidencia'].value(),
-                'NombreVialidad': registro['NombreVialidad'].value(),
-                'NumeroExterior': registro['NumeroExterior'].value(),
-                'NumeroInterior': registro['NumeroInterior'].value(),
-                'CodigoPostal': registro['CodigoPostal'].value(),
-                'AsentamientoHumano': registro['AsentamientoHumano'].value(),
-                'ReferenciaDomicilio': registro['ReferenciaDomicilio'].value(),
-                'Dependencia': registro['Dependencia'].value(),
-                'NombrePrograma': registro['NombrePrograma'].value(),
-                'NombreSubprograma': registro['NombreSubprograma'].value(),
-                'TipoApoyo': registro['TipoApoyo'].value(),
-                'Beneficio': registro['Beneficio'].value(),
-                'CantBeneficios': registro['CantBeneficios'].value(),
-                'TotalPesosBeneficios': registro['TotalPesosBeneficios'].value(),
-                'InversionFederal': registro['InversionFederal'].value(),
-                'InversionEstatal': registro['InversionEstatal'].value(),
-                'InversionMunicipal': registro['InversionMunicipal'].value(),
-                'InversionOtras': registro['InversionOtras'].value(),
-                'FuentesRecurso': registro['FuentesRecurso'].value(),
-                'MesPeriodoPago': registro['MesPeriodoPago'].value(),
-                'PeriodicidadEntregaBeneficio': registro['PeriodicidadEntregaBeneficio'].value(),
-                'NumeroEntregaBeneficio': registro['NumeroEntregaBeneficio'].value()
+                'idhogar': registro['idhogar'].value(),
+                'idpersona': registro['idpersona'].value(),
+                'primerapellido': registro['primerapellido'].value(),
+                'segundoapellido': registro['segundoapellido'].value(),
+                'nombre': registro['nombre'].value(),
+                'curp': registro['curp'].value(),
+                'sexo': registro['sexo'].value(),
+                'estadocivil': registro['estadocivil'].value(),
+                'titular': registro['titular'].value(),
+                'parentesco': registro['parentesco'].value(),
+                'otrodocto': registro['otrodocto'].value(),
+                'cvemunicipiopago': registro['cvemunicipiopago'].value(),
+                'localidadpago': registro['localidadpago'].value(),
+                'localidadresidencia': registro['localidadresidencia'].value(),
+                'nombrevialidad': registro['nombrevialidad'].value(),
+                'numexterior': registro['numexterior'].value(),
+                'numinterior': registro['numinterior'].value(),
+                'codigopostal': registro['codigopostal'].value(),
+                'asentamientohumano': registro['asentamientohumano'].value(),
+                'referenciadomicilio': registro['referenciadomicilio'].value(),
+                'dependencia': registro['dependencia'].value(),
+                'claveprograma': registro['claveprograma'].value(),
+                'clavesubprograma': registro['clavesubprograma'].value(),
+                'tipoapoyo': registro['tipoapoyo'].value(),
+                'beneficio': registro['beneficio'].value(),
+                'cantbeneficios': registro['cantbeneficios'].value(),
+                'totalpesosbeneficios': registro['totalpesosbeneficios'].value(),
+                'inversionfederal': registro['inversionfederal'].value(),
+                'inversionestatal': registro['inversionestatal'].value(),
+                'inversionmunicipal': registro['inversionmunicipal'].value(),
+                'inversionotras': registro['inversionotras'].value(),
+                'fuentesrecurso': registro['fuentesrecurso'].value(),
+                'mesperiodopago': registro['mesperiodopago'].value(),
+                'periodicidadentrega': registro['periodicidadentrega'].value(),
+                'numentrega': registro['numentrega'].value()
             }
             diccionario_normalizado.append(diccionario_temporal)
 
