@@ -130,20 +130,6 @@ def validar(request, trabajo_id):
                     trabajo.save()
 
                     return HttpResponseRedirect(request.get_full_path())
-                    # comprobando el metodo de acceso a los datos en el formulario
-                    # print 'claveprograma.value() = ' + str(formulario['claveprograma'].value())
-                    # print formulario['claveprograma'].errors
-
-                # check whether it's valid:
-                #if formulario.is_valid():
-                #    print 'llegue aqui'
-                #    print str(request.get_host())
-                #    print request.get_full_path()
-                #    if dato_inicial[registro] == formulario:
-                #        print 'estan bien pinche iguales'
-                    # process the data in form.cleaned_data as required
-                    # ...
-                    # redirect to a new URL:
 
             # if a GET (or any other method) we'll create a blank form
             else:
