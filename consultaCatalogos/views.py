@@ -115,6 +115,8 @@ def validar(request, trabajo_id):
                     formulario = formPoblacion(request.POST)
                 elif tipopadronid == 2:
                     formulario = formPersonas(request.POST)
+                elif tipopadronid == 1:
+                    formulario = formActores(request.POST)
 
                 # obteniendo el numero de registro en el diccionario de datos
                 registro = int(formulario['registro'].value()) - 1
