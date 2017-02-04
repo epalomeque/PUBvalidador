@@ -19974,3 +19974,13 @@ div.registro ul li.False {
 .logopubhome {
     width: 120px;
 }
+
+label {
+  font-weight: bolder;
+  font-size: 16px;
+  text-align: left !important;
+}
+
+.infobox:hover{
+  background-color: rgba(217, 159, 39, 0.22);
+}
