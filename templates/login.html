@@ -1,4 +1,5 @@
 {% extends 'log_.html' %}
+{% load staticfiles %}
 
                 {% block contenido %}
 
@@ -14,24 +15,33 @@
                 <!-- Aqui empieza el login -->
                 <div id="login-box" class="login-box visible widget-box no-border">
                   <div class="widget-body">
-                    <div class="widget-main">
-                      <h4 class="header blue lighter bigger">
-                        <!--i class="ace-icon fa fa-coffee green"></i-->
-                        Ingresa tus datos para iniciar sesión
-                      </h4>
+                    <div class="widget-main center">
+                      <img class="logopub" src="{% static "assets/images/logo-PUB.png" %}">
 
-                      <div class="space-6"></div>
+
+                      <h2 class="header lighter naranja">
+                        <!--i class="ace-icon fa fa-coffee green"></i-->
+                        <strong>Sistema Validador de Formatos</strong>
+                      </h2>
+
+                      <div class="space-12"></div>
 
                       {% if form.errors %}
-                        <p>{{ form.errors }}</p>
+                      <div class="alert alert-danger">
+                      <button type="button" class="close" data-dismiss="alert">
+						<i class="ace-icon fa fa-times"></i>
+                      </button>
+                      <!-- {{ form.errors }} -->
+                      <p>Existe un error en la combinación de <strong>Usuario/Contraseña</strong>, por favor revisalo e intenta nuevamente</p>
+                      </div>
                       {% endif %}
 
                       <form method="post" action="{% url 'django.contrib.auth.views.login' %}">
                         {% csrf_token %}
-                        <label class="block clearfix">Usuario: </label>
+                        <label class="block clearfix"><strong>Usuario: </strong></label>
                         {{ form.username }}
                         <div class="space"></div>
-                        <label class="block clearfix">Contraseña: </label>
+                        <label class="block clearfix"><strong>Contraseña: </strong></label>
                         {{ form.password }}
                         <div class="space"></div>
 
@@ -41,14 +51,13 @@
                             <span class="lbl"> Recordarme</span>
                           </label-->
 
-                          <button type="submit" class="width-55 pull-right btn btn-sm btn-primary">
+                          <button type="submit" class="width-55 pull-center btn btn-warning">
                             <!--i class="ace-icon fa fa-key"></i-->
-                            <span class="bigger-110">Iniciar sesión</span>
+                            <span class="bigger-110"><strong>Iniciar sesión</strong></span>
                             <input type="hidden" name="next" value="{{ next }}"/>
                           </button>
                         </div>
 
-                          <div class="space-4"></div>
                         </fieldset>
                       </form>
 
@@ -58,38 +67,31 @@
 
                       <div class="space-6"></div>
 
-                      <!-- div class="social-login center">
-                        <a class="btn btn-primary">
-                          <i class="ace-icon fa fa-facebook"></i>
-                        </a>
-
-                        <a class="btn btn-info">
-                          <i class="ace-icon fa fa-twitter"></i>
-                        </a>
-
-                        <a class="btn btn-danger">
-                          <i class="ace-icon fa fa-google-plus"></i>
-                        </a>
-                      </div -->
+                      <div class="social-login center">
+                        <img class="logosdsconescudo" src="{% static "assets/images/logo-SDS-cEscudo.png" %}">
+                        <p>Paseo de la Sierra # 425 Col. Reforma, C.P. 86060 Villahermosa, Tabasco | <strong>Teléfono: </strong>(993) 3103700 ext 40030</p>
+                      </div>
                     </div><!-- /.widget-main -->
 
-                    <div class="toolbar clearfix">
-                      <div>
-                        <!--a href="#" data-target="#forgot-box" class="forgot-password-link">
+                    <!---------------------------------------->
+                    <!-- div class="toolbar clearfix" -->
+                      <!--div>
+                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
                           <a href="#" class="forgot-password-link">
                           <i class="ace-icon fa fa-arrow-left"></i>
                           Olvidé mi contraseña
-                        </a-->
-                      </div>
+                        </a>
+                      </div-->
 
-                      <div>
-                        <!--a href="#" data-target="#signup-box" class="user-signup-link"-->
+                      <!--div>
+                        <a href="#" data-target="#signup-box" class="user-signup-link">
                         <a href="{% url 'signup' %}" class="user-signup-link">
                           Registrarse
                           <i class="ace-icon fa fa-arrow-right"></i>
                         </a>
-                      </div>
-                    </div>
+                      </div-->
+                    <!--/div-->
+                    <!---------------------------------------->
                   </div><!-- /.widget-body -->
                 </div><!-- /.login-box -->
                 <!-- Aqui termina el login -->
@@ -125,7 +127,7 @@
                           </label>
 
                           <div class="clearfix">
-                            <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
+                            <button type="button" class="width-35 pull-right btn btn-sm btn-warning">
                               <!--i class="ace-icon fa fa-lightbulb-o"></i-->
                               <span class="bigger-110">Enviar</span>
                             </button>

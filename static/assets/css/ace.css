@@ -19915,6 +19915,10 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
     background-color: #ff6600;
 }
 
+.ace-nav > li.orangeuno > a:focus {
+    background-color: #ab5200;
+}
+
 #id_username, #id_password {
     width:100%;
 }
@@ -19958,4 +19962,15 @@ div.registro ul li.True {
 }
 div.registro ul li.False {
   background-color: palevioletred;
+}
+
+.titulobase,
+.titulobase h2{
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: 32px;
+}
+
+.logopubhome {
+    width: 120px;
 }
