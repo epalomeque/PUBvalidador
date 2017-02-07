@@ -76,6 +76,17 @@ def home(request):
 
 
 @login_required()
+def borrar(request, trabajo_id):
+    trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
+    if trabajo.Usuario == request.user:
+        trabajo.delete()
+    else:
+        return HttpResponseRedirect('/noautorizado')
+
+    return HttpResponseRedirect('/')
+
+
+@login_required()
 def validar(request, trabajo_id):
     # Abrir estatus del trabajo
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)

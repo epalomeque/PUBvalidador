@@ -19911,6 +19911,11 @@ input.typeahead.scrollable ~ .tt-dropdown-menu {
 
 /* HACKS SDS  */
 
+.logosdsconescudo {
+    width: 8%;
+    margin-bottom: 15px;
+}
+
 .ace-nav > li.orangeuno > a {
     background-color: #ff6600;
 }
@@ -19983,4 +19988,22 @@ label {
 
 .infobox:hover{
   background-color: rgba(217, 159, 39, 0.22);
+}
+
+.ace-nav > li.orangeuno {
+  height: 80px;
+}
+
+.user-info {
+  vertical-align: middle;
+}
+
+.pagination > li > a,
+.pagination > li > a:hover{
+  color: #ff6600;
+  border-color: #ff6600;
+}
+.pagination > li.active > a, .pagination > li.active > a:hover {
+  background-color: #ff6600;
+  border-color: #ff6600;
 }

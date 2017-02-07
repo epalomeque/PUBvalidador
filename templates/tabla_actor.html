@@ -1,20 +1,6 @@
 {% load consulta_extras %}
 
-<div class="row">
-    <div class="col-sm-12">
-        <ul class="pagination">
-        {% if formulario.has_previous %}
-            <li><a href="?page={{ formulario.previous_page_number }}">Previo</a></li>
-        {% endif %}
-        {% for pagina in paginador.page_range %}
-            <li><a href="?page={{ pagina }}">{{ pagina }}</a></li>
-        {% endfor %}
-        {% if formulario.has_next %}
-            <li><a href="?page={{ formulario.next_page_number }}">Siguiente</a></li>
-        {% endif %}
-        </ul>
-    </div>
-</div>
+{% include "paginador.html" %}
 
 {% for form in formulario %}
 <div class="space-12"></div>
@@ -73,18 +59,4 @@
 
 {% endfor %}
 
-<div class="col-sm-12">
-
-        <ul class="pagination">
-        {% if formulario.has_previous %}
-            <li><a href="?page={{ formulario.previous_page_number }}">Previo</a></li>
-        {% endif %}
-        {% for pagina in paginador.page_range %}
-            <li><a href="?page={{ pagina }}">{{ pagina }}</a></li>
-        {% endfor %}
-        {% if formulario.has_next %}
-            <li><a href="?page={{ formulario.next_page_number }}">Siguiente</a></li>
-        {% endif %}
-        </ul>
-
-</div>
+{% include "paginador.html" %}

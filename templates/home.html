@@ -103,9 +103,9 @@
                 <a href="validar/{{ record.pk }}" class="btn btn-xs btn-info" >
                     <i class="ace-icon fa fa-pencil bigger-120"></i>
                 </a>
-                <button class="btn btn-xs btn-danger">
+                <a  href="borrar/{{ record.pk }}" class="btn btn-xs btn-danger">
                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                    </button>
+                    </a>
             {% elif record.Estatus_id == 2 %}
                 <span class="label label-success">
 			        <strong>Estatus: </strong>{{ record.Estatus }}
@@ -133,9 +133,9 @@
                 <a href="validar/{{ record.pk }}" class="btn btn-xs btn-info" >
                     <i class="ace-icon fa fa-pencil bigger-120"></i>
                 </a>
-                <button class="btn btn-xs btn-danger">
+                <a  href="borrar/{{ record.pk }}" class="btn btn-xs btn-danger">
                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                    </button>
+                    </a>
             {% else %}
                 <p>Error en la carga, intente nuevamente</p>
             {% endif %}
