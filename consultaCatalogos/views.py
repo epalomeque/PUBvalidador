@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# from django.conf.global_settings import MEDIA_URL
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.contrib.auth.decorators import login_required
@@ -7,11 +6,10 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http.response import HttpResponseRedirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from consultaCatalogos.forms import SignUpForm, nuevoTrabajoForm, formPoblacion, formPersonas
 from models import TrabajosRealizados, Cat_Municipio
-#from django.core.files.uploadedfile import SimpleUploadedFile
 from csv_actions import *
-# from django.forms import formset_factory
+from consultaCatalogos.forms import SignUpForm, nuevoTrabajoForm, formPoblacion, formPersonas
+#from django.core.files.uploadedfile import SimpleUploadedFile
 
 
 # Create your views here.
@@ -99,6 +97,7 @@ def validar(request, trabajo_id):
         Estatus_id = trabajo.Estatus_id
 
         if trabajo.jsondata:  # Si existen datos en el campo de JSON
+            print 'Si hay datos en el JSON'
             datos = json.loads(trabajo.jsondata)  # Obtengo los datos del JSON
             #  Creamos una lista de formularios con los datos del JSON
             dato_inicial = ObtenDatosEnLista(datos, tipopadronid, trabajo.modeloConvertido)

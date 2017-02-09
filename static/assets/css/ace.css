@@ -20007,3 +20007,25 @@ label {
   background-color: #ff6600;
   border-color: #ff6600;
 }
+
+.transparenciaroja {
+ background-image: linear-gradient(to bottom, #ffffff 0%, #ead4d4 100%);
+}
+
+.transparenciaverde {
+ background-image: linear-gradient(to bottom, #ffffff 0%, #A5CB9F 100%);
+}
+
+ul.errorlist {
+  color: red;
+  background-color: bisque;
+  padding: 10px 10px 10px 20px;
+}
+
+.colorverde {
+  color:#7ba065;
+}
+
+.colorrojo {
+  color:red;
+}

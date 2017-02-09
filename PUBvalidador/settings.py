@@ -98,7 +98,7 @@ LANGUAGE_CODE = 'es-MX'
 TIME_ZONE = 'UTC'
 
 # Se cambia a False por que no se usan los parametros de internacionalizaion
-USE_I18N = False
+USE_I18N = True
 
 USE_L10N = True
 

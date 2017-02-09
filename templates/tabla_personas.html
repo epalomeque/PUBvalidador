@@ -5,7 +5,7 @@
 <div class="space-12"></div>
 
 <div class="widget-box{% if form.is_valid %} collapsed{% endif %}">
-    <div class="widget-header">
+    <div class="widget-header {% if form.is_valid %}colorverde{% else %}colorrojo{% endif %}">
         <h4 class="widget-title smaller"><strong>Registro no. {{ form.registro.value }}</strong></h4>
         <div class="widget-toolbar">
         {% if form.is_valid %}

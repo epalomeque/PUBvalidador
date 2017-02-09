@@ -61,13 +61,13 @@ class formPoblacion(forms.Form):
     # Municipio donde se encuentra la obra_8
     municipiobeneficiado = forms.ModelChoiceField(queryset=Cat_Municipio.objects.all(),
                                                   to_field_name="identMunicipio",
-                                                  empty_label="(Ninguno)",
+                                                  empty_label="------",
                                                   label='Municipio')
     # Clave Localidad donde se encuentra la obra_9
     # Localidad donde se encuentra la obra_10
     localidadbeneficiada = forms.ModelChoiceField(queryset=Cat_Localidad.objects.all(),
                                                   to_field_name="identLocalidad",
-                                                  empty_label="(Ninguno)",
+                                                  empty_label="------",
                                                   label='Localidad')
     # Asentamiento humano_11
     asentamiento = forms.ModelChoiceField(queryset=Cat_Asentamiento.objects.all(),
