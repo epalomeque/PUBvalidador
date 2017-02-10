@@ -141,7 +141,7 @@ class Cat_Periodos(models.Model):
     mes = models.ManyToManyField(Cat_Mes)
 
     def __unicode__(self):
-        return '%s' % (self.nombrePeriodo)
+        return '%s | %s' % (self.identPeriodo, self.nombrePeriodo)
 
 
 class Cat_Frecuencia(models.Model):
