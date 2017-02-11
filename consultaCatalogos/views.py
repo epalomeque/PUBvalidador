@@ -47,6 +47,7 @@ def signup(request):
 
 @login_required()
 def home(request):
+    errortipodearchivo = True
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -57,6 +58,7 @@ def home(request):
             el_trabajo = nuevo_trabajo.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/validar/%s' % el_trabajo.pk)
+        # elif nuevo_trabajo.
 
     usuario_actual = request.user
     trabajos_pedientes = TrabajosRealizados.objects.filter(Usuario=usuario_actual, Estatus__in=[1, 2, 3, 4])
@@ -67,7 +69,8 @@ def home(request):
         'total_pendientes': trabajos_pedientes.count(),
         'error_estructura': True, # al inicio las banderas estan en True para que no impriman mensaje de error
         'error_trimestre': True,
-        'error_anio': True
+        'error_anio': True,
+        'errortipodearchivo':errortipodearchivo
     }
 
     return render_to_response('home.html', userData, context_instance=RequestContext(request))
