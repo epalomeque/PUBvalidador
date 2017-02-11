@@ -88,7 +88,9 @@ def borrar(request, trabajo_id):
 def validar(request, trabajo_id):
     # Abrir estatus del trabajo
     trabajo = TrabajosRealizados.objects.get(pk=trabajo_id)
+    # El valor del numero de pagina en el paginador
     page = ''
+    # Si el usuario es el mismo que hace la peticion entonces se puede acceder al trabajo
     if trabajo.Usuario == request.user:
 
         tipopadronid = trabajo.TipoPadron_id  # obtengo el tipo de padron # print 'tipopadronid: ' + str(tipopadronid)
@@ -113,14 +115,12 @@ def validar(request, trabajo_id):
             dato_inicial = list()
             registros_por_validar = 0
 
-        # Si el estatus del trabajo es INCOMPLETO
+        ### Si el estatus del trabajo es INCOMPLETO
         if Estatus_id == 1:
 
+            # Crea una instancia del formulario y rellenarlo con los datos del request.POST
             if request.method == 'POST':
-                # Crea una instancia del formulario y rellenarlo con los datos del request.POST
-                ####
-                #### Hacer if para que seleccione el tipo de padron
-                ####
+                # Hacer if para que seleccione el tipo de padron
                 if tipopadronid == 3:
                     formulario = formPoblacion(request.POST)
                 elif tipopadronid == 2:
@@ -143,22 +143,22 @@ def validar(request, trabajo_id):
 
                     return HttpResponseRedirect(request.get_full_path())
 
-            # if a GET (or any other method) we'll create a blank form
+            # si es GET (o cualquier otro metodo) asignamos la pagina a presentar del paginador
             else:
                 page = request.GET.get('page')
 
-        # Si el estatus del trabajo es COMPLETO
+        ### Si el estatus del trabajo es COMPLETO
         elif Estatus_id == 2:
             print 'trabajo.Estatus_id == 2 | Completo'
             print trabajo.Estatus
             page = request.GET.get('page')
 
-        # Si el estatus del trabajo es ENVIADO
+        ### Si el estatus del trabajo es ENVIADO
         elif Estatus_id == 3:
             print 'trabajo.Estatus_id == 3 | Enviado'
             print trabajo.Estatus
 
-        # Si el estatus del trabajo es INICIADO
+        ### Si el estatus del trabajo es INICIADO
         elif Estatus_id == 4:
             # print 'El estatus es INICIADO'
             # Convierte el archivo CSV a JSON y lo guarda en el modelo trabajo

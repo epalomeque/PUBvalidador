@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from validators import FileValidator
 
 # Create your models here.
 class Cat_AnioEjercicio(models.Model):
@@ -168,8 +168,12 @@ class EstatusTrabajos(models.Model):
         return self.nombreEstatus
 
 
+validate_file= FileValidator(allowed_extensions=('csv',),
+                            allowed_mimetypes=('text/plain',)
+                            )
+
 class TrabajosRealizados(models.Model):
-    archivoRelacionado = models.FileField(upload_to='csv/%Y/%m/%d')
+    archivoRelacionado = models.FileField(validators = [validate_file], upload_to='csv/%Y/%m/%d')
     Estatus = models.ForeignKey(EstatusTrabajos)
     Usuario = models.ForeignKey(User)
     FechaInicio = models.DateTimeField(auto_now_add=True)
